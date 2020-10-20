@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="ShipDelivery\Domain\Models\" />
+    <Folder Include="ShipProvincial\Domain\Models\" />
+    <Folder Include="Social\Domain\Models\" />
+  </ItemGroup>
+
+
+</Project>
