@@ -4,7 +4,7 @@ using VirtualExpress.ShipDelivery.Domain.Models;
 using VirtualExpress.ShipProvincial.Domain.Models;
 using VirtualExpress.Social.Domain.Models;
 
-namespace VirtualExpress.Persistance.Context
+namespace VirtualExpress.General.Persistance.Context
 {
     public class AppDbContext : DbContext
     {
