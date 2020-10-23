@@ -1103,23 +1103,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Usuario\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\lucia\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Usuario\\Desktop\\UPC_trabajos y archivos\\ciclo8\\web\\Trabajo Final\\VirtualExpress\\VirtualExpress\\VirtualExpress.csproj",
+      "projectUniqueName": "E:\\Aplicaciones Web\\Clone\\TecsoftBackendOptional\\VirtualExpress\\VirtualExpress.csproj",
       "projectName": "VirtualExpress",
-      "projectPath": "C:\\Users\\Usuario\\Desktop\\UPC_trabajos y archivos\\ciclo8\\web\\Trabajo Final\\VirtualExpress\\VirtualExpress\\VirtualExpress.csproj",
-      "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Usuario\\Desktop\\UPC_trabajos y archivos\\ciclo8\\web\\Trabajo Final\\VirtualExpress\\VirtualExpress\\obj\\",
+      "projectPath": "E:\\Aplicaciones Web\\Clone\\TecsoftBackendOptional\\VirtualExpress\\VirtualExpress.csproj",
+      "packagesPath": "C:\\Users\\lucia\\.nuget\\packages\\",
+      "outputPath": "E:\\Aplicaciones Web\\Clone\\TecsoftBackendOptional\\VirtualExpress\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\lucia\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1194,7 +1190,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
       }
     }
   }

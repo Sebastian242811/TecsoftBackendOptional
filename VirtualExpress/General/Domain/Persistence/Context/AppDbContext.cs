@@ -3,6 +3,7 @@ using VirtualExpress.CompanyManagement.Domain.Models;
 using VirtualExpress.ShipDelivery.Domain.Models;
 using VirtualExpress.ShipProvincial.Domain.Models;
 using VirtualExpress.Social.Domain.Models;
+using VirtualExpress.Initialization.Domain.Model;
 
 namespace VirtualExpress.General.Persistance.Context
 {
@@ -21,6 +22,11 @@ namespace VirtualExpress.General.Persistance.Context
         public DbSet<Package> Packages { get; set; }
         public DbSet<Commentary> Comentaries { get; set; }
 
+        public DbSet<Company> Companies { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Employee> Employees { get; set; }
+
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -31,6 +37,18 @@ namespace VirtualExpress.General.Persistance.Context
                 .IsRequired().ValueGeneratedOnAdd();
             builder.Entity<City>().Property(p => p.Name)
                 .IsRequired().HasMaxLength(30);
+            builder.Entity<City>()
+                .HasMany(p => p.customers)
+                .WithOne(p => p.City)
+                .HasForeignKey(p => p.CityId);
+            builder.Entity<City>()
+                .HasMany(p => p.employees)
+                .WithOne(p => p.City)
+                .HasForeignKey(p => p.CityId);
+            builder.Entity<City>()
+                .HasData(
+                new City { Id = 1, Name = "Lima" }
+                );
 
 
             builder.Entity<Terminal>().ToTable("Terminals");
@@ -94,6 +112,57 @@ namespace VirtualExpress.General.Persistance.Context
             builder.Entity<Commentary>().HasKey(p => p.Id);
             builder.Entity<Commentary>().Property(p => p.Id)
                 .IsRequired().ValueGeneratedOnAdd();
+
+            builder.Entity<Company>().ToTable("Companies");
+            builder.Entity<Company>().HasKey(p => p.Id);
+            builder.Entity<Company>().Property(p => p.Id)
+                .IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<Company>().Property(p => p.Name)
+                .IsRequired().HasMaxLength(30);
+            builder.Entity<Company>().Property(p => p.Username)
+                .IsRequired().HasMaxLength(15);
+            builder.Entity<Company>().Property(p => p.Email)
+                .IsRequired().HasMaxLength(50);
+            builder.Entity<Company>().Property(p => p.Number)
+                .IsRequired().HasMaxLength(9);
+            builder.Entity<Company>().Property(p => p.Password)
+                .IsRequired().HasMaxLength(15);
+            builder.Entity<Company>().Property(p => p.Ruc)
+                .IsRequired().HasMaxLength(11);
+
+            builder.Entity<Customer>().ToTable("Customers");
+            builder.Entity<Customer>().HasKey(p => p.Id);
+            builder.Entity<Customer>().Property(p => p.Id)
+                .IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<Customer>().Property(p => p.Name)
+                .IsRequired().HasMaxLength(30);
+            builder.Entity<Customer>().Property(p => p.Username)
+                .IsRequired().HasMaxLength(15);
+            builder.Entity<Customer>().Property(p => p.Number)
+                .IsRequired().HasMaxLength(9);
+            builder.Entity<Customer>().Property(p => p.Brithday)
+                .IsRequired();
+            builder.Entity<Customer>().Property(p => p.Email)
+                .IsRequired().HasMaxLength(50);
+            builder.Entity<Customer>().Property(p => p.Password)
+                .IsRequired().HasMaxLength(15);
+
+            builder.Entity<Employee>().ToTable("Employees");
+            builder.Entity<Employee>().HasKey(p => p.Id);
+            builder.Entity<Employee>().Property(p => p.Id)
+                .IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<Employee>().Property(p => p.Name)
+                .IsRequired().HasMaxLength(30);
+            builder.Entity<Employee>().Property(p => p.Username)
+                .IsRequired().HasMaxLength(15);
+            builder.Entity<Employee>().Property(p => p.Number)
+                .IsRequired().HasMaxLength(9);
+            builder.Entity<Employee>().Property(p => p.Brithday)
+                .IsRequired();
+            builder.Entity<Employee>().Property(p => p.Email)
+                .IsRequired().HasMaxLength(50);
+            builder.Entity<Employee>().Property(p => p.Password)
+                .IsRequired().HasMaxLength(15);
         }
     }
 

@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using VirtualExpress.CompanyManagement.Domain.Models;
 using VirtualExpress.CompanyManagement.Resources;
+using VirtualExpress.Initialization.Domain.Model;
+using VirtualExpress.Initialization.Resource;
 using VirtualExpress.ShipDelivery.Domain.Models;
 using VirtualExpress.ShipDelivery.Resources;
 using VirtualExpress.ShipProvincial.Domain.Models;
@@ -26,6 +28,12 @@ namespace VirtualExpress.General.Mapping
             CreateMap<SavePackageDeliveryResource, PackageDelivery>();
             CreateMap<SaveTerminalResource, Terminal>();
             CreateMap<SaveCityResource, City>();
+
+            //Initialization
+            CreateMap<SaveCustomerResource, Customer>();
+            CreateMap<SaveCompanyResource, Company>();
+            CreateMap<SaveEmployeeResource, Employee>();
+
         }
     }
 }

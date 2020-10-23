@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using VirtualExpress.ShipDelivery.Domain.Models;
 
-namespace VirtualExpress.ShipDelivery.Domain.Models
+namespace VirtualExpress.Initialization.Domain.Model
 {
     public class Delivery
     {

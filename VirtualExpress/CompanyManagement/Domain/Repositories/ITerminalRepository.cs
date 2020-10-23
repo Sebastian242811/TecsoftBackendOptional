@@ -6,7 +6,7 @@ using VirtualExpress.CompanyManagement.Domain.Models;
 
 namespace VirtualExpress.CompanyManagement.Domain.Repositories
 {
-    interface ITerminalRepository
+    public interface ITerminalRepository
     {
         Task<IEnumerable<Terminal>> ListAsync();
         Task<IEnumerable<Terminal>> ListByCityOriginIdAndCityShipIdAsync(int cityOriginId, int cityShipId);

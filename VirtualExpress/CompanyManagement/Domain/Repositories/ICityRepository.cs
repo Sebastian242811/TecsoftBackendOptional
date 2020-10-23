@@ -6,7 +6,7 @@ using VirtualExpress.CompanyManagement.Domain.Models;
 
 namespace VirtualExpress.CompanyManagement.Domain.Repositories
 {
-    interface ICityRepository
+    public interface ICityRepository
     {
         Task<IEnumerable<City>> ListAsync();
         Task AddAsync(City city);
