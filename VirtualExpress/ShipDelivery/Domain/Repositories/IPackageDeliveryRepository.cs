@@ -6,7 +6,7 @@ using VirtualExpress.ShipDelivery.Domain.Models;
 
 namespace VirtualExpress.ShipDelivery.Domain.Repositories
 {
-    interface IPackageDeliveryRepository
+    public interface IPackageDeliveryRepository
     {
         Task<IEnumerable<PackageDelivery>> ListAsync();
         Task AddAsync(PackageDelivery packageDelivery);

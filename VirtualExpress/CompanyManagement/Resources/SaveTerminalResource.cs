@@ -14,6 +14,8 @@ namespace VirtualExpress.CompanyManagement.Resources
 
         [Required]
         [MaxLength(30)]
-        public string Direction { get; set; }
+        public string Adress { get; set; }
+        [Required]
+        public int CityId { get; set; }
     }
 }

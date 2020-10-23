@@ -9,7 +9,7 @@ using VirtualExpress.General.Domain.Repositories;
 using VirtualExpress.Initialization.Domain.Model;
 using VirtualExpress.Initialization.Domain.Repositories;
 using VirtualExpress.Initialization.Domain.Services;
-using VirtualExpress.Initialization.Domain.Services.Communications;
+using VirtualExpress.Initialization.Domain.Services.Responses;
 
 namespace VirtualExpress.Register.Services
 {

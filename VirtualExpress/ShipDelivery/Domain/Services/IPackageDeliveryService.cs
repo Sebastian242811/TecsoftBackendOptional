@@ -7,7 +7,7 @@ using VirtualExpress.ShipDelivery.Domain.Services.Responses;
 
 namespace VirtualExpress.ShipDelivery.Domain.Services
 {
-    interface IPackageDeliveryService
+    public interface IPackageDeliveryService
     {
         Task<IEnumerable<PackageDelivery>> ListAsync();
         Task<PackageDeliveryResponse> SaveAsync(PackageDelivery packageDelivery);

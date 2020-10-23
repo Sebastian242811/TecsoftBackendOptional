@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using VirtualExpress.Initialization.Domain.Model;
+using VirtualExpress.ShipDelivery.Domain.Models;
 
 namespace VirtualExpress.ShipProvincial.Domain.Models
 {
@@ -19,5 +21,8 @@ namespace VirtualExpress.ShipProvincial.Domain.Models
         public Freight Freight { get; set; }
         public int DispatcherId { get; set; }
         public Dispatcher Dispatcher { get; set; }
+        public int CustomerId { get; set; }
+        public Customer Customer { get; set; }
+        public IList<PackageDelivery> PackageDeliveries { get; set; } = new List<PackageDelivery>();
     }
 }

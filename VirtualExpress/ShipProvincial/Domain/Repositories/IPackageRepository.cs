@@ -6,7 +6,7 @@ using VirtualExpress.ShipProvincial.Domain.Models;
 
 namespace VirtualExpress.ShipProvincial.Domain.Repositories
 {
-    interface IPackageRepository
+    public interface IPackageRepository
     {
         Task<IEnumerable<Package>> ListAsync();
         Task<IEnumerable<Package>> ListByCostumerId(int costumerId);

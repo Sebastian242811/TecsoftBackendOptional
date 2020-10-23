@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VirtualExpress.Initialization.Domain.Model;
-using VirtualExpress.Initialization.Domain.Services.Communications;
+using VirtualExpress.Initialization.Domain.Services.Responses;
 
 namespace VirtualExpress.Initialization.Domain.Services
 {

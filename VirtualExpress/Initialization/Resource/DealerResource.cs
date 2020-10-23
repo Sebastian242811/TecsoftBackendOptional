@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using VirtualExpress.CompanyManagement.Domain.Models;
 
-namespace VirtualExpress.Initialization.Domain.Model
+namespace VirtualExpress.Initialization.Resource
 {
-    public class Employee
+    public class DealerResource
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -15,7 +14,5 @@ namespace VirtualExpress.Initialization.Domain.Model
         public DateTime Brithday { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public int CityId { get; set; }
-        public City City { get; set; }
     }
 }

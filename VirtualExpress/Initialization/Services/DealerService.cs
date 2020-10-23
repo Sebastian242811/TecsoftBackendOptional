@@ -7,85 +7,85 @@ using VirtualExpress.General.Domain.Repositories;
 using VirtualExpress.Initialization.Domain.Model;
 using VirtualExpress.Initialization.Domain.Repositories;
 using VirtualExpress.Initialization.Domain.Services;
-using VirtualExpress.Initialization.Domain.Services.Communications;
+using VirtualExpress.Initialization.Domain.Services.Responses;
 
 namespace VirtualExpress.Register.Services
 {
-    public class EmployeeService : IEmployeeService
+    public class DealerService : IDealerService
     {
-        private readonly IEmployeeRepository _employeeRepository;
+        private readonly IDealerRepository _employeeRepository;
         private readonly ICityRepository _cityRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public EmployeeService(IEmployeeRepository employeeRepository, ICityRepository cityRepository, IUnitOfWork unitOfWork)
+        public DealerService(IDealerRepository employeeRepository, ICityRepository cityRepository, IUnitOfWork unitOfWork)
         {
             _employeeRepository = employeeRepository;
             _cityRepository = cityRepository;
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<EmployeeResponse> DeleteAsync(int employeeId)
+        public async Task<DealerResponse> DeleteAsync(int employeeId)
         {
             var existingEmployee = await _employeeRepository.FindById(employeeId);
             if (existingEmployee == null)
-                return new EmployeeResponse("Employee not found");
+                return new DealerResponse("Employee not found");
             try
             {
                 _employeeRepository.Remove(existingEmployee);
                 await _unitOfWork.CompleteAsync();
-                return new EmployeeResponse(existingEmployee);
+                return new DealerResponse(existingEmployee);
             }
             catch(Exception e)
             {
-                return new EmployeeResponse($"An error ocurred while deleting the employee {e.Message}");
+                return new DealerResponse($"An error ocurred while deleting the employee {e.Message}");
             }
         }
 
-        public async Task<EmployeeResponse> FindEmployeeById(int employeeId)
+        public async Task<DealerResponse> FindEmployeeById(int employeeId)
         {
             var existingEmployee = await _employeeRepository.FindById(employeeId);
             if (existingEmployee == null)
-                return new EmployeeResponse("Employee not found");
-            return new EmployeeResponse(existingEmployee);
+                return new DealerResponse("Employee not found");
+            return new DealerResponse(existingEmployee);
         }
 
-        public async Task<IEnumerable<Employee>> ListAsync()
+        public async Task<IEnumerable<Dealer>> ListAsync()
         {
             return await _employeeRepository.ListAsync();
         }
 
-        public async Task<EmployeeResponse> SaveAsync(Employee employee)
+        public async Task<DealerResponse> SaveAsync(Dealer employee)
         {
             var existingUsername = await _employeeRepository.FindByUsername(employee.Username);
             if(existingUsername != null)
-                return new EmployeeResponse("This username is being used by another user");
+                return new DealerResponse("This username is being used by another user");
 
             var existingCity = await _cityRepository.FindById(employee.CityId);
             if (existingCity != null)
-                return new EmployeeResponse("City not found");
+                return new DealerResponse("City not found");
 
             var existingEmail = await _employeeRepository.FindByEmail(employee.Email);
             if(existingEmail != null)
-                return new EmployeeResponse("This email is being used by another user");
+                return new DealerResponse("This email is being used by another user");
 
             employee.City = existingCity;
             try
             {
                 await _employeeRepository.AddAsync(employee);
                 await _unitOfWork.CompleteAsync();
-                return new EmployeeResponse(employee);
+                return new DealerResponse(employee);
             }
             catch (Exception e)
             {
-                return new EmployeeResponse($"An error ocurred while saving the employee {e.Message}");
+                return new DealerResponse($"An error ocurred while saving the employee {e.Message}");
             }
         }
 
-        public async Task<EmployeeResponse> UpdateAsync(int employeeId, Employee employee)
+        public async Task<DealerResponse> UpdateAsync(int employeeId, Dealer employee)
         {
             var existingEmployee = await _employeeRepository.FindById(employeeId);
             if (existingEmployee == null)
-                return new EmployeeResponse("Employee not found");
+                return new DealerResponse("Employee not found");
 
             existingEmployee.Brithday = employee.Brithday;
             existingEmployee.City = employee.City;
@@ -97,11 +97,11 @@ namespace VirtualExpress.Register.Services
             {
                 _employeeRepository.Update(existingEmployee);
                 await _unitOfWork.CompleteAsync();
-                return new EmployeeResponse(existingEmployee);
+                return new DealerResponse(existingEmployee);
             }
             catch (Exception e)
             {
-                return new EmployeeResponse($"An error ocurred while updating the employee {e.Message}");
+                return new DealerResponse($"An error ocurred while updating the employee {e.Message}");
             }
         }
     }

@@ -82,3 +82,15 @@ E:\Aplicaciones Web\Clone\TecsoftBackendOptional\VirtualExpress\obj\Debug\netcor
 E:\Aplicaciones Web\Clone\TecsoftBackendOptional\VirtualExpress\obj\Debug\netcoreapp3.1\VirtualExpress.dll
 E:\Aplicaciones Web\Clone\TecsoftBackendOptional\VirtualExpress\obj\Debug\netcoreapp3.1\VirtualExpress.pdb
 E:\Aplicaciones Web\Clone\TecsoftBackendOptional\VirtualExpress\obj\Debug\netcoreapp3.1\VirtualExpress.genruntimeconfig.cache
+C:\Users\Usuario\Desktop\UPC_trabajos y archivos\ciclo8\web\Trabajo Final\VirtualExpress\VirtualExpress\bin\Debug\netcoreapp3.1\VirtualExpress.deps.json
+C:\Users\Usuario\Desktop\UPC_trabajos y archivos\ciclo8\web\Trabajo Final\VirtualExpress\VirtualExpress\bin\Debug\netcoreapp3.1\VirtualExpress.runtimeconfig.json
+C:\Users\Usuario\Desktop\UPC_trabajos y archivos\ciclo8\web\Trabajo Final\VirtualExpress\VirtualExpress\bin\Debug\netcoreapp3.1\VirtualExpress.runtimeconfig.dev.json
+C:\Users\Usuario\Desktop\UPC_trabajos y archivos\ciclo8\web\Trabajo Final\VirtualExpress\VirtualExpress\bin\Debug\netcoreapp3.1\VirtualExpress.dll
+C:\Users\Usuario\Desktop\UPC_trabajos y archivos\ciclo8\web\Trabajo Final\VirtualExpress\VirtualExpress\bin\Debug\netcoreapp3.1\VirtualExpress.pdb
+C:\Users\Usuario\Desktop\UPC_trabajos y archivos\ciclo8\web\Trabajo Final\VirtualExpress\VirtualExpress\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.Annotations.dll
+C:\Users\Usuario\Desktop\UPC_trabajos y archivos\ciclo8\web\Trabajo Final\VirtualExpress\VirtualExpress\obj\Debug\netcoreapp3.1\VirtualExpress.csproj.CoreCompileInputs.cache
+C:\Users\Usuario\Desktop\UPC_trabajos y archivos\ciclo8\web\Trabajo Final\VirtualExpress\VirtualExpress\obj\Debug\netcoreapp3.1\VirtualExpress.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Usuario\Desktop\UPC_trabajos y archivos\ciclo8\web\Trabajo Final\VirtualExpress\VirtualExpress\obj\Debug\netcoreapp3.1\VirtualExpress.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Usuario\Desktop\UPC_trabajos y archivos\ciclo8\web\Trabajo Final\VirtualExpress\VirtualExpress\obj\Debug\netcoreapp3.1\VirtualExpress.dll
+C:\Users\Usuario\Desktop\UPC_trabajos y archivos\ciclo8\web\Trabajo Final\VirtualExpress\VirtualExpress\obj\Debug\netcoreapp3.1\VirtualExpress.pdb
+C:\Users\Usuario\Desktop\UPC_trabajos y archivos\ciclo8\web\Trabajo Final\VirtualExpress\VirtualExpress\obj\Debug\netcoreapp3.1\VirtualExpress.genruntimeconfig.cache

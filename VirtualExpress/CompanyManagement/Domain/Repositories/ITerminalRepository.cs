@@ -14,6 +14,7 @@ namespace VirtualExpress.CompanyManagement.Domain.Repositories
         Task<Terminal> FindByCompanyIdAndCityOriginIdAndCityShipId(int companyId, int cityOriginId, int cityShipId);
         Task<Terminal> FindByTerminalIdAndCompanyId(int terminalId, int companyId);
         Task<Terminal> FindById(int id);
+        Task AddAsync(Terminal terminal);
         void Remove(Terminal terminal);
         void Update(Terminal terminal);
         Task AssignTerminalCompany(int terminalId, int companyId);

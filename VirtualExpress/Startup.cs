@@ -27,6 +27,18 @@ using VirtualExpress.Initialization.Domain.Services;
 using VirtualExpress.Initialization.Persistence.Repositories;
 using VirtualExpress.Register.Persistence.Repositories;
 using VirtualExpress.Register.Services;
+using VirtualExpress.ShipDelivery.Domain.Repositories;
+using VirtualExpress.ShipDelivery.Domain.Services;
+using VirtualExpress.ShipDelivery.Persistance.Repositories;
+using VirtualExpress.ShipDelivery.Services;
+using VirtualExpress.ShipProvincial.Domain.Repositories;
+using VirtualExpress.ShipProvincial.Domain.Services;
+using VirtualExpress.ShipProvincial.Persistance.Repositories;
+using VirtualExpress.ShipProvincial.Services;
+using VirtualExpress.Social.Domain.Repositories;
+using VirtualExpress.Social.Domain.Services;
+using VirtualExpress.Social.Persistance.Repositories;
+using VirtualExpress.Social.Services;
 
 namespace VirtualExpress
 {
@@ -52,9 +64,19 @@ namespace VirtualExpress
                 //Initialization
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<ICompanyRepository, CompanyRepository>();
-            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            services.AddScoped<IDealerRepository, DealerRepository>();
             //CompanyManagement
             services.AddScoped<ICityRepository, CityRepository>();
+            services.AddScoped<ITerminalRepository, TerminalRepository>();
+            //ShipDelivery
+            services.AddScoped<IDeliveryRepository, DeliveryRepository>();
+            services.AddScoped<IPackageDeliveryRepository, PackageDeliveryRepository>();
+            //ShipProvincial
+            services.AddScoped<IDispatcherRepository, DispatcherRepository>();
+            services.AddScoped<IFreightRepository, FreightRepository>();
+            services.AddScoped<IPackageRepository,PackageRepository>();
+            //Social
+            services.AddScoped<ICommentaryRepository, CommentaryRepository>();
 
 
             //UnitOfWork
@@ -64,10 +86,20 @@ namespace VirtualExpress
                 //Initialization
             services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<ICompanyService, CompanyService>();
-            services.AddScoped<IEmployeeService, EmployeeService>();
+            services.AddScoped<IDealerService, DealerService>();
             //CompanyManagement
             services.AddScoped<ICityService, CityService>();
-
+            services.AddScoped<ITerminalService, TerminalService>();
+            //shipDelivery
+            services.AddScoped<IDeliveryService, DeliveryService>();
+            services.AddScoped<IPackageDeliveryService, PackageDeliveryService>();
+            //ShipProvincial
+            services.AddScoped<IDispatcherService, DispatcherService>();
+            services.AddScoped<IFreightService, FreightService>();
+            services.AddScoped<IPackageService, PackageService>();
+            //Social
+            services.AddScoped<ICommentaryService, CommentaryService>();
+            
             services.AddAutoMapper(typeof(Startup));
 
             services.AddCustomSwagger();

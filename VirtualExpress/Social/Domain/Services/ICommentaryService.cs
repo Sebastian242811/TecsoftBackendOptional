@@ -7,7 +7,7 @@ using VirtualExpress.Social.Domain.Services.Responses;
 
 namespace VirtualExpress.Social.Domain.Services
 {
-    interface ICommentaryService
+    public interface ICommentaryService
     {
         Task<IEnumerable<Commentary>> ListAsync();
         Task<CommentaryResponse> SaveAsync(Commentary comentary);

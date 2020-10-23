@@ -11,7 +11,7 @@ namespace VirtualExpress.CompanyManagement.Domain.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public IList<Terminal> Terminals { get; set; } = new List<Terminal>();
-        public IList<Customer> customers { get; set; } = new List<Customer>();
-        public IList<Employee> employees { get; set; } = new List<Employee>();
+        public IList<Customer> Customers { get; set; } = new List<Customer>();
+        public IList<Dealer> Dealers { get; set; } = new List<Dealer>();
     }
 }

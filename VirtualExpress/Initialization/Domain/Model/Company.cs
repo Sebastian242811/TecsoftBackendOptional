@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using VirtualExpress.CompanyManagement.Domain.Models;
 
 namespace VirtualExpress.Initialization.Domain.Model
 {
@@ -14,6 +15,7 @@ namespace VirtualExpress.Initialization.Domain.Model
         public string Email { get; set; }
         public string Password { get; set; }
         public string Ruc { get; set; }
+        public IList<Terminal> Terminals { get; set; } = new List<Terminal>();
         //Subscription
     }
 }

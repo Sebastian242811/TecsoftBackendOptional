@@ -6,7 +6,7 @@ using VirtualExpress.Social.Domain.Models;
 
 namespace VirtualExpress.Social.Domain.Repositories
 {
-    interface ICommentaryRepository
+    public interface ICommentaryRepository
     {
         Task<IEnumerable<Commentary>> ListAsync();
         Task AddAsync(Commentary Comentary);

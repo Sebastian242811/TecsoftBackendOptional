@@ -8,5 +8,6 @@ namespace VirtualExpress.ShipDelivery.Resources
     public class SavePackageDeliveryResource
     {
         public int DeliveryId { get; set; }
+        public int PackageId { get; set; }
     }
 }

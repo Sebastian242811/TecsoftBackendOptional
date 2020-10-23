@@ -32,7 +32,7 @@ namespace VirtualExpress.General.Mapping
             //Initialization
             CreateMap<SaveCustomerResource, Customer>();
             CreateMap<SaveCompanyResource, Company>();
-            CreateMap<SaveEmployeeResource, Employee>();
+            CreateMap<SaveDealerResource, Dealer>();
 
         }
     }

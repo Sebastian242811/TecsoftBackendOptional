@@ -6,7 +6,7 @@ using VirtualExpress.ShipProvincial.Domain.Models;
 
 namespace VirtualExpress.ShipProvincial.Domain.Repositories
 {
-    interface IFreightRepository
+    public interface IFreightRepository
     {
         Task<IEnumerable<Freight>> ListAsync();
         Task<IEnumerable<Freight>> ListByMothAndYearDate(int month, int year);

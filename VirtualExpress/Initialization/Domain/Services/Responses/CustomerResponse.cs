@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using VirtualExpress.General.Response;
 using VirtualExpress.Initialization.Domain.Model;
 
-namespace VirtualExpress.Initialization.Domain.Services.Communications
+namespace VirtualExpress.Initialization.Domain.Services.Responses
 {
     public class CustomerResponse : BaseResponse<Customer>
     {

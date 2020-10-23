@@ -15,12 +15,12 @@ namespace VirtualExpress.Initialization.Controller
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CustomersController : ControllerBase
+    public class CustomerController : ControllerBase
     {
         private readonly ICustomerService _customerService;
         private readonly IMapper _mapper;
 
-        public CustomersController(ICustomerService customerService, IMapper mapper)
+        public CustomerController(ICustomerService customerService, IMapper mapper)
         {
             _customerService = customerService;
             _mapper = mapper;
@@ -38,6 +38,8 @@ namespace VirtualExpress.Initialization.Controller
         }
 
         //Task<CustomerResponse> FindCustomerById(int customerId);
+        [SwaggerResponse(200, "Get an especific custumer by selected Id", typeof(IActionResult))]
+        [ProducesResponseType(typeof(IActionResult), 200)]
         [HttpGet("id")]
         public async Task<IActionResult> getCustomerByID(int id)
         {
@@ -52,6 +54,8 @@ namespace VirtualExpress.Initialization.Controller
         }
 
         //Task<CustomerResponse> SaveAsync(Customer customer);
+        [SwaggerResponse(200, "Save customer", typeof(IActionResult))]
+        [ProducesResponseType(typeof(IActionResult), 200)]
         [HttpPost("customers")]
         public async Task<IActionResult> createCustomer([FromBody] SaveCustomerResource resource)
         {
@@ -70,6 +74,8 @@ namespace VirtualExpress.Initialization.Controller
         }
 
         //Task<CustomerResponse> UpdateAsync(int customerId, Customer customer);
+        [SwaggerResponse(200, "Update a customer by giving the id", typeof(IActionResult))]
+        [ProducesResponseType(typeof(IActionResult), 200)]
         [HttpPut("customers/{Id}")]
         public async Task<IActionResult> updateCustomer(int Id, [FromBody] SaveCustomerResource resource)
         {

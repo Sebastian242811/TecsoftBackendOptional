@@ -4,6 +4,7 @@ using VirtualExpress.ShipDelivery.Domain.Models;
 using VirtualExpress.ShipProvincial.Domain.Models;
 using VirtualExpress.Social.Domain.Models;
 using VirtualExpress.Initialization.Domain.Model;
+using VirtualExpress.General.Extensions;
 
 namespace VirtualExpress.General.Persistance.Context
 {
@@ -14,7 +15,7 @@ namespace VirtualExpress.General.Persistance.Context
         }
 
         public DbSet<City> Cities { get; set; }
-        public DbSet<Terminal> Terminal { get; set; }
+        public DbSet<Terminal> Terminals { get; set; }
         public DbSet<Delivery> Deliveries { get; set; }
         public DbSet<PackageDelivery> PackageDeliveries { get; set; }
         public DbSet<Dispatcher> Dispatchers { get; set; }
@@ -24,7 +25,7 @@ namespace VirtualExpress.General.Persistance.Context
 
         public DbSet<Company> Companies { get; set; }
         public DbSet<Customer> Customers { get; set; }
-        public DbSet<Employee> Employees { get; set; }
+        public DbSet<Dealer> Dealers { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -38,11 +39,11 @@ namespace VirtualExpress.General.Persistance.Context
             builder.Entity<City>().Property(p => p.Name)
                 .IsRequired().HasMaxLength(30);
             builder.Entity<City>()
-                .HasMany(p => p.customers)
+                .HasMany(p => p.Customers)
                 .WithOne(p => p.City)
                 .HasForeignKey(p => p.CityId);
             builder.Entity<City>()
-                .HasMany(p => p.employees)
+                .HasMany(p => p.Dealers)
                 .WithOne(p => p.City)
                 .HasForeignKey(p => p.CityId);
             builder.Entity<City>()
@@ -61,6 +62,8 @@ namespace VirtualExpress.General.Persistance.Context
                 .IsRequired().HasMaxLength(30);
             builder.Entity<Terminal>().HasOne(p => p.City)
                 .WithMany(p => p.Terminals).HasForeignKey(p => p.CityId);
+            builder.Entity<Terminal>().HasOne(p => p.Company)
+                .WithMany(p => p.Terminals).HasForeignKey(p => p.CompanyId);
 
             builder.Entity<Delivery>().ToTable("Delivery");
             builder.Entity<Delivery>().HasKey(k => k.Id);
@@ -72,9 +75,11 @@ namespace VirtualExpress.General.Persistance.Context
                 .IsRequired().HasMaxLength(25);
 
             builder.Entity<PackageDelivery>().ToTable("PackageDelivery");
-            builder.Entity<PackageDelivery>().HasKey(k => k.DeliveryId);
+            builder.Entity<PackageDelivery>().HasKey(k => new { k.DeliveryId, k.PackageId});
             builder.Entity<PackageDelivery>().HasOne(p => p.Delivery)
                 .WithMany(p => p.PackageDeliveries).HasForeignKey(p => p.DeliveryId);
+            builder.Entity<PackageDelivery>().HasOne(p => p.Package)
+                .WithMany(p => p.PackageDeliveries).HasForeignKey(p => p.PackageId);
 
             builder.Entity<Dispatcher>().ToTable("Dispatchers");
             builder.Entity<Dispatcher>().HasKey(Key => Key.Id);
@@ -106,6 +111,8 @@ namespace VirtualExpress.General.Persistance.Context
                 .WithMany(p => p.Packages).HasForeignKey(p => p.FerightId);
             builder.Entity<Package>().HasOne(p => p.Dispatcher)
                 .WithMany(p => p.Packages).HasForeignKey(p => p.DispatcherId);
+            builder.Entity<Package>().HasOne(p => p.Customer)
+                .WithMany(p => p.Packages).HasForeignKey(p => p.CustomerId);
 
 
             builder.Entity<Commentary>().ToTable("Commentary");
@@ -147,22 +154,25 @@ namespace VirtualExpress.General.Persistance.Context
             builder.Entity<Customer>().Property(p => p.Password)
                 .IsRequired().HasMaxLength(15);
 
-            builder.Entity<Employee>().ToTable("Employees");
-            builder.Entity<Employee>().HasKey(p => p.Id);
-            builder.Entity<Employee>().Property(p => p.Id)
+            builder.Entity<Dealer>().ToTable("Employees");
+            builder.Entity<Dealer>().HasKey(p => p.Id);
+            builder.Entity<Dealer>().Property(p => p.Id)
                 .IsRequired().ValueGeneratedOnAdd();
-            builder.Entity<Employee>().Property(p => p.Name)
+            builder.Entity<Dealer>().Property(p => p.Name)
                 .IsRequired().HasMaxLength(30);
-            builder.Entity<Employee>().Property(p => p.Username)
+            builder.Entity<Dealer>().Property(p => p.Username)
                 .IsRequired().HasMaxLength(15);
-            builder.Entity<Employee>().Property(p => p.Number)
+            builder.Entity<Dealer>().Property(p => p.Number)
                 .IsRequired().HasMaxLength(9);
-            builder.Entity<Employee>().Property(p => p.Brithday)
+            builder.Entity<Dealer>().Property(p => p.Brithday)
                 .IsRequired();
-            builder.Entity<Employee>().Property(p => p.Email)
+            builder.Entity<Dealer>().Property(p => p.Email)
                 .IsRequired().HasMaxLength(50);
-            builder.Entity<Employee>().Property(p => p.Password)
+            builder.Entity<Dealer>().Property(p => p.Password)
                 .IsRequired().HasMaxLength(15);
+
+
+            //builder.ApplySnakeCaseNamingConvention();
         }
     }
 
