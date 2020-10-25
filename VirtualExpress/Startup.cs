@@ -1,22 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using VirtualExpress.CompanyManagement.Domain.Models;
 using VirtualExpress.CompanyManagement.Domain.Repositories;
 using VirtualExpress.CompanyManagement.Domain.Services;
 using VirtualExpress.CompanyManagement.Persistence.Repositories;
-using VirtualExpress.CompanyManagement.Resources;
 using VirtualExpress.CompanyManagement.Services;
 using VirtualExpress.General.Domain.Repositories;
 using VirtualExpress.General.Extensions;
@@ -25,6 +16,13 @@ using VirtualExpress.General.Repositories;
 using VirtualExpress.Initialization.Domain.Repositories;
 using VirtualExpress.Initialization.Domain.Services;
 using VirtualExpress.Initialization.Persistence.Repositories;
+using VirtualExpress.MemberShip.Domain.Model;
+using VirtualExpress.MemberShip.Domain.Repositories;
+using VirtualExpress.MemberShip.Domain.Services;
+using VirtualExpress.MemberShip.Model.Repositories;
+using VirtualExpress.MemberShip.Model.Services;
+using VirtualExpress.MemberShip.Persistence.Repositories;
+using VirtualExpress.MemberShip.Services;
 using VirtualExpress.Register.Persistence.Repositories;
 using VirtualExpress.Register.Services;
 using VirtualExpress.ShipDelivery.Domain.Repositories;
@@ -65,21 +63,25 @@ namespace VirtualExpress
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<ICompanyRepository, CompanyRepository>();
             services.AddScoped<IDealerRepository, DealerRepository>();
-            //CompanyManagement
+                //CompanyManagement
             services.AddScoped<ICityRepository, CityRepository>();
             services.AddScoped<ITerminalRepository, TerminalRepository>();
-            //ShipDelivery
+                //ShipDelivery
             services.AddScoped<IDeliveryRepository, DeliveryRepository>();
             services.AddScoped<IPackageDeliveryRepository, PackageDeliveryRepository>();
-            //ShipProvincial
+                //ShipProvincial
             services.AddScoped<IDispatcherRepository, DispatcherRepository>();
             services.AddScoped<IFreightRepository, FreightRepository>();
             services.AddScoped<IPackageRepository,PackageRepository>();
-            //Social
+                //Social
             services.AddScoped<ICommentaryRepository, CommentaryRepository>();
-
-
-            //UnitOfWork
+                //MemberShip
+            services.AddScoped<IPlanCompanyRepository, PlanCompanyRepository>();
+            services.AddScoped<IPlanCustomerRepository, PlanCustomerRepository>();
+            services.AddScoped<ISubscriptionCompanyRepository, SubscriptionCompanyRepository>();
+            services.AddScoped<ISubscriptionCustomerRepository, SubscriptionCustomerRepository>();
+            services.AddScoped<ITypeOfCurrentRepository, TypeOfCurrentRepository>();
+                //UnitOfWork
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             //Services
@@ -87,19 +89,25 @@ namespace VirtualExpress
             services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<ICompanyService, CompanyService>();
             services.AddScoped<IDealerService, DealerService>();
-            //CompanyManagement
+                //CompanyManagement
             services.AddScoped<ICityService, CityService>();
             services.AddScoped<ITerminalService, TerminalService>();
-            //shipDelivery
+                //shipDelivery
             services.AddScoped<IDeliveryService, DeliveryService>();
             services.AddScoped<IPackageDeliveryService, PackageDeliveryService>();
-            //ShipProvincial
+                //ShipProvincial
             services.AddScoped<IDispatcherService, DispatcherService>();
             services.AddScoped<IFreightService, FreightService>();
             services.AddScoped<IPackageService, PackageService>();
-            //Social
+                //Social
             services.AddScoped<ICommentaryService, CommentaryService>();
-            
+                //MemberShip
+            services.AddScoped<IPlanCompanyService, PlanCompanyService>();
+            services.AddScoped<IPlanCustomerService, PlanCustomerService>();
+            services.AddScoped<ISubscriptionCompanyService, SubscriptionCompanyService>();
+            services.AddScoped<ISubscriptionCustomerService, SubscriptionCustomerService>();
+            services.AddScoped<ITypeOfCurrentService, TypeOfCurrentService>();
+
             services.AddAutoMapper(typeof(Startup));
 
             services.AddCustomSwagger();

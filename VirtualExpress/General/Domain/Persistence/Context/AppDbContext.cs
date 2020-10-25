@@ -5,6 +5,9 @@ using VirtualExpress.ShipProvincial.Domain.Models;
 using VirtualExpress.Social.Domain.Models;
 using VirtualExpress.Initialization.Domain.Model;
 using VirtualExpress.General.Extensions;
+using VirtualExpress.MemberShip.Model.Model;
+using VirtualExpress.MemberShip.Domain.Model;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace VirtualExpress.General.Persistance.Context
 {
@@ -23,10 +26,17 @@ namespace VirtualExpress.General.Persistance.Context
         public DbSet<Package> Packages { get; set; }
         public DbSet<Commentary> Comentaries { get; set; }
 
+        //Initialization
         public DbSet<Company> Companies { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Dealer> Dealers { get; set; }
 
+        //MemberShip
+        public DbSet<TypeOfCurrent> TypeOfCurrents { get; set; }
+        public DbSet<PlanCompany> PlanCompanies { get; set; }
+        public DbSet<PlanCustomer> PlanCustomers { get; set; }
+        public DbSet<SubscriptionCustomer> SubscriptionCustomers { get; set; }
+        public DbSet<SubscriptionCompany> SubscriptionCompanies { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -120,6 +130,8 @@ namespace VirtualExpress.General.Persistance.Context
             builder.Entity<Commentary>().Property(p => p.Id)
                 .IsRequired().ValueGeneratedOnAdd();
 
+                //Initialization
+
             builder.Entity<Company>().ToTable("Companies");
             builder.Entity<Company>().HasKey(p => p.Id);
             builder.Entity<Company>().Property(p => p.Id)
@@ -136,6 +148,10 @@ namespace VirtualExpress.General.Persistance.Context
                 .IsRequired().HasMaxLength(15);
             builder.Entity<Company>().Property(p => p.Ruc)
                 .IsRequired().HasMaxLength(11);
+            builder.Entity<Company>()
+                .HasMany(p => p.Subscriptions)
+                .WithOne(p => p.Company)
+                .HasForeignKey(p => p.CompanyId);
 
             builder.Entity<Customer>().ToTable("Customers");
             builder.Entity<Customer>().HasKey(p => p.Id);
@@ -153,6 +169,10 @@ namespace VirtualExpress.General.Persistance.Context
                 .IsRequired().HasMaxLength(50);
             builder.Entity<Customer>().Property(p => p.Password)
                 .IsRequired().HasMaxLength(15);
+            builder.Entity<Customer>()
+                .HasMany(p => p.Subscriptions)
+                .WithOne(p => p.Customer)
+                .HasForeignKey(p => p.CustomerId);
 
             builder.Entity<Dealer>().ToTable("Employees");
             builder.Entity<Dealer>().HasKey(p => p.Id);
@@ -171,6 +191,70 @@ namespace VirtualExpress.General.Persistance.Context
             builder.Entity<Dealer>().Property(p => p.Password)
                 .IsRequired().HasMaxLength(15);
 
+            //MemberShip
+            builder.Entity<TypeOfCurrent>().ToTable("TypeOfCurrents");
+            builder.Entity<TypeOfCurrent>().HasKey(p => p.Id);
+            builder.Entity<TypeOfCurrent>().Property(p => p.Id)
+                .IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<TypeOfCurrent>().Property(p => p.Name)
+                .IsRequired().HasMaxLength(15);
+            builder.Entity<TypeOfCurrent>()
+                .HasMany(p => p.PlanCompanies)
+                .WithOne(p => p.TypeOfCurrent)
+                .HasForeignKey(p => p.TypeOfCurrentId);
+            builder.Entity<TypeOfCurrent>()
+                .HasMany(p => p.PlanCustomers)
+                .WithOne(p => p.TypeOfCurrent)
+                .HasForeignKey(p => p.TypeOfCurrentId);
+
+
+            builder.Entity<PlanCustomer>().ToTable("PlanCustomers");
+            builder.Entity<PlanCustomer>().HasKey(p => p.Id);
+            builder.Entity<PlanCustomer>().Property(p => p.Id)
+                .IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<PlanCustomer>().Property(p => p.Name)
+                .IsRequired().HasMaxLength(20);
+            builder.Entity<PlanCustomer>().Property(p => p.Cost)
+                .IsRequired();
+            builder.Entity<PlanCustomer>()
+                .HasMany(p => p.SubscriptionCustomer)
+                .WithOne(p => p.PlanCustomer)
+                .HasForeignKey(p => p.PlanId);
+
+            builder.Entity<PlanCompany>().ToTable("PlanCompanies");
+            builder.Entity<PlanCompany>().HasKey(p => p.Id);
+            builder.Entity<PlanCompany>().Property(p => p.Id)
+                .IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<PlanCompany>().Property(p => p.Name)
+                .IsRequired().HasMaxLength(20);
+            builder.Entity<PlanCompany>().Property(p => p.Cost)
+                .IsRequired();
+            builder.Entity<PlanCompany>()
+             .HasMany(p => p.SubscriptionCompany)
+             .WithOne(p => p.PlanCompany)
+             .HasForeignKey(p => p.PlanId);
+
+            builder.Entity<SubscriptionCustomer>().ToTable("SubscriptionCustomers");
+            builder.Entity<SubscriptionCustomer>().HasKey(p => p.Id);
+            builder.Entity<SubscriptionCustomer>().Property(p => p.Id)
+                .IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<SubscriptionCustomer>().Property(p => p.Discount)
+                .IsRequired();
+            builder.Entity<SubscriptionCustomer>().Property(p => p.DateTime)
+                .IsRequired();
+            builder.Entity<SubscriptionCustomer>().Property(p => p.TotalPrice)
+                .IsRequired();
+
+            builder.Entity<SubscriptionCompany>().ToTable("SubscriptionCustomers");
+            builder.Entity<SubscriptionCompany>().HasKey(p => p.Id);
+            builder.Entity<SubscriptionCompany>().Property(p => p.Id)
+                .IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<SubscriptionCompany>().Property(p => p.Discount)
+                .IsRequired();
+            builder.Entity<SubscriptionCompany>().Property(p => p.DateTime)
+                .IsRequired();
+            builder.Entity<SubscriptionCompany>().Property(p => p.TotalPrice)
+                .IsRequired();
 
             //builder.ApplySnakeCaseNamingConvention();
         }

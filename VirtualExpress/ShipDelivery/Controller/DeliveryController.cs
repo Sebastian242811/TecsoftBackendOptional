@@ -60,7 +60,7 @@ namespace VirtualExpress.ShipDelivery.Controller
         [SwaggerResponse(200, "Update Delivery", typeof(IActionResult))]
         [ProducesResponseType(typeof(IActionResult), 200)]
         [HttpPut("id")]
-        public async Task<IActionResult> PutAsyng(int id, [FromBody] SaveDeliveryResource resource)
+        public async Task<IActionResult> PutAsync(int id, [FromBody] SaveDeliveryResource resource)
         {
             var Delivery = _mapper.Map<SaveDeliveryResource, Delivery>(resource);
             var result = await _DeliveryStateService.UpdateAsync(id, Delivery);

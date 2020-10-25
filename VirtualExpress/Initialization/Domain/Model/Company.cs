@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VirtualExpress.CompanyManagement.Domain.Models;
+using VirtualExpress.MemberShip.Domain.Model;
 
 namespace VirtualExpress.Initialization.Domain.Model
 {
@@ -17,5 +18,6 @@ namespace VirtualExpress.Initialization.Domain.Model
         public string Ruc { get; set; }
         public IList<Terminal> Terminals { get; set; } = new List<Terminal>();
         //Subscription
+        public IList<SubscriptionCompany> Subscriptions { get; set; } = new List<SubscriptionCompany>();
     }
 }

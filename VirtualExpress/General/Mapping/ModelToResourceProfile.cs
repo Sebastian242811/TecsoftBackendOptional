@@ -7,6 +7,9 @@ using VirtualExpress.CompanyManagement.Domain.Models;
 using VirtualExpress.CompanyManagement.Resources;
 using VirtualExpress.Initialization.Domain.Model;
 using VirtualExpress.Initialization.Resource;
+using VirtualExpress.MemberShip.Domain.Model;
+using VirtualExpress.MemberShip.Model.Model;
+using VirtualExpress.MemberShip.Resource;
 using VirtualExpress.ShipDelivery.Domain.Models;
 using VirtualExpress.ShipDelivery.Resources;
 using VirtualExpress.ShipProvincial.Domain.Models;
@@ -33,6 +36,13 @@ namespace VirtualExpress.General.Mapping
             CreateMap<Customer, CustomerResource>();
             CreateMap<Company, CompanyResource>();
             CreateMap<Dealer, DealerResource>();
+
+            //MemberShip
+            CreateMap<PlanCompany, PlanCompanyResource>();
+            CreateMap<PlanCustomer, PlanCustomerResource>();
+            CreateMap<SubscriptionCompany, SubscriptionCompanyResource>();
+            CreateMap<SubscriptionCustomer, SubscriptionCustomerResource>();
+            CreateMap<TypeOfCurrent, TypeOfCurrentResource>();
         }
     }
 }
