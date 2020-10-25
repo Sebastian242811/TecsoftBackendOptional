@@ -90,13 +90,14 @@ namespace VirtualExpress.Register.Services
                 return new CompanyResponse("Customer not found");
 
             existingCustomer.Email = company.Email;
+            existingCustomer.Username = company.Username;
             existingCustomer.Name = company.Name;
             existingCustomer.Number = company.Number;
             existingCustomer.Password = company.Password;
             existingCustomer.Ruc = company.Ruc;
             try
             {
-                _companyRepository.Remove(existingCustomer);
+                _companyRepository.Update(existingCustomer);
                 await _unitOfWork.CompleteAsync();
                 return new CompanyResponse(existingCustomer);
             }

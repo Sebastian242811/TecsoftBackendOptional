@@ -36,6 +36,8 @@ namespace VirtualExpress.MemberShip.Controller
             return resource;
         }
 
+        [SwaggerResponse(200, "Get Customer Subscription by Id", typeof(IActionResult))]
+        [ProducesResponseType(typeof(IActionResult), 200)]
         [HttpGet("{id}")]
         public async Task<IActionResult> getSubscriptionCustomerById(int id)
         {
@@ -48,6 +50,8 @@ namespace VirtualExpress.MemberShip.Controller
             return Ok(subscriptionCustomerResource);
         }
 
+        [SwaggerResponse(200, "Save Customer Subscription", typeof(IActionResult))]
+        [ProducesResponseType(typeof(IActionResult), 200)]
         [HttpPost]
         public async Task<IActionResult> createSubscriptionCustomer([FromBody] SaveSubscriptionCustomerResource resource)
         {
@@ -64,7 +68,9 @@ namespace VirtualExpress.MemberShip.Controller
             return Ok(subscriptionCustomerResource);
         }
 
-        [HttpPut]
+        [SwaggerResponse(200, "Update Customer Subscription", typeof(IActionResult))]
+        [ProducesResponseType(typeof(IActionResult), 200)]
+        [HttpPut("{id}")]
         public async Task<IActionResult> updateSubscriptionCustomer(int id, [FromBody] SaveSubscriptionCustomerResource resource)
         {
             var subscriptionCustomer = _mapper.Map<SaveSubscriptionCustomerResource, SubscriptionCustomer>(resource);
@@ -77,7 +83,9 @@ namespace VirtualExpress.MemberShip.Controller
             return Ok(subscriptionCustomer);
         }
 
-        [HttpDelete]
+        [SwaggerResponse(200, "Delete Customer Subscription", typeof(IActionResult))]
+        [ProducesResponseType(typeof(IActionResult), 200)]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> deleteSubscriptionCustomer(int id)
         {
             var result = await _subscriptionCustomerService.RemoveAsync(id);

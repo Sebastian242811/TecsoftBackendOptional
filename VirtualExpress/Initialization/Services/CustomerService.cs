@@ -103,7 +103,7 @@ namespace VirtualExpress.Register.Services
             existingCustomer.Username = customer.Username;
             try
             {
-                await _customerRepository.AddAsync(existingCustomer);
+                 _customerRepository.Update(existingCustomer);
                 await _unitOfWork.CompleteAsync();
                 return new CustomerResponse(existingCustomer);
             }

@@ -71,7 +71,8 @@ namespace VirtualExpress.ShipDelivery.Services
             var existingDelivery = await _DeliveryRepository.FindById(id);
             if (existingDelivery == null)
                 return new DeliveryResponse("Delivery not found");
-            existingDelivery.Id = Delivery.Id;
+            existingDelivery.Arrival = Delivery.Arrival;
+            existingDelivery.Price = Delivery.Price;
             try
             {
                 _DeliveryRepository.Update(existingDelivery);

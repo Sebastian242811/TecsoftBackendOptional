@@ -74,6 +74,7 @@ namespace VirtualExpress.Social.Services
             if (existing == null)
                 return new CommentaryResponse("Commentary not found");
             existing.Opinion = Commentary.Opinion;
+            existing.Valoration = Commentary.Valoration;
             try
             {
                 _CommentaryRepository.Update(existing);

@@ -82,7 +82,7 @@ namespace VirtualExpress.CompanyManagement.Controller
             if (!result.Sucess)
                 return BadRequest(result.Message);
 
-            return Ok(result.Resource);
+            return Ok("Delete");
         }
     }
 }

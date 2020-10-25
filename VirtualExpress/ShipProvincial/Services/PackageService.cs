@@ -85,7 +85,15 @@ namespace VirtualExpress.ShipProvincial.Services
             var existing = await _packageRepository.FindById(id);
             if (existing == null)
                 return new PackageResponse("Package not found");
+            existing.Description = package.Description;
             existing.Observations = package.Observations;
+            existing.Priority = package.Priority;
+            existing.State = package.State;
+            existing.Weight = package.Weight;
+            existing.Discount = package.Discount;
+            existing.Price = package.Price;
+            existing.FerightId = package.FerightId;
+            existing.DispatcherId = package.DispatcherId;
             try
             {
                 _packageRepository.Update(existing);

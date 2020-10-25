@@ -59,7 +59,7 @@ namespace VirtualExpress.CompanyManagement.Controller
 
         [SwaggerResponse(200, "Edit cities by entering the Id", typeof(IActionResult))]
         [ProducesResponseType(typeof(IActionResult), 200)]
-        [HttpPut("id")]
+        [HttpPut("{id}")]
         public async Task<IActionResult> PutAsync(int id, [FromBody] SaveCityResource resource)
         {
             var city = _mapper.Map<SaveCityResource, City>(resource);

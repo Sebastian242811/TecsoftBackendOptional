@@ -98,10 +98,9 @@ namespace VirtualExpress.MemberShip.Services
             if (existingPlan == null)
                 return new SubscriptionCustomerResponse("PlanCustomer not found");
 
-            existingSubscription.Customer = existingCustomer;
-            existingSubscription.PlanCustomer = existingPlan;
-            existingSubscription.CustomerId = customerId;
-            existingSubscription.PlanId = planId;
+            existingSubscription.PlanCustomer = subscriptionCustomer.PlanCustomer;
+            existingSubscription.CustomerId = subscriptionCustomer.CustomerId;
+            existingSubscription.PlanId = subscriptionCustomer.PlanId;
             existingSubscription.DateTime = subscriptionCustomer.DateTime;
             existingSubscription.Discount = subscriptionCustomer.Discount;
             existingSubscription.TotalPrice = subscriptionCustomer.TotalPrice;

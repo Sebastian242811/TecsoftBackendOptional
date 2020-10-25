@@ -57,7 +57,7 @@ namespace VirtualExpress.ShipProvincial.Controller
 
         [SwaggerResponse(200, "Update Freight", typeof(IActionResult))]
         [ProducesResponseType(typeof(IActionResult), 200)]
-        [HttpPut("id")]
+        [HttpPut("{id}")]
         public async Task<IActionResult> PutAsync(int id, [FromBody] SaveFreightResource resource)
         {
             var freight = _mapper.Map<SaveFreightResource, Freight>(resource);

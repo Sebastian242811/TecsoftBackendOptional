@@ -58,7 +58,7 @@ namespace VirtualExpress.ShipProvincial.Controller
 
         [SwaggerResponse(200, "Update package", typeof(IActionResult))]
         [ProducesResponseType(typeof(IActionResult), 200)]
-        [HttpPut("id")]
+        [HttpPut("{id}")]
         public async Task<IActionResult> PutAsyng(int id, [FromBody] SavePackageResource resource)
         {
             var package = _mapper.Map<SavePackageResource, Package>(resource);

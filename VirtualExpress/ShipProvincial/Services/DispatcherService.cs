@@ -73,6 +73,8 @@ namespace VirtualExpress.ShipProvincial.Services
             if (existing == null)
                 return new DispatcherResponse("Dispatcher not found");
             existing.Name = dispatcher.Name;
+            existing.DNI = dispatcher.DNI;
+            existing.TerminalId = dispatcher.TerminalId;
             try
             {
                 _dispatcherRepository.Update(existing);

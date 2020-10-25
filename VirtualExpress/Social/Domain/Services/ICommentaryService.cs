@@ -12,7 +12,7 @@ namespace VirtualExpress.Social.Domain.Services
         Task<IEnumerable<Commentary>> ListAsync();
         Task<CommentaryResponse> SaveAsync(Commentary comentary);
         Task<CommentaryResponse> GetById(int id);
-        Task<CommentaryResponse> UpdateAsync(int id, Commentary comentary);
+        Task<CommentaryResponse> UpdateAsync(int id, Commentary commentary);
         Task<CommentaryResponse> DeleteAsync(int id);
     }
 }

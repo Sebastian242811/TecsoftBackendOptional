@@ -98,6 +98,8 @@ namespace VirtualExpress.General.Persistance.Context
             builder.Entity<Dispatcher>().Property(p => p.Name)
                 .IsRequired().HasMaxLength(30);
             builder.Entity<Dispatcher>().Property(p => p.DNI).HasMaxLength(8);
+            builder.Entity<Dispatcher>().HasOne(p => p.Terminal)
+                .WithMany(p => p.Dispatchers).HasForeignKey(p => p.TerminalId);
 
 
             builder.Entity<Freight>().ToTable("Freight");
@@ -115,8 +117,8 @@ namespace VirtualExpress.General.Persistance.Context
             builder.Entity<Package>().Property(p => p.Description)
                 .IsRequired().ValueGeneratedOnAdd();
             builder.Entity<Package>().Property(p => p.Observations).HasMaxLength(50);
-            builder.Entity<Package>().Property(p => p.Priority).IsRequired();
-            builder.Entity<Package>().Property(p => p.State).IsRequired();
+            builder.Entity<Package>().Property(p => p.Priority).HasDefaultValue(EPriority.Baja).IsRequired();
+            builder.Entity<Package>().Property(p => p.State).HasDefaultValue(EState.En_espera).IsRequired();
             builder.Entity<Package>().HasOne(p => p.Freight)
                 .WithMany(p => p.Packages).HasForeignKey(p => p.FerightId);
             builder.Entity<Package>().HasOne(p => p.Dispatcher)

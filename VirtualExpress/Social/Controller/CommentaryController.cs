@@ -58,7 +58,7 @@ namespace VirtualExpress.Social.Controller
 
         [SwaggerResponse(200, "Update Comentary", typeof(IActionResult))]
         [ProducesResponseType(typeof(IActionResult), 200)]
-        [HttpPut]
+        [HttpPut("{id}")]
         public async Task<IActionResult> PutAsync(int id, [FromBody] SaveCommentaryResource resource)
         {
             var commentary = _mapper.Map<SaveCommentaryResource, Commentary>(resource);

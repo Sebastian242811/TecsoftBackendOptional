@@ -61,7 +61,7 @@ namespace VirtualExpress.Register.Services
                 return new DealerResponse("This username is being used by another user");
 
             var existingCity = await _cityRepository.FindById(employee.CityId);
-            if (existingCity != null)
+            if (existingCity == null)
                 return new DealerResponse("City not found");
 
             var existingEmail = await _employeeRepository.FindByEmail(employee.Email);
@@ -88,6 +88,7 @@ namespace VirtualExpress.Register.Services
                 return new DealerResponse("Employee not found");
 
             existingEmployee.Brithday = employee.Brithday;
+            existingEmployee.Username = employee.Username;
             existingEmployee.City = employee.City;
             existingEmployee.Email = employee.Email;
             existingEmployee.Name = employee.Name;

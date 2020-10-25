@@ -34,6 +34,8 @@ namespace VirtualExpress.MemberShip.Controller
             return resource;
         }
 
+        [SwaggerResponse(200, "Get Type of Current by Id", typeof(IActionResult))]
+        [ProducesResponseType(typeof(IActionResult), 200)]
         [HttpGet("{id}")]
         public async Task<IActionResult> getTypeOfCurrentById(int id)
         {
@@ -46,6 +48,8 @@ namespace VirtualExpress.MemberShip.Controller
             return Ok(typeOfCurrentResource);
         }
 
+        [SwaggerResponse(200, "Save Type of Current", typeof(IActionResult))]
+        [ProducesResponseType(typeof(IActionResult), 200)]
         [HttpPost]
         public async Task<IActionResult> createTypeOfCurrent([FromBody] SaveTypeOfCurrentResource resource)
         {
@@ -62,7 +66,9 @@ namespace VirtualExpress.MemberShip.Controller
             return Ok(typeOfCurrentResource);
         }
 
-        [HttpPut]
+        [SwaggerResponse(200, "Update Type of Current", typeof(IActionResult))]
+        [ProducesResponseType(typeof(IActionResult), 200)]
+        [HttpPut("{id}")]
         public async Task<IActionResult> updateTypeOfCurrent(int id, [FromBody] SaveTypeOfCurrentResource resource)
         {
             var typeOfCurrent = _mapper.Map<SaveTypeOfCurrentResource, TypeOfCurrent>(resource);
@@ -75,7 +81,9 @@ namespace VirtualExpress.MemberShip.Controller
             return Ok(typeOfCurrentResource);
         }
 
-        [HttpDelete]
+        [SwaggerResponse(200, "Delete Type of Current", typeof(IActionResult))]
+        [ProducesResponseType(typeof(IActionResult), 200)]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> deleteTypeOfCurrent(int id)
         {
             var result = await _typeOfCurrentService.DeleteAsync(id);

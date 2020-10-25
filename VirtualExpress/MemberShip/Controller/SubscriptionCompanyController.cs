@@ -26,7 +26,7 @@ namespace VirtualExpress.MemberShip.Controller
             _mapper = mapper;
         }
 
-        [SwaggerResponse(200, "List of Plans for Customer", typeof(IEnumerable<SubscriptionCompanyResource>))]
+        [SwaggerResponse(200, "List of Subscription Companies", typeof(IEnumerable<SubscriptionCompanyResource>))]
         [ProducesResponseType(typeof(IEnumerable<SubscriptionCompanyResource>), 200)]
         [HttpGet]
         public async Task<IEnumerable<SubscriptionCompanyResource>> getAllPlanCompanies()
@@ -36,6 +36,8 @@ namespace VirtualExpress.MemberShip.Controller
             return resource;
         }
 
+        [SwaggerResponse(200, "Get subscription Company by Id", typeof(IActionResult))]
+        [ProducesResponseType(typeof(IActionResult), 200)]
         [HttpGet("{id}")]
         public async Task<IActionResult> getSubscriptionCompanyById(int id)
         {
@@ -48,6 +50,8 @@ namespace VirtualExpress.MemberShip.Controller
             return Ok(resource);
         }
 
+        [SwaggerResponse(200, "Save subscription Company", typeof(IActionResult))]
+        [ProducesResponseType(typeof(IActionResult), 200)]
         [HttpPost]
         public async Task<IActionResult> createSubscriptionCompany([FromBody] SaveSubscriptionCompanyResource resource)
         {
@@ -64,7 +68,9 @@ namespace VirtualExpress.MemberShip.Controller
             return Ok(SubscriptionCompanyResource);
         }
 
-        [HttpPut]
+        [SwaggerResponse(200, "Update subscription Company", typeof(IActionResult))]
+        [ProducesResponseType(typeof(IActionResult), 200)]
+        [HttpPut("{id}")]
         public async Task<IActionResult> updateSubscriptionCompany(int id, [FromBody] SaveSubscriptionCompanyResource resource)
         {
             var subscriptionCompany = _mapper.Map<SaveSubscriptionCompanyResource, SubscriptionCompany>(resource);
@@ -77,7 +83,9 @@ namespace VirtualExpress.MemberShip.Controller
             return Ok(SubscriptionCompanyResource);
         }
 
-        [HttpDelete]
+        [SwaggerResponse(200, "Delete subscription Company", typeof(IActionResult))]
+        [ProducesResponseType(typeof(IActionResult), 200)]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> deleteSubscriptionCompany(int id)
         {
             var result = await _subscriptionCompany.RemoveAsync(id);

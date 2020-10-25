@@ -1,8 +1,10 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VirtualExpress.Initialization.Domain.Model;
+using VirtualExpress.ShipProvincial.Domain.Models;
 
 namespace VirtualExpress.CompanyManagement.Domain.Models
 {
@@ -15,5 +17,6 @@ namespace VirtualExpress.CompanyManagement.Domain.Models
         public City City { get; set; }
         public int CompanyId { get; set; }
         public Company Company { get; set; }
+        public IList<Dispatcher> Dispatchers { get; set; } = new List<Dispatcher>();
     }
 }

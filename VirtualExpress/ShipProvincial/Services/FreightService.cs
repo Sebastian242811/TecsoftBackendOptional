@@ -77,7 +77,9 @@ namespace VirtualExpress.ShipProvincial.Services
             var existingFreight = await _freightRepository.FindById(id);
             if (existingFreight == null)
                 return new FreightResponse("Freight not found");
-            existingFreight.Id = freight.Id;
+            existingFreight.ArrivalDate = freight.ArrivalDate;
+            existingFreight.DepartureDate = freight.DepartureDate;
+            existingFreight.Observations = freight.Observations;
             try
             {
                 _freightRepository.Update(existingFreight);

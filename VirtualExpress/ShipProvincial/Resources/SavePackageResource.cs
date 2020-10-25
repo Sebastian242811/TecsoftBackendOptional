@@ -15,10 +15,10 @@ namespace VirtualExpress.ShipProvincial.Resources
         [MaxLength(50)]
         public string Observations { get; set; }
         [Required]
-        [MaxLength(5)]
+        [MaxLength(20)]
         public string Priority { get; set; }
         [Required]
-        [MaxLength(5)]
+        [MaxLength(20)]
         public string State { get; set; }
         [Required]
         [MaxLength(5)]

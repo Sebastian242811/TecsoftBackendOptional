@@ -36,6 +36,8 @@ namespace VirtualExpress.MemberShip.Controller
             return resource;
         }
 
+        [SwaggerResponse(200, "Get Plan for Customer by Id", typeof(IActionResult))]
+        [ProducesResponseType(typeof(IActionResult), 200)]
         [HttpGet("{id}")]
         public async Task<IActionResult> getPlanCompanyById(int id)
         {
@@ -48,6 +50,8 @@ namespace VirtualExpress.MemberShip.Controller
             return Ok(resource);
         }
 
+        [SwaggerResponse(200, "Save Plan for Customer", typeof(IActionResult))]
+        [ProducesResponseType(typeof(IActionResult), 200)]
         [HttpPost]
         public async Task<IActionResult> createPlanCompany([FromBody] SavePlanCustomerResource resource)
         {
@@ -64,7 +68,9 @@ namespace VirtualExpress.MemberShip.Controller
             return Ok(planCustomerResource);
         }
 
-        [HttpPut]
+        [SwaggerResponse(200, "Update Plan for Customer", typeof(IActionResult))]
+        [ProducesResponseType(typeof(IActionResult), 200)]
+        [HttpPut("{id}")]
         public async Task<IActionResult> updatePlanCompany(int id, [FromBody] SavePlanCustomerResource resource)
         {
             var planCustomer = _mapper.Map<SavePlanCustomerResource, PlanCustomer>(resource);
@@ -77,7 +83,9 @@ namespace VirtualExpress.MemberShip.Controller
             return Ok(planCustomerResource);
         }
 
-        [HttpDelete]
+        [SwaggerResponse(200, "Delete Plan for Customer", typeof(IActionResult))]
+        [ProducesResponseType(typeof(IActionResult), 200)]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> deletePlanCompany(int id)
         {
             var result = await _planCustomerService.RemoveAsync(id);
