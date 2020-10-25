@@ -54,6 +54,13 @@ namespace VirtualExpress.CompanyManagement.Services
 
         public async Task<CityResponse> SaveAsync(City city)
         {
+            var cities = await _cityRepository.ListAsync();
+            foreach(City citi in cities)
+            {
+                if (citi.Name.ToLower() == city.Name.ToLower())
+                    return new CityResponse("City is already registered");
+            }
+
             try
             {
                 await _cityRepository.AddAsync(city);
