@@ -37,7 +37,7 @@ namespace VirtualExpress.ShipProvincial.Controller
             return resource;
         }
 
-        [SwaggerResponse(200, "Save package", typeof(IActionResult))]
+        [SwaggerResponse(200, "Save package.    ATTENTION: there are 4 options of state values: 'En_camino' 'En_espera' 'Retrasado' 'En_termina_destino' and 3 options of priority values: 'Alta' 'Media' 'Baja'", typeof(IActionResult))]
         [ProducesResponseType(typeof(IActionResult), 200)]
         [HttpPost]
         public async Task<IActionResult> PostAsync([FromBody] SavePackageResource resource)
