@@ -28,7 +28,7 @@ namespace VirtualExpress.Register.Services
         {
             var existingEmployee = await _employeeRepository.FindById(employeeId);
             if (existingEmployee == null)
-                return new DealerResponse("Employee not found");
+                return new DealerResponse("Dealer not found");
             try
             {
                 _employeeRepository.Remove(existingEmployee);
@@ -37,7 +37,7 @@ namespace VirtualExpress.Register.Services
             }
             catch(Exception e)
             {
-                return new DealerResponse($"An error ocurred while deleting the employee {e.Message}");
+                return new DealerResponse($"An error ocurred while deleting the dealer {e.Message}");
             }
         }
 
@@ -58,7 +58,7 @@ namespace VirtualExpress.Register.Services
         {
             var existingUsername = await _employeeRepository.FindByUsername(employee.Username);
             if(existingUsername != null)
-                return new DealerResponse("This username is being used by another user");
+                return new DealerResponse("This username is being used by another dealer");
 
             var existingCity = await _cityRepository.FindById(employee.CityId);
             if (existingCity == null)
@@ -66,7 +66,7 @@ namespace VirtualExpress.Register.Services
 
             var existingEmail = await _employeeRepository.FindByEmail(employee.Email);
             if(existingEmail != null)
-                return new DealerResponse("This email is being used by another user");
+                return new DealerResponse("This email is being used by another dealer");
 
             employee.City = existingCity;
             try
@@ -77,7 +77,7 @@ namespace VirtualExpress.Register.Services
             }
             catch (Exception e)
             {
-                return new DealerResponse($"An error ocurred while saving the employee {e.Message}");
+                return new DealerResponse($"An error ocurred while saving the dealer {e.Message}");
             }
         }
 
@@ -85,7 +85,7 @@ namespace VirtualExpress.Register.Services
         {
             var existingEmployee = await _employeeRepository.FindById(employeeId);
             if (existingEmployee == null)
-                return new DealerResponse("Employee not found");
+                return new DealerResponse("Dealer not found");
 
             existingEmployee.Brithday = employee.Brithday;
             existingEmployee.Username = employee.Username;
@@ -102,7 +102,7 @@ namespace VirtualExpress.Register.Services
             }
             catch (Exception e)
             {
-                return new DealerResponse($"An error ocurred while updating the employee {e.Message}");
+                return new DealerResponse($"An error ocurred while updating the dealer {e.Message}");
             }
         }
     }

@@ -55,7 +55,7 @@ namespace VirtualExpress.MemberShip.Services
         {
             var existingName = await _typeOfCurrentRepository.FindByName(typeOfCurrent.Name);
             if (existingName != null)
-                return new TypeOfCurrentResponse("Name: " + typeOfCurrent.Name + " is begin used");
+                return new TypeOfCurrentResponse("Name is begin used in other TypeOfCurrent");
 
             try
             {
@@ -79,7 +79,7 @@ namespace VirtualExpress.MemberShip.Services
             {
                 var existingName = await _typeOfCurrentRepository.FindByName(typeOfCurrent.Name);
                 if (existingName != null)
-                    return new TypeOfCurrentResponse("Name: " + typeOfCurrent.Name + " is begin used");
+                    return new TypeOfCurrentResponse("Name is begin used in other TypeOfCurrent");
             }
 
             existingType.Name = typeOfCurrent.Name;

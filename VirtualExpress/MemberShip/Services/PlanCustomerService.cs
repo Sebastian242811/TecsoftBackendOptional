@@ -59,7 +59,7 @@ namespace VirtualExpress.MemberShip.Services
         {
             var existingName = await _planCustomerRepository.FindByName(planCustomer.Name);
             if (existingName != null)
-                return new PlanCustomerResponse("Name: " + planCustomer.Name + " is begin used");
+                return new PlanCustomerResponse("Name is begin used in other PlanCustomer");
 
             var existingType = await _typeOfCurrentRepository.FindById(planCustomer.TypeOfCurrentId);
             if (existingType == null)
@@ -91,7 +91,7 @@ namespace VirtualExpress.MemberShip.Services
             {
                 var existingName = await _planCustomerRepository.FindByName(planCustomer.Name);
                 if (existingName != null)
-                    return new PlanCustomerResponse("Name: " + planCustomer.Name + " is begin used");
+                    return new PlanCustomerResponse("Name is begin used in other PlanCustomer");
             }
 
             existingPlan.Name = planCustomer.Name;

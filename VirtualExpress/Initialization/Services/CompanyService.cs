@@ -25,7 +25,7 @@ namespace VirtualExpress.Register.Services
         {
             var existingCustomer = await _companyRepository.FindCompanyById(id);
             if (existingCustomer == null)
-                return new CompanyResponse("Customer not found");
+                return new CompanyResponse("Company not found");
 
             try
             {
@@ -43,7 +43,7 @@ namespace VirtualExpress.Register.Services
         {
             var existingCustomer = await _companyRepository.FindCompanyById(cityId);
             if (existingCustomer == null)
-                return new CompanyResponse("Customer not found");
+                return new CompanyResponse("Company not found");
             return new CompanyResponse(existingCustomer);
             //mal
         }
@@ -52,7 +52,7 @@ namespace VirtualExpress.Register.Services
         {
             var existingCustomer = await _companyRepository.FindCompanyById(companyId);
             if (existingCustomer == null)
-                return new CompanyResponse("Customer not found");
+                return new CompanyResponse("Company not found");
             return new CompanyResponse(existingCustomer);
         }
 
@@ -65,11 +65,11 @@ namespace VirtualExpress.Register.Services
         {
             var existingUsername = await _companyRepository.FindByUsername(company.Username);
             if (existingUsername != null)
-                return new CompanyResponse("This username is being used by another user");
+                return new CompanyResponse("This username is being used by another company");
 
             var existingEmail = await _companyRepository.FindByEmail(company.Email);
             if (existingEmail != null)
-                return new CompanyResponse("This email is being used by another user");
+                return new CompanyResponse("This email is being used by another company");
 
             try
             {
@@ -87,7 +87,7 @@ namespace VirtualExpress.Register.Services
         {
             var existingCustomer = await _companyRepository.FindCompanyById(companyId);
             if (existingCustomer == null)
-                return new CompanyResponse("Customer not found");
+                return new CompanyResponse("Company not found");
 
             existingCustomer.Email = company.Email;
             existingCustomer.Username = company.Username;
