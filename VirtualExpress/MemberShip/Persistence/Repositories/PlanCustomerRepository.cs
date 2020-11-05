@@ -35,7 +35,7 @@ namespace VirtualExpress.MemberShip.Persistence.Repositories
 
         public async Task<IEnumerable<PlanCustomer>> ListAsync()
         {
-            return await _context.PlanCustomers.ToListAsync();
+            return await _context.PlanCustomers.Include(p => p.TypeOfCurrent).ToListAsync();
         }
 
         public void Remove(PlanCustomer planCustomer)

@@ -208,8 +208,10 @@ namespace VirtualExpress.General.Persistance.Context
                 .HasMany(p => p.PlanCustomers)
                 .WithOne(p => p.TypeOfCurrent)
                 .HasForeignKey(p => p.TypeOfCurrentId);
-
-
+            builder.Entity<TypeOfCurrent>().HasData(
+                new TypeOfCurrent { Id = 1, Name = "soles" }
+                );
+            
             builder.Entity<PlanCustomer>().ToTable("PlanCustomers");
             builder.Entity<PlanCustomer>().HasKey(p => p.Id);
             builder.Entity<PlanCustomer>().Property(p => p.Id)

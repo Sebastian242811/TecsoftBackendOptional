@@ -65,8 +65,10 @@ namespace VirtualExpress.MemberShip.Services
             if (existingType == null)
                 return new PlanCustomerResponse("TypeOfCurrent not found");
 
+            
             try
             {
+                planCustomer.TypeOfCurrent = existingType;
                 await _planCustomerRepository.AddAsync(planCustomer);
                 await _unitOfWork.CompleteAsync();
                 return new PlanCustomerResponse(planCustomer);

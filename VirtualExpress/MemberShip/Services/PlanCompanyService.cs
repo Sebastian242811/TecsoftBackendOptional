@@ -64,6 +64,7 @@ namespace VirtualExpress.MemberShip.Services
             if (existingType == null)
                 return new PlanCompanyResponse("TypeOfCurrent not found");
 
+            planCompany.TypeOfCurrent = existingType;
             try
             {
                 await _planCompanyRepository.AddAsync(planCompany);

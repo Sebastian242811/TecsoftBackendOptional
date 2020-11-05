@@ -129,7 +129,6 @@ E:\Aplicaciones Web\Clone\Nueva carpeta\TecsoftBackendOptional\VirtualExpress\bi
 E:\Aplicaciones Web\Clone\Nueva carpeta\TecsoftBackendOptional\VirtualExpress\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
 E:\Aplicaciones Web\Clone\Nueva carpeta\TecsoftBackendOptional\VirtualExpress\bin\Debug\netcoreapp3.1\System.Collections.Immutable.dll
 E:\Aplicaciones Web\Clone\Nueva carpeta\TecsoftBackendOptional\VirtualExpress\bin\Debug\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll
-E:\Aplicaciones Web\Clone\Nueva carpeta\TecsoftBackendOptional\VirtualExpress\obj\Debug\netcoreapp3.1\VirtualExpress.csprojAssemblyReference.cache
 E:\Aplicaciones Web\Clone\Nueva carpeta\TecsoftBackendOptional\VirtualExpress\obj\Debug\netcoreapp3.1\VirtualExpress.AssemblyInfoInputs.cache
 E:\Aplicaciones Web\Clone\Nueva carpeta\TecsoftBackendOptional\VirtualExpress\obj\Debug\netcoreapp3.1\VirtualExpress.AssemblyInfo.cs
 E:\Aplicaciones Web\Clone\Nueva carpeta\TecsoftBackendOptional\VirtualExpress\obj\Debug\netcoreapp3.1\VirtualExpress.csproj.CoreCompileInputs.cache
