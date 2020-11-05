@@ -2,7 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
+using VirtualExpress.Communication.Domain.Models;
 using VirtualExpress.Initialization.Domain.Model;
 using VirtualExpress.ShipProvincial.Domain.Models;
 
@@ -18,5 +20,7 @@ namespace VirtualExpress.CompanyManagement.Domain.Models
         public int CompanyId { get; set; }
         public Company Company { get; set; }
         public IList<Dispatcher> Dispatchers { get; set; } = new List<Dispatcher>();
+        public IList<CustomerServiceEmployee> CustomerServiceEmployees { get; set; } = new List<CustomerServiceEmployee>();
+
     }
 }
