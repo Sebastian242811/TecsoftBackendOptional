@@ -8,6 +8,7 @@ using VirtualExpress.General.Extensions;
 using VirtualExpress.MemberShip.Model.Model;
 using VirtualExpress.MemberShip.Domain.Model;
 using Microsoft.EntityFrameworkCore.Internal;
+using VirtualExpress.Communication.Domain.Models;
 
 namespace VirtualExpress.General.Persistance.Context
 {
@@ -37,6 +38,12 @@ namespace VirtualExpress.General.Persistance.Context
         public DbSet<PlanCustomer> PlanCustomers { get; set; }
         public DbSet<SubscriptionCustomer> SubscriptionCustomers { get; set; }
         public DbSet<SubscriptionCompany> SubscriptionCompanies { get; set; }
+
+        //Communication
+        public DbSet<CustomerServiceEmployee> CustomerServiceEmployees { get; set; }
+        public DbSet<Chat> Chats { get; set; }
+        public DbSet<Message> Messages { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -208,10 +215,8 @@ namespace VirtualExpress.General.Persistance.Context
                 .HasMany(p => p.PlanCustomers)
                 .WithOne(p => p.TypeOfCurrent)
                 .HasForeignKey(p => p.TypeOfCurrentId);
-            builder.Entity<TypeOfCurrent>().HasData(
-                new TypeOfCurrent { Id = 1, Name = "soles" }
-                );
-            
+
+
             builder.Entity<PlanCustomer>().ToTable("PlanCustomers");
             builder.Entity<PlanCustomer>().HasKey(p => p.Id);
             builder.Entity<PlanCustomer>().Property(p => p.Id)
@@ -260,6 +265,37 @@ namespace VirtualExpress.General.Persistance.Context
             builder.Entity<SubscriptionCompany>().Property(p => p.TotalPrice)
                 .IsRequired();
 
+            //Communication
+            builder.Entity<CustomerServiceEmployee>().ToTable("CustomersServicesEmployees");
+            builder.Entity<CustomerServiceEmployee>().HasKey(p => p.Id);
+            builder.Entity<CustomerServiceEmployee>().Property(p => p.Id)
+                .IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<CustomerServiceEmployee>().Property(p => p.Name)
+                .IsRequired();
+            builder.Entity<CustomerServiceEmployee>().HasOne(p => p.Terminal)
+                .WithMany(p => p.CustomerServiceEmployees).HasForeignKey(p => p.TerminalId);
+
+            builder.Entity<Chat>().ToTable("Chats");
+            builder.Entity<Chat>().HasKey(p => p.Id);
+            builder.Entity<Chat>().Property(p => p.Id)
+                .IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<Chat>().Property(p => p.PostDate)
+                .IsRequired();
+            builder.Entity<Chat>().HasMany(p => p.Messages)
+                .WithOne(p => p.Chat).HasForeignKey(p => p.ChatId);
+
+            builder.Entity<Message>().ToTable("Messages");
+            builder.Entity<Message>().HasKey(p => p.Id);
+            builder.Entity<Message>().Property(p => p.Id)
+                .IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<Message>().Property(p => p.Description)
+                .IsRequired();
+            builder.Entity<Message>().HasOne(p => p.Chat)
+                .WithMany(p => p.Messages).HasForeignKey(p => p.ChatId);
+            builder.Entity<Message>().HasOne(p => p.Customer)
+               .WithMany(p => p.Messages).HasForeignKey(p => p.CustomerId);
+            builder.Entity<Message>().HasOne(p => p.CustomerServiceEmployee)
+               .WithMany(p => p.Messages).HasForeignKey(p => p.CustomerServiceEmployeeId);
             //builder.ApplySnakeCaseNamingConvention();
         }
     }
