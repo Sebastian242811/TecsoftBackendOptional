@@ -9,9 +9,12 @@ namespace VirtualExpress.CompanyManagement.Domain.Repositories
     public interface IShipTerminalRepository
     {
         Task<IEnumerable<ShipTerminal>> ListAsync();
+        Task<IEnumerable<ShipTerminal>> GetAllTerminalDestinyByOriginId(int originId);
+        Task<IEnumerable<ShipTerminal>> GetShipTerminalsByCompanyId(int id);
+        Task<IEnumerable<ShipTerminal>> GetCityOriginAndCityDestinyByCompanyId(int companyId);
+        Task<ShipTerminal> FindByOriginIdAndDestinyId(int originId, int destinyId);
         Task AddAsync(ShipTerminal shipTerminal);
-        Task<ShipTerminal> FindById(int id);
-        void Update(ShipTerminal shipTerminal);
         void Remove(ShipTerminal shipTerminal);
+        void Update(ShipTerminal shipTerminal);
     }
 }

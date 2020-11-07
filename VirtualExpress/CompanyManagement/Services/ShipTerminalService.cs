@@ -12,23 +12,22 @@ namespace VirtualExpress.CompanyManagement.Services
 {
     public class ShipTerminalService : IShipTerminalService
     {
-        private readonly ITerminalRepository _terminalRepository;
         private readonly IShipTerminalRepository _shipTerminalRepository;
+        private readonly ITerminalRepository _terminalRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public ShipTerminalService(IUnitOfWork unitOfWork, IShipTerminalRepository shipTerminalRepository, ITerminalRepository terminalRepository)
+        public ShipTerminalService(IShipTerminalRepository shipTerminalRepository, ITerminalRepository terminalRepository, IUnitOfWork unitOfWork)
         {
-            _unitOfWork = unitOfWork;
             _shipTerminalRepository = shipTerminalRepository;
             _terminalRepository = terminalRepository;
+            _unitOfWork = unitOfWork;
         }
 
-        public async Task<ShipTerminalResponse> DeleteAsync(int id)
+        public async Task<ShipTerminalResponse> DeleteAsync(int originId, int destinyId)
         {
-            var existingShipTerminal = await _shipTerminalRepository.FindById(id);
+            var existingShipTerminal = await _shipTerminalRepository.FindByOriginIdAndDestinyId(originId, destinyId);
             if (existingShipTerminal == null)
-                return new ShipTerminalResponse("Data not found");
-
+                return new ShipTerminalResponse("ShipTerminal not found");
             try
             {
                 _shipTerminalRepository.Remove(existingShipTerminal);
@@ -37,16 +36,32 @@ namespace VirtualExpress.CompanyManagement.Services
             }
             catch (Exception e)
             {
-                return new ShipTerminalResponse($"An error ocurred while deleting data: {e.Message}");
+                return new ShipTerminalResponse($"An error ocurred while deleting ShipTerminal: {e.Message}");
             }
         }
 
-        public async Task<ShipTerminalResponse> FindCityById(int id)
+        public async Task<ShipTerminalResponse> GetByOriginIdAndDestinyId(int originId, int destinyId)
         {
-            var existingShipTerminal = await _shipTerminalRepository.FindById(id);
+            var existingShipTerminal = await _shipTerminalRepository.FindByOriginIdAndDestinyId(originId, destinyId);
             if (existingShipTerminal == null)
-                return new ShipTerminalResponse("Data not found");
+                return new ShipTerminalResponse("ShipTerminal not found");
+
             return new ShipTerminalResponse(existingShipTerminal);
+        }
+
+        public async Task<IEnumerable<ShipTerminal>> GetCityOriginAndCityDestinyByCompanyId(int companyId)
+        {
+            return await _shipTerminalRepository.GetCityOriginAndCityDestinyByCompanyId(companyId);
+        }
+
+        public async Task<IEnumerable<ShipTerminal>> GetShipTerminalsByCompanyId(int companyId)
+        {
+            return await _shipTerminalRepository.GetShipTerminalsByCompanyId(companyId);
+        }
+
+        public async Task<IEnumerable<ShipTerminal>> GetShipTerminalsByOriginId(int originId)
+        {
+            return await _shipTerminalRepository.GetAllTerminalDestinyByOriginId(originId);
         }
 
         public async Task<IEnumerable<ShipTerminal>> ListAsync()
@@ -56,28 +71,23 @@ namespace VirtualExpress.CompanyManagement.Services
 
         public async Task<ShipTerminalResponse> SaveAsync(ShipTerminal shipTerminal)
         {
-            var existingDestinyTerminals = await _terminalRepository.FindById(shipTerminal.TerminalDestinyId);
-            var existingOriginTerminals = await _terminalRepository.FindById(shipTerminal.TerminalOriginId);
-            var alreadyregistereddata = await _shipTerminalRepository.ListAsync();
-            foreach(ShipTerminal itera in alreadyregistereddata)
-            {
-                if(itera.TerminalDestinyId==shipTerminal.TerminalDestinyId && itera.TerminalOriginId == shipTerminal.TerminalOriginId && itera.Price == shipTerminal.Price)
-                {
-                    return new ShipTerminalResponse("This data is already been registered");
-                }
-            }
-            if (existingOriginTerminals == null)
-            {
-                return new ShipTerminalResponse("Origin terminal doesnt exist");
-            }
-            if (existingDestinyTerminals == null)
-            {
-                return new ShipTerminalResponse("Destiny terminal doesnt exist");
-            }
-            if(shipTerminal.TerminalOriginId==shipTerminal.TerminalDestinyId)
-            {
-                return new ShipTerminalResponse("Destiny and origin cant be the same");
-            }
+            if (shipTerminal.TerminalOriginId == shipTerminal.TerminalDestinyId)
+                return new ShipTerminalResponse("The originId and destinyId can't be equals");
+
+            var existingShipTerminalInList = await _shipTerminalRepository.FindByOriginIdAndDestinyId(shipTerminal.TerminalOriginId, shipTerminal.TerminalDestinyId);
+            if (existingShipTerminalInList != null)
+                return new ShipTerminalResponse("ShipTerminal is begin used");
+
+            var existingOrigin = await _terminalRepository.FindById(shipTerminal.TerminalOriginId);
+            if (existingOrigin == null)
+                return new ShipTerminalResponse("TerminalOrigin not found");
+
+            var existingDestiny = await _terminalRepository.FindById(shipTerminal.TerminalDestinyId);
+            if (existingDestiny == null)
+                return new ShipTerminalResponse("TerminalDestiny not found");
+
+            shipTerminal.TerminalOrigin = existingOrigin;
+            shipTerminal.TerminalDestiny = existingDestiny;
             try
             {
                 await _shipTerminalRepository.AddAsync(shipTerminal);
@@ -86,28 +96,49 @@ namespace VirtualExpress.CompanyManagement.Services
             }
             catch (Exception e)
             {
-                return new ShipTerminalResponse($"An error ocurred while saving the data: {e.Message}");
+                return new ShipTerminalResponse($"An error ocurred while deleting ShipTerminal: {e.Message}");
             }
         }
 
-        public async Task<ShipTerminalResponse> UpdateAsync(int id, ShipTerminal shipTerminal)
+        public async Task<ShipTerminalResponse> UpdateAsync(int originId, int destinyId, ShipTerminal shipTerminal)
         {
-            var existingShipTerminal = await _shipTerminalRepository.FindById(id);
-            if (existingShipTerminal == null)
-                return new ShipTerminalResponse("Data not found");
+            if (shipTerminal.TerminalOriginId == shipTerminal.TerminalDestinyId)
+                return new ShipTerminalResponse("The originId and destinyId can't be equals");
 
-            existingShipTerminal.Price=shipTerminal.Price;
+            if (originId == destinyId)
+                return new ShipTerminalResponse("The originId and destinyId can't be equals");
+
+
+            var existingShipTerminal = await _shipTerminalRepository.FindByOriginIdAndDestinyId(originId, destinyId);
+            if (existingShipTerminal == null)
+                return new ShipTerminalResponse("ShipTerminal not found");
+
+            var existingShipTerminalInList = await _shipTerminalRepository.FindByOriginIdAndDestinyId(shipTerminal.TerminalOriginId, shipTerminal.TerminalDestinyId);
+            if (existingShipTerminalInList != null)
+                return new ShipTerminalResponse("ShipTerminal is begin used");
+
+            var existingOrigin = await _terminalRepository.FindById(shipTerminal.TerminalOriginId);
+            if (existingOrigin == null)
+                return new ShipTerminalResponse("TerminalOrigin not found");
+
+            var existingDestiny = await _terminalRepository.FindById(shipTerminal.TerminalDestinyId);
+            if (existingDestiny == null)
+                return new ShipTerminalResponse("TerminalDestiny not found");
+
+            existingShipTerminal.TerminalOrigin = existingOrigin;
             existingShipTerminal.TerminalOriginId = shipTerminal.TerminalOriginId;
-            existingShipTerminal.TerminalDestinyId = shipTerminal.TerminalOriginId;
+            existingShipTerminal.TerminalDestiny = existingDestiny;
+            existingShipTerminal.TerminalDestinyId = shipTerminal.TerminalDestinyId;
+            existingShipTerminal.Price = shipTerminal.Price;
             try
             {
-                _shipTerminalRepository.Update(existingShipTerminal);
+                await _shipTerminalRepository.AddAsync(shipTerminal);
                 await _unitOfWork.CompleteAsync();
-                return new ShipTerminalResponse(existingShipTerminal);
+                return new ShipTerminalResponse(shipTerminal);
             }
             catch (Exception e)
             {
-                return new ShipTerminalResponse($"An error ocurred while updating the data: {e.Message}");
+                return new ShipTerminalResponse($"An error ocurred while deleting ShipTerminal: {e.Message}");
             }
         }
     }

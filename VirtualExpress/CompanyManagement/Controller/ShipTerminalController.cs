@@ -13,76 +13,106 @@ using VirtualExpress.General.Extensions;
 
 namespace VirtualExpress.CompanyManagement.Controller
 {
-    [Route("api/shipterminals")]
     [ApiController]
+    [Produces("application/json")]
+    [Route("api/shipTerminals")]
     public class ShipTerminalController : ControllerBase
     {
         private readonly IShipTerminalService _shipTerminalService;
         private readonly IMapper _mapper;
 
-        public ShipTerminalController(IShipTerminalService ShipTerminalService, IMapper mapper)
+        public ShipTerminalController(IShipTerminalService shipTerminalService, IMapper mapper)
         {
-            _shipTerminalService = ShipTerminalService;
+            _shipTerminalService = shipTerminalService;
             _mapper = mapper;
         }
 
-        [SwaggerResponse(200, "List of ShipTerminal", typeof(IEnumerable<ShipTerminalResource>))]
+
+        [SwaggerResponse(200, "List of the ShipTerminals", typeof(IEnumerable<ShipTerminalResource>))]
         [ProducesResponseType(typeof(IEnumerable<ShipTerminalResource>), 200)]
         [HttpGet]
         public async Task<IEnumerable<ShipTerminalResource>> GetAllAsync()
         {
-            var shipterminals = await _shipTerminalService.ListAsync();
-            var resource = _mapper.Map<IEnumerable<ShipTerminal>, IEnumerable<ShipTerminalResource>>(shipterminals);
-
+            var terminals = await _shipTerminalService.ListAsync();
+            var resource = _mapper.Map<IEnumerable<ShipTerminal>, IEnumerable<ShipTerminalResource>>(terminals);
             return resource;
         }
-
-        [SwaggerResponse(200, "Save sipterminal by entering the name", typeof(IActionResult))]
-        [ProducesResponseType(typeof(IActionResult), 200)]
+        //Task<IEnumerable<ShipTerminal>> ListAsync();
+        //Task<ShipTerminalResponse> GetByOriginIdAndDestinyId(int originId, int destinyId);
+        [HttpGet("originId/destinyId")]
+        public async Task<IActionResult> GetShipTerminalByOriginIdAndDestinyId(int originId, int destinyId)
+        {
+            var result = await _shipTerminalService.GetByOriginIdAndDestinyId(originId, destinyId);
+            var shipTerminalResource = _mapper.Map<ShipTerminal, ShipTerminalResource>(result.Resource);
+            return Ok(shipTerminalResource);
+        }
+        //Task<ShipTerminalResponse> SaveAsync(ShipTerminal shipTerminal);
         [HttpPost]
         public async Task<IActionResult> PostAsync([FromBody] SaveShipTerminalResource resource)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
 
-            var ShipTerminal = _mapper.Map<SaveShipTerminalResource, ShipTerminal>(resource);
-            // TODO: Implement Response Logic
-            var result = await _shipTerminalService.SaveAsync(ShipTerminal);
+            var terminal = _mapper.Map<SaveShipTerminalResource, ShipTerminal>(resource);
+            var result = await _shipTerminalService.SaveAsync(terminal);
 
             if (!result.Sucess)
                 return BadRequest(result.Message);
-
-            var ShipTerminalResource = _mapper.Map<ShipTerminal, ShipTerminalResource>(result.Resource);
-
-            return Ok(ShipTerminalResource);
+            var shipTerminalResource = _mapper.Map<ShipTerminal, ShipTerminalResource>(result.Resource);
+            return Ok(shipTerminalResource);
         }
-
-        [SwaggerResponse(200, "Edit shipterminals by entering the Id", typeof(IActionResult))]
-        [ProducesResponseType(typeof(IActionResult), 200)]
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutAsync(int id, [FromBody] SaveShipTerminalResource resource)
+        //Task<ShipTerminalResponse> UpdateAsync(int originid, int destinyId, ShipTerminal shipTerminal);
+        [HttpPut("originId/destinyId")]
+        public async Task<IActionResult> PutAsync(int originId, int destinyId, [FromBody] SaveShipTerminalResource resource)
         {
-            var ShipTerminal = _mapper.Map<SaveShipTerminalResource, ShipTerminal>(resource);
-            var result = await _shipTerminalService.UpdateAsync(id, ShipTerminal);
-
-            if (result == null)
-                return BadRequest(result.Message);
-
-            var categoryResource = _mapper.Map<ShipTerminal, ShipTerminalResource>(result.Resource);
-            return Ok(categoryResource);
-        }
-
-        [SwaggerResponse(200, "Delete shipterminals by entering the id", typeof(IActionResult))]
-        [ProducesResponseType(typeof(IActionResult), 200)]
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
-        {
-            var result = await _shipTerminalService.DeleteAsync(id);
+            var terminal = _mapper.Map<SaveShipTerminalResource, ShipTerminal>(resource);
+            var result = await _shipTerminalService.UpdateAsync(originId, destinyId, terminal);
 
             if (!result.Sucess)
                 return BadRequest(result.Message);
+            var shipTerminalResource = _mapper.Map<ShipTerminal, ShipTerminalResource>(result.Resource);
+            return Ok(shipTerminalResource);
+        }
+        //Task<ShipTerminalResponse> DeleteAsync(int originId, int destinyId);
+        [HttpDelete("originId/destinyId")]
+        public async Task<IActionResult> DeleteAsync(int originId, int destinyId)
+        {
+            var result = await _shipTerminalService.DeleteAsync(originId, destinyId);
 
-            return Ok("Delete");
+            if (!result.Sucess)
+                return BadRequest(result.Message);
+            var shipTerminalResource = _mapper.Map<ShipTerminal, ShipTerminalResource>(result.Resource);
+            return Ok(shipTerminalResource);
+        }
+
+        [SwaggerResponse(200, "List ShipTerminal by OriginId", typeof(IEnumerable<ShipTerminalResource>))]
+        [ProducesResponseType(typeof(IEnumerable<ShipTerminalResource>), 200)]
+        [HttpGet("id")]
+        public async Task<IEnumerable<ShipTerminalResource>> GetllShipTerminalByOriginId(int originId)
+        {
+            var terminals = await _shipTerminalService.GetShipTerminalsByOriginId(originId);
+            var terminalResources = _mapper.Map<IEnumerable<ShipTerminal>, IEnumerable<ShipTerminalResource>>(terminals);
+            return terminalResources;
+        }
+
+        [SwaggerResponse(200, "List ShipTerminal by OriginId", typeof(IEnumerable<ShipTerminalResource>))]
+        [ProducesResponseType(typeof(IEnumerable<ShipTerminalResource>), 200)]
+        [HttpGet("companies/id")]
+        public async Task<IEnumerable<ShipTerminalResource>> GetAllShipTerminalByCompanyId(int company)
+        {
+            var terminals = await _shipTerminalService.GetShipTerminalsByCompanyId(company);
+            var terminalResources = _mapper.Map<IEnumerable<ShipTerminal>, IEnumerable<ShipTerminalResource>>(terminals);
+            return terminalResources;
+        }
+
+        [SwaggerResponse(200, "List ShipTerminal by OriginId", typeof(IEnumerable<ShipTerminalResource>))]
+        [ProducesResponseType(typeof(IEnumerable<ShipTerminalResource>), 200)]
+        [HttpGet("companies/id/city")]
+        public async Task<IEnumerable<ShipTerminalResource>> GetCityOriginAndCityDestinyByCompanyId(int company)
+        {
+            var terminals = await _shipTerminalService.GetCityOriginAndCityDestinyByCompanyId(company);
+            var terminalResources = _mapper.Map<IEnumerable<ShipTerminal>, IEnumerable<ShipTerminalResource>>(terminals);
+            return terminalResources;
         }
     }
 }

@@ -54,10 +54,15 @@ namespace VirtualExpress
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
             services.AddControllers();
+
+            services.AddCors(options => options.AddDefaultPolicy(
+                builder => builder.AllowAnyOrigin()));
+
             services.AddDbContext<AppDbContext>(options =>
             {
-                options.UseInMemoryDatabase("transport-api-in-memory");
+                options.UseMySQL(Configuration.GetConnectionString("MySQLConnection"));
             });
 
             //Repositorie
@@ -130,6 +135,8 @@ namespace VirtualExpress
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors();
 
             app.UseAuthorization();
 

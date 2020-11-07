@@ -8,11 +8,10 @@ namespace VirtualExpress.CompanyManagement.Domain.Models
 {
     public class ShipTerminal
     {
-        public int Id { get; set; }
-        public int TerminalOriginId { get; set; }
         public Terminal TerminalOrigin { get; set; }
-        public int TerminalDestinyId { get; set; }
+        public int TerminalOriginId { get; set; }
         public Terminal TerminalDestiny { get; set; }
+        public int TerminalDestinyId { get; set; }
         public double Price { get; set; }
         public IList<Package> Packages { get; set; } = new List<Package>();
     }

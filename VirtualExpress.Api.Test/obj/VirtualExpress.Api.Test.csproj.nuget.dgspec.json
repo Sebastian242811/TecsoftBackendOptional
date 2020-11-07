@@ -1,23 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Usuario\\Desktop\\UPC_trabajos y archivos\\ciclo8\\web\\Trabajo Final\\TecsoftBackendOptional\\VirtualExpress.Api.Test\\VirtualExpress.Api.Test.csproj": {}
+    "E:\\Aplicaciones Web\\Clone\\Nueva carpeta\\TecsoftBackendOptional\\VirtualExpress.Api.Test\\VirtualExpress.Api.Test.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Usuario\\Desktop\\UPC_trabajos y archivos\\ciclo8\\web\\Trabajo Final\\TecsoftBackendOptional\\VirtualExpress.Api.Test\\VirtualExpress.Api.Test.csproj": {
+    "E:\\Aplicaciones Web\\Clone\\Nueva carpeta\\TecsoftBackendOptional\\VirtualExpress.Api.Test\\VirtualExpress.Api.Test.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Usuario\\Desktop\\UPC_trabajos y archivos\\ciclo8\\web\\Trabajo Final\\TecsoftBackendOptional\\VirtualExpress.Api.Test\\VirtualExpress.Api.Test.csproj",
+        "projectUniqueName": "E:\\Aplicaciones Web\\Clone\\Nueva carpeta\\TecsoftBackendOptional\\VirtualExpress.Api.Test\\VirtualExpress.Api.Test.csproj",
         "projectName": "VirtualExpress.Api.Test",
-        "projectPath": "C:\\Users\\Usuario\\Desktop\\UPC_trabajos y archivos\\ciclo8\\web\\Trabajo Final\\TecsoftBackendOptional\\VirtualExpress.Api.Test\\VirtualExpress.Api.Test.csproj",
-        "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Usuario\\Desktop\\UPC_trabajos y archivos\\ciclo8\\web\\Trabajo Final\\TecsoftBackendOptional\\VirtualExpress.Api.Test\\obj\\",
+        "projectPath": "E:\\Aplicaciones Web\\Clone\\Nueva carpeta\\TecsoftBackendOptional\\VirtualExpress.Api.Test\\VirtualExpress.Api.Test.csproj",
+        "packagesPath": "C:\\Users\\lucia\\.nuget\\packages\\",
+        "outputPath": "E:\\Aplicaciones Web\\Clone\\Nueva carpeta\\TecsoftBackendOptional\\VirtualExpress.Api.Test\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\lucia\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -30,8 +27,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\Usuario\\Desktop\\UPC_trabajos y archivos\\ciclo8\\web\\Trabajo Final\\TecsoftBackendOptional\\VirtualExpress\\VirtualExpress.csproj": {
-                "projectPath": "C:\\Users\\Usuario\\Desktop\\UPC_trabajos y archivos\\ciclo8\\web\\Trabajo Final\\TecsoftBackendOptional\\VirtualExpress\\VirtualExpress.csproj"
+              "E:\\Aplicaciones Web\\Clone\\Nueva carpeta\\TecsoftBackendOptional\\VirtualExpress\\VirtualExpress.csproj": {
+                "projectPath": "E:\\Aplicaciones Web\\Clone\\Nueva carpeta\\TecsoftBackendOptional\\VirtualExpress\\VirtualExpress.csproj"
               }
             }
           }
@@ -100,24 +97,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Usuario\\Desktop\\UPC_trabajos y archivos\\ciclo8\\web\\Trabajo Final\\TecsoftBackendOptional\\VirtualExpress\\VirtualExpress.csproj": {
+    "E:\\Aplicaciones Web\\Clone\\Nueva carpeta\\TecsoftBackendOptional\\VirtualExpress\\VirtualExpress.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Usuario\\Desktop\\UPC_trabajos y archivos\\ciclo8\\web\\Trabajo Final\\TecsoftBackendOptional\\VirtualExpress\\VirtualExpress.csproj",
+        "projectUniqueName": "E:\\Aplicaciones Web\\Clone\\Nueva carpeta\\TecsoftBackendOptional\\VirtualExpress\\VirtualExpress.csproj",
         "projectName": "VirtualExpress",
-        "projectPath": "C:\\Users\\Usuario\\Desktop\\UPC_trabajos y archivos\\ciclo8\\web\\Trabajo Final\\TecsoftBackendOptional\\VirtualExpress\\VirtualExpress.csproj",
-        "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Usuario\\Desktop\\UPC_trabajos y archivos\\ciclo8\\web\\Trabajo Final\\TecsoftBackendOptional\\VirtualExpress\\obj\\",
+        "projectPath": "E:\\Aplicaciones Web\\Clone\\Nueva carpeta\\TecsoftBackendOptional\\VirtualExpress\\VirtualExpress.csproj",
+        "packagesPath": "C:\\Users\\lucia\\.nuget\\packages\\",
+        "outputPath": "E:\\Aplicaciones Web\\Clone\\Nueva carpeta\\TecsoftBackendOptional\\VirtualExpress\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\lucia\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -165,6 +159,10 @@
               "target": "Package",
               "version": "[1.2.3, )"
             },
+            "MySql.Data.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.22, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[5.6.3, )"
@@ -192,7 +190,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
         }
       }
     }

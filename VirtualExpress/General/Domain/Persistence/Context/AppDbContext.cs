@@ -150,8 +150,6 @@ namespace VirtualExpress.General.Persistance.Context
                 .WithMany(p => p.Packages).HasForeignKey(p => p.DispatcherId);
             builder.Entity<Package>().HasOne(p => p.Customer)
                 .WithMany(p => p.Packages).HasForeignKey(p => p.CustomerId);
-            builder.Entity<Package>().HasOne(p => p.ShipTerminal)
-                .WithMany(p => p.Packages).HasForeignKey(p => p.ShipTerminalId);
 
 
             builder.Entity<Commentary>().ToTable("Commentary");
@@ -284,7 +282,7 @@ namespace VirtualExpress.General.Persistance.Context
             builder.Entity<SubscriptionCustomer>().Property(p => p.TotalPrice)
                 .IsRequired();
 
-            builder.Entity<SubscriptionCompany>().ToTable("SubscriptionCustomers");
+            builder.Entity<SubscriptionCompany>().ToTable("SubscriptionCompany");
             builder.Entity<SubscriptionCompany>().HasKey(p => p.Id);
             builder.Entity<SubscriptionCompany>().Property(p => p.Id)
                 .IsRequired().ValueGeneratedOnAdd();
@@ -327,14 +325,12 @@ namespace VirtualExpress.General.Persistance.Context
             builder.Entity<Message>().HasOne(p => p.CustomerServiceEmployee)
                .WithMany(p => p.Messages).HasForeignKey(p => p.CustomerServiceEmployeeId);
 
-            builder.Entity<ShipTerminal>().ToTable("ShipTerminals");
-            builder.Entity<ShipTerminal>().HasKey(p => p.Id);
-            builder.Entity<ShipTerminal>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
-            builder.Entity<ShipTerminal>().Property(p => p.Price).IsRequired();
-            builder.Entity<ShipTerminal>().HasOne(p => p.TerminalOrigin)
-                .WithMany(p => p.ShipTerminalso).HasForeignKey(p=>p.TerminalOriginId);
+            builder.Entity<ShipTerminal>().ToTable("ShipTerminal");
+            builder.Entity<ShipTerminal>().HasKey(k => new { k.TerminalOriginId, k.TerminalDestinyId });
             builder.Entity<ShipTerminal>().HasOne(p => p.TerminalDestiny)
                 .WithMany(p => p.ShipTerminalsd).HasForeignKey(p => p.TerminalDestinyId);
+            builder.Entity<ShipTerminal>().HasOne(p => p.TerminalOrigin)
+                .WithMany(p => p.ShipTerminalso).HasForeignKey(p => p.TerminalOriginId);
 
             builder.Entity<ChangeState>().ToTable("ChangeStates");
             builder.Entity<ChangeState>().HasKey(p => p.Id);

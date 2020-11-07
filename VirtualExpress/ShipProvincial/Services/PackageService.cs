@@ -80,7 +80,7 @@ namespace VirtualExpress.ShipProvincial.Services
             var existingfreight = await _freightRepository.FindById(package.FerightId);
             var existingDispatcher = await _dispatcherRepository.FindById(package.DispatcherId);
             var existingCustomer = await _customerRepository.FindById(package.CustomerId);
-            var existingshipterminal = await _shipTerminalRepository.FindById(package.ShipTerminalId);
+            
 
             if (existingfreight==null)
             {
@@ -94,10 +94,7 @@ namespace VirtualExpress.ShipProvincial.Services
             {
                 return new PackageResponse("Customer doesnt exist");
             }
-            if (existingshipterminal == null)
-            {
-                return new PackageResponse("Ship Terminal doesnt exist");
-            }
+            
             try
             {
                 await _packageRepository.AddAsync(package);

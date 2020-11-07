@@ -36,9 +36,6 @@ E:\Aplicaciones Web\Clone\Nueva carpeta\TecsoftBackendOptional\VirtualExpress\bi
 E:\Aplicaciones Web\Clone\Nueva carpeta\TecsoftBackendOptional\VirtualExpress\obj\Release\netcoreapp3.1\VirtualExpress.csprojAssemblyReference.cache
 E:\Aplicaciones Web\Clone\Nueva carpeta\TecsoftBackendOptional\VirtualExpress\obj\Release\netcoreapp3.1\VirtualExpress.AssemblyInfoInputs.cache
 E:\Aplicaciones Web\Clone\Nueva carpeta\TecsoftBackendOptional\VirtualExpress\obj\Release\netcoreapp3.1\VirtualExpress.AssemblyInfo.cs
-E:\Aplicaciones Web\Clone\Nueva carpeta\TecsoftBackendOptional\VirtualExpress\obj\Release\netcoreapp3.1\VirtualExpress.csproj.CoreCompileInputs.cache
-E:\Aplicaciones Web\Clone\Nueva carpeta\TecsoftBackendOptional\VirtualExpress\obj\Release\netcoreapp3.1\VirtualExpress.MvcApplicationPartsAssemblyInfo.cs
-E:\Aplicaciones Web\Clone\Nueva carpeta\TecsoftBackendOptional\VirtualExpress\obj\Release\netcoreapp3.1\VirtualExpress.MvcApplicationPartsAssemblyInfo.cache
 E:\Aplicaciones Web\Clone\Nueva carpeta\TecsoftBackendOptional\VirtualExpress\obj\Release\netcoreapp3.1\VirtualExpress.RazorTargetAssemblyInfo.cache
 E:\Aplicaciones Web\Clone\Nueva carpeta\TecsoftBackendOptional\VirtualExpress\obj\Release\netcoreapp3.1\VirtualExpress.csproj.CopyComplete
 E:\Aplicaciones Web\Clone\Nueva carpeta\TecsoftBackendOptional\VirtualExpress\obj\Release\netcoreapp3.1\staticwebassets\VirtualExpress.StaticWebAssets.Manifest.cache
@@ -94,3 +91,21 @@ C:\Users\Usuario\Desktop\UPC_trabajos y archivos\ciclo8\web\Trabajo Final\Tecsof
 C:\Users\Usuario\Desktop\UPC_trabajos y archivos\ciclo8\web\Trabajo Final\TecsoftBackendOptional\VirtualExpress\obj\Release\netcoreapp3.1\staticwebassets\VirtualExpress.StaticWebAssets.Manifest.cache
 C:\Users\Usuario\Desktop\UPC_trabajos y archivos\ciclo8\web\Trabajo Final\TecsoftBackendOptional\VirtualExpress\obj\Release\netcoreapp3.1\staticwebassets\VirtualExpress.StaticWebAssets.xml
 C:\Users\Usuario\Desktop\UPC_trabajos y archivos\ciclo8\web\Trabajo Final\TecsoftBackendOptional\VirtualExpress\obj\Release\netcoreapp3.1\VirtualExpress.genruntimeconfig.cache
+E:\Aplicaciones Web\Clone\Nueva carpeta\TecsoftBackendOptional\VirtualExpress\bin\Release\netcoreapp3.1\BouncyCastle.Crypto.dll
+E:\Aplicaciones Web\Clone\Nueva carpeta\TecsoftBackendOptional\VirtualExpress\bin\Release\netcoreapp3.1\Google.Protobuf.dll
+E:\Aplicaciones Web\Clone\Nueva carpeta\TecsoftBackendOptional\VirtualExpress\bin\Release\netcoreapp3.1\K4os.Compression.LZ4.dll
+E:\Aplicaciones Web\Clone\Nueva carpeta\TecsoftBackendOptional\VirtualExpress\bin\Release\netcoreapp3.1\K4os.Compression.LZ4.Streams.dll
+E:\Aplicaciones Web\Clone\Nueva carpeta\TecsoftBackendOptional\VirtualExpress\bin\Release\netcoreapp3.1\K4os.Hash.xxHash.dll
+E:\Aplicaciones Web\Clone\Nueva carpeta\TecsoftBackendOptional\VirtualExpress\bin\Release\netcoreapp3.1\MySql.Data.dll
+E:\Aplicaciones Web\Clone\Nueva carpeta\TecsoftBackendOptional\VirtualExpress\bin\Release\netcoreapp3.1\Ubiety.Dns.Core.dll
+E:\Aplicaciones Web\Clone\Nueva carpeta\TecsoftBackendOptional\VirtualExpress\bin\Release\netcoreapp3.1\Zstandard.Net.dll
+E:\Aplicaciones Web\Clone\Nueva carpeta\TecsoftBackendOptional\VirtualExpress\bin\Release\netcoreapp3.1\MySql.Data.EntityFrameworkCore.dll
+E:\Aplicaciones Web\Clone\Nueva carpeta\TecsoftBackendOptional\VirtualExpress\bin\Release\netcoreapp3.1\Renci.SshNet.dll
+E:\Aplicaciones Web\Clone\Nueva carpeta\TecsoftBackendOptional\VirtualExpress\bin\Release\netcoreapp3.1\SshNet.Security.Cryptography.dll
+E:\Aplicaciones Web\Clone\Nueva carpeta\TecsoftBackendOptional\VirtualExpress\bin\Release\netcoreapp3.1\System.Configuration.ConfigurationManager.dll
+E:\Aplicaciones Web\Clone\Nueva carpeta\TecsoftBackendOptional\VirtualExpress\bin\Release\netcoreapp3.1\System.Security.Cryptography.ProtectedData.dll
+E:\Aplicaciones Web\Clone\Nueva carpeta\TecsoftBackendOptional\VirtualExpress\bin\Release\netcoreapp3.1\System.Xml.XPath.XmlDocument.dll
+E:\Aplicaciones Web\Clone\Nueva carpeta\TecsoftBackendOptional\VirtualExpress\bin\Release\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+E:\Aplicaciones Web\Clone\Nueva carpeta\TecsoftBackendOptional\VirtualExpress\obj\Release\netcoreapp3.1\VirtualExpress.csproj.CoreCompileInputs.cache
+E:\Aplicaciones Web\Clone\Nueva carpeta\TecsoftBackendOptional\VirtualExpress\obj\Release\netcoreapp3.1\VirtualExpress.MvcApplicationPartsAssemblyInfo.cs
+E:\Aplicaciones Web\Clone\Nueva carpeta\TecsoftBackendOptional\VirtualExpress\obj\Release\netcoreapp3.1\VirtualExpress.MvcApplicationPartsAssemblyInfo.cache
