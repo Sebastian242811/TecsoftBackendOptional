@@ -6,9 +6,11 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using VirtualExpress.General.Domain.Repositories;
+using VirtualExpress.Initialization.Domain.Repositories;
 using VirtualExpress.ShipDelivery.Domain.Models;
 using VirtualExpress.ShipDelivery.Domain.Repositories;
 using VirtualExpress.ShipDelivery.Services;
+using VirtualExpress.ShipProvincial.Domain.Repositories;
 
 namespace VirtualExpress.Api.Test.ShipDelivery.Test
 {
@@ -26,9 +28,13 @@ namespace VirtualExpress.Api.Test.ShipDelivery.Test
             mockDeliveryRepository.Setup(r => r.ListAsync())
                 .ReturnsAsync(new List<PackageDelivery>());
             var mockUnitOfWork = GetDefaultIUnitOfWorkInstance();
+            var packageRepository = GetDefaultIPackageRepositoryInstance();
+            var deliveryRepository = GetDefaultIDeliveryRepositoryInstance();
             var service = new PackageDeliveryService(
                 mockDeliveryRepository.Object,
-                mockUnitOfWork.Object
+                mockUnitOfWork.Object,
+                packageRepository.Object,
+                deliveryRepository.Object
                 );
 
             //Act
@@ -46,9 +52,13 @@ namespace VirtualExpress.Api.Test.ShipDelivery.Test
             mockDeliveryRepository.Setup(r => r.ListAsync())
                 .ReturnsAsync(new List<PackageDelivery>());
             var mockUnitOfWork = GetDefaultIUnitOfWorkInstance();
+            var packageRepository = GetDefaultIPackageRepositoryInstance();
+            var deliveryRepository = GetDefaultIDeliveryRepositoryInstance();
             var service = new PackageDeliveryService(
                 mockDeliveryRepository.Object,
-                mockUnitOfWork.Object
+                mockUnitOfWork.Object,
+                packageRepository.Object,
+                deliveryRepository.Object
                 );
 
             //Act
@@ -65,9 +75,13 @@ namespace VirtualExpress.Api.Test.ShipDelivery.Test
             mockDeliveryRepository.Setup(r => r.ListAsync())
                 .ReturnsAsync(new List<PackageDelivery>());
             var mockUnitOfWork = GetDefaultIUnitOfWorkInstance();
+            var packageRepository = GetDefaultIPackageRepositoryInstance();
+            var deliveryRepository = GetDefaultIDeliveryRepositoryInstance();
             var service = new PackageDeliveryService(
                 mockDeliveryRepository.Object,
-                mockUnitOfWork.Object
+                mockUnitOfWork.Object,
+                packageRepository.Object,
+                deliveryRepository.Object
                 );
 
             //Act
@@ -86,6 +100,16 @@ namespace VirtualExpress.Api.Test.ShipDelivery.Test
         private Mock<IUnitOfWork> GetDefaultIUnitOfWorkInstance()
         {
             return new Mock<IUnitOfWork>();
+        }
+
+        private Mock<IPackageRepository> GetDefaultIPackageRepositoryInstance()
+        {
+            return new Mock<IPackageRepository>();
+        }
+
+        private Mock<IDeliveryRepository> GetDefaultIDeliveryRepositoryInstance()
+        {
+            return new Mock<IDeliveryRepository>();
         }
     }
 }

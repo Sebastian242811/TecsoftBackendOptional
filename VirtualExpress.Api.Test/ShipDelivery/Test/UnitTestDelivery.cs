@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using VirtualExpress.General.Domain.Repositories;
 using VirtualExpress.Initialization.Domain.Model;
+using VirtualExpress.Initialization.Domain.Repositories;
 using VirtualExpress.ShipDelivery.Domain.Repositories;
 using VirtualExpress.ShipDelivery.Services;
 
@@ -27,9 +28,11 @@ namespace VirtualExpress.Api.Test.ShipDelivery.Test
             mockDeliveryRepository.Setup(r => r.ListAsync())
                 .ReturnsAsync(new List<Delivery>());
             var mockUnitOfWork = GetDefaultIUnitOfWorkInstance();
+            var mockdealer = GetDefaultIDealerRepository();
             var service = new DeliveryService(
                 mockDeliveryRepository.Object,
-                mockUnitOfWork.Object
+                mockUnitOfWork.Object,
+                mockdealer.Object
                 );
 
             //Act
@@ -48,9 +51,11 @@ namespace VirtualExpress.Api.Test.ShipDelivery.Test
             mockDeliveryRepository.Setup(r => r.ListAsync())
                 .ReturnsAsync(new List<Delivery>());
             var mockUnitOfWork = GetDefaultIUnitOfWorkInstance();
+            var mockdealer = GetDefaultIDealerRepository();
             var service = new DeliveryService(
                 mockDeliveryRepository.Object,
-                mockUnitOfWork.Object
+                mockUnitOfWork.Object,
+                mockdealer.Object
                 );
 
             //Act
@@ -68,9 +73,11 @@ namespace VirtualExpress.Api.Test.ShipDelivery.Test
             mockDeliveryRepository.Setup(r => r.ListAsync())
                 .ReturnsAsync(new List<Delivery>());
             var mockUnitOfWork = GetDefaultIUnitOfWorkInstance();
+            var mockdealer = GetDefaultIDealerRepository();
             var service = new DeliveryService(
                 mockDeliveryRepository.Object,
-                mockUnitOfWork.Object
+                mockUnitOfWork.Object,
+                mockdealer.Object
                 );
 
             //Act
@@ -90,6 +97,11 @@ namespace VirtualExpress.Api.Test.ShipDelivery.Test
         private Mock<IUnitOfWork> GetDefaultIUnitOfWorkInstance()
         {
             return new Mock<IUnitOfWork>();
+        }
+
+        private Mock<IDealerRepository> GetDefaultIDealerRepository()
+        {
+            return new Mock<IDealerRepository>();
         }
     }
 }

@@ -9,6 +9,7 @@ using VirtualExpress.CompanyManagement.Domain.Models;
 using VirtualExpress.CompanyManagement.Domain.Repositories;
 using VirtualExpress.CompanyManagement.Services;
 using VirtualExpress.General.Domain.Repositories;
+using VirtualExpress.Initialization.Domain.Repositories;
 
 namespace VirtualExpress.Api.Test.CompanyManagement.Test
 {
@@ -28,9 +29,13 @@ namespace VirtualExpress.Api.Test.CompanyManagement.Test
             mockTerminalRepository.Setup(r => r.ListAsync())
                 .ReturnsAsync(new List<Terminal>());
             var mockUnitOfWork = GetDefaultIUnitOfWorkInstance();
+            var mockcity = GetDefaultICityRepositoryInstance();
+            var mockCompany = GetDefaultICompanyRepositoryInstance();
             var service = new TerminalService(
                 mockTerminalRepository.Object,
-                mockUnitOfWork.Object
+                mockUnitOfWork.Object,
+                mockcity.Object,
+                mockCompany.Object
                 );
 
             //Act
@@ -49,9 +54,13 @@ namespace VirtualExpress.Api.Test.CompanyManagement.Test
             mockTerminalRepository.Setup(r => r.ListAsync())
                 .ReturnsAsync(new List<Terminal>());
             var mockUnitOfWork = GetDefaultIUnitOfWorkInstance();
+            var mockcity = GetDefaultICityRepositoryInstance();
+            var mockCompany = GetDefaultICompanyRepositoryInstance();
             var service = new TerminalService(
                 mockTerminalRepository.Object,
-                mockUnitOfWork.Object
+                mockUnitOfWork.Object,
+                mockcity.Object,
+                mockCompany.Object
                 );
 
             //Act
@@ -69,9 +78,13 @@ namespace VirtualExpress.Api.Test.CompanyManagement.Test
             mockTerminalRepository.Setup(r => r.ListAsync())
                 .ReturnsAsync(new List<Terminal>());
             var mockUnitOfWork = GetDefaultIUnitOfWorkInstance();
+            var mockcity = GetDefaultICityRepositoryInstance();
+            var mockCompany = GetDefaultICompanyRepositoryInstance();
             var service = new TerminalService(
                 mockTerminalRepository.Object,
-                mockUnitOfWork.Object
+                mockUnitOfWork.Object,
+                mockcity.Object,
+                mockCompany.Object
                 );
 
             //Act
@@ -93,6 +106,14 @@ namespace VirtualExpress.Api.Test.CompanyManagement.Test
         private Mock<IUnitOfWork> GetDefaultIUnitOfWorkInstance()
         {
             return new Mock<IUnitOfWork>();
+        }
+        private Mock<ICityRepository> GetDefaultICityRepositoryInstance()
+        {
+            return new Mock<ICityRepository>();
+        }
+        private Mock<ICompanyRepository> GetDefaultICompanyRepositoryInstance()
+        {
+            return new Mock<ICompanyRepository>();
         }
     }
 }

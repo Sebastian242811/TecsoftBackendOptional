@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using VirtualExpress.General.Domain.Repositories;
+using VirtualExpress.Initialization.Domain.Repositories;
 using VirtualExpress.Social.Domain.Models;
 using VirtualExpress.Social.Domain.Repositories;
 using VirtualExpress.Social.Services;
@@ -27,9 +28,13 @@ namespace VirtualExpress.Api.Test.Social.Test
             mockCommentaryRepository.Setup(r => r.ListAsync())
                 .ReturnsAsync(new List<Commentary>());
             var mockUnitOfWork = GetDefaultIUnitOfWorkRepositoryInstance();
+            var mockcustomer = GetDefaultICustomerRepositoryInstance();
+            var mockcompany = GetDefaultICompanyRepositoryInstance();
             var service = new CommentaryService(
                 mockCommentaryRepository.Object,
-                mockUnitOfWork.Object
+                mockUnitOfWork.Object,
+                mockcustomer.Object,
+                mockcompany.Object
                 );
             //Act
             List<Commentary> commentaries = (List<Commentary>)await service.ListAsync();
@@ -47,6 +52,16 @@ namespace VirtualExpress.Api.Test.Social.Test
         private Mock<IUnitOfWork> GetDefaultIUnitOfWorkRepositoryInstance()
         {
             return new Mock<IUnitOfWork>();
+        }
+
+        private Mock<ICustomerRepository> GetDefaultICustomerRepositoryInstance()
+        {
+            return new Mock<ICustomerRepository>();
+        }
+
+        private Mock<ICompanyRepository> GetDefaultICompanyRepositoryInstance()
+        {
+            return new Mock<ICompanyRepository>();
         }
     }
 }
