@@ -76,6 +76,7 @@ namespace VirtualExpress
             services.AddScoped<IDispatcherRepository, DispatcherRepository>();
             services.AddScoped<IFreightRepository, FreightRepository>();
             services.AddScoped<IPackageRepository,PackageRepository>();
+            services.AddScoped<IChangeStateRepository, ChangeStateRepository>();
                 //Social
             services.AddScoped<ICommentaryRepository, CommentaryRepository>();
                 //MemberShip
@@ -103,6 +104,7 @@ namespace VirtualExpress
             services.AddScoped<IDispatcherService, DispatcherService>();
             services.AddScoped<IFreightService, FreightService>();
             services.AddScoped<IPackageService, PackageService>();
+            services.AddScoped<IChangeStateService, ChangeStateService>();
                 //Social
             services.AddScoped<ICommentaryService, CommentaryService>();
                 //MemberShip

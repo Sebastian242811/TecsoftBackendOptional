@@ -84,5 +84,21 @@ namespace VirtualExpress.ShipProvincial.Controller
 
             return Ok("Delete");
         }
+
+        [SwaggerResponse(200, "Update package State", typeof(IActionResult))]
+        [ProducesResponseType(typeof(IActionResult), 200)]
+        [HttpPut("updatestate/{id}")]
+        public async Task<IActionResult> PutStateAsyng(int id, [FromBody] UpdateStateResource resource)
+        {
+            var package = _mapper.Map<UpdateStateResource, Package>(resource);
+            var result = await _PackageService.UpdateStateAsync(id, package);
+
+            if (result == null)
+                return BadRequest(result.Message);
+
+            var packageResource = _mapper.Map<Package, PackageResource>(result.Resource);
+
+            return Ok(packageResource);
+        }
     }
 }

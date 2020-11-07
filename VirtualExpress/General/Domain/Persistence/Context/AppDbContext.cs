@@ -30,6 +30,7 @@ namespace VirtualExpress.General.Persistance.Context
         public DbSet<Package> Packages { get; set; }
         public DbSet<Commentary> Comentaries { get; set; }
         public DbSet<ShipTerminal> ShipTerminals { get; set; }
+        public DbSet<ChangeState> ChangesStates { get; set; }
 
         //Initialization
         public DbSet<Company> Companies { get; set; }
@@ -226,7 +227,7 @@ namespace VirtualExpress.General.Persistance.Context
             builder.Entity<Dealer>().Property(p => p.Password)
                 .IsRequired().HasMaxLength(15);
             builder.Entity<Dealer>().HasData(
-                new Dealer { Id = 1, Name = "Luis Gerardo", Username = "Luisqa", Number = "723162464", Brithday = Convert.ToDateTime("Friday, 29 May 1994"), Email = "luisqa@gmail.com", Password = "123456", CityId = 1 }
+                new Dealer { Id = 1, Name = "Luis Gerardo", Username = "Luisqa", Number = "723162464", Brithday = Convert.ToDateTime("Tuesday, 16 Jun 1992"), Email = "luisqa@gmail.com", Password = "123456", CityId = 1 }
                 );
 
             //MemberShip
@@ -334,6 +335,13 @@ namespace VirtualExpress.General.Persistance.Context
                 .WithMany(p => p.ShipTerminalso).HasForeignKey(p=>p.TerminalOriginId);
             builder.Entity<ShipTerminal>().HasOne(p => p.TerminalDestiny)
                 .WithMany(p => p.ShipTerminalsd).HasForeignKey(p => p.TerminalDestinyId);
+
+            builder.Entity<ChangeState>().ToTable("ChangeStates");
+            builder.Entity<ChangeState>().HasKey(p => p.Id);
+            builder.Entity<ChangeState>().Property(p => p.Id)
+                .IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<ChangeState>().Property(p => p.PackageId).IsRequired();
+            builder.Entity<ChangeState>().HasOne(p => p.Package).WithMany(p => p.ChangesStates).HasForeignKey(p=>p.PackageId);
             //builder.ApplySnakeCaseNamingConvention();
         }
     }

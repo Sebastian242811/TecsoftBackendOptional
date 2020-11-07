@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using VirtualExpress.ShipProvincial.Domain.Models;
 
 namespace VirtualExpress.ShipProvincial.Resources
 {
@@ -15,11 +16,9 @@ namespace VirtualExpress.ShipProvincial.Resources
         [MaxLength(50)]
         public string Observations { get; set; }
         [Required]
-        [MaxLength(20)]
-        public string Priority { get; set; }
+        public EPriority Priority { get; set; }
         [Required]
-        [MaxLength(20)]
-        public string State { get; set; }
+        public EState State { get; set; }
         [Required]
         [MaxLength(5)]
         public string Weight { get; set; }
@@ -29,5 +28,9 @@ namespace VirtualExpress.ShipProvincial.Resources
         public int FerightId { get; set; }
         [Required]
         public int DispatcherId { get; set; }
+        [Required]
+        public int CustomerId { get; set; }
+        [Required]
+        public int ShipTerminalId { get; set; }
     }
 }

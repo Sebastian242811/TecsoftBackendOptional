@@ -26,6 +26,7 @@ namespace VirtualExpress.General.Mapping
         public ResourceToModelProfile()
         {
             CreateMap<SavePackageResource, Package>();
+            CreateMap<UpdateStateResource, Package>();
             CreateMap<SaveFreightResource, Freight>();
             CreateMap<SaveDispatcherResource, Dispatcher>();
             CreateMap<SaveCommentaryResource, Commentary>();
@@ -34,6 +35,7 @@ namespace VirtualExpress.General.Mapping
             CreateMap<SaveTerminalResource, Terminal>();
             CreateMap<SaveCityResource, City>();
             CreateMap<SaveShipTerminalResource, ShipTerminal>();
+            CreateMap<SaveChangeStateResource, ChangeState>();
 
             //Initialization
             CreateMap<SaveCustomerResource, Customer>();

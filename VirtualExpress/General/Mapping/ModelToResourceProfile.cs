@@ -34,6 +34,7 @@ namespace VirtualExpress.General.Mapping
             CreateMap<Terminal, TerminalResource>();
             CreateMap<City, CityResource>();
             CreateMap<ShipTerminal, ShipTerminalResource>();
+            CreateMap<ChangeState, ChangeStateResource>();
 
             //Initialization
             CreateMap<Customer, CustomerResource>();

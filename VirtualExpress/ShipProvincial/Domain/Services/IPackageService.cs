@@ -15,6 +15,7 @@ namespace VirtualExpress.ShipProvincial.Domain.Services
         Task<PackageResponse> GetById(int id);
         Task<PackageResponse> SaveAsync(Package package);
         Task<PackageResponse> UpdateAsync(int id, Package package);
+        Task<PackageResponse> UpdateStateAsync(int id, Package package);
         Task<PackageResponse> DeleteAsync(int id);
     }
 }

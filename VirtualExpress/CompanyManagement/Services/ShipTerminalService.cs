@@ -74,6 +74,10 @@ namespace VirtualExpress.CompanyManagement.Services
             {
                 return new ShipTerminalResponse("Destiny terminal doesnt exist");
             }
+            if(shipTerminal.TerminalOriginId==shipTerminal.TerminalDestinyId)
+            {
+                return new ShipTerminalResponse("Destiny and origin cant be the same");
+            }
             try
             {
                 await _shipTerminalRepository.AddAsync(shipTerminal);

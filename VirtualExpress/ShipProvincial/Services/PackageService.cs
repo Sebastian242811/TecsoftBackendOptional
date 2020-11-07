@@ -136,5 +136,24 @@ namespace VirtualExpress.ShipProvincial.Services
                 return new PackageResponse($"An error ocurred while updating Package: {e.Message}");
             }
         }
+
+        public async Task<PackageResponse> UpdateStateAsync(int id, Package package)
+        {
+            var existing = await _packageRepository.FindById(id);
+            if (existing == null)
+                return new PackageResponse("Package not found");
+            existing.State = package.State;
+            try
+            {
+                _packageRepository.Update(existing);
+                await _unitOfWork.CompleteAsync();
+
+                return new PackageResponse(existing);
+            }
+            catch (Exception e)
+            {
+                return new PackageResponse($"An error ocurred while updating Package: {e.Message}");
+            }
+        }
     }
 }
