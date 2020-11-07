@@ -6,11 +6,13 @@ using VirtualExpress.Communication.Domain.Models;
 using VirtualExpress.Communication.Domain.Repositories;
 using VirtualExpress.Communication.Domain.Services;
 using VirtualExpress.Communication.Domain.Services.Responses;
+using VirtualExpress.CompanyManagement.Domain.Repositories;
 
 namespace VirtualExpress.Communication.Services
 {
     public class CustomerServiceEmployeeService : ICustomerServiceEmployeeService
     {
+        public readonly ITerminalRepository _terminalRepository;
         public readonly ICustomerServiceEmployeeRepository _CustomerServiceEmployeeRepository;
         public async Task<CustomerServiceEmployeeResponse> DeleteAsync(int id)
         {
@@ -50,6 +52,11 @@ namespace VirtualExpress.Communication.Services
 
         public async Task<CustomerServiceEmployeeResponse> SaveAsync(CustomerServiceEmployee customerServiceEmployee)
         {
+            var existingTerminals = await _terminalRepository.FindById(customerServiceEmployee.TerminalId);
+            if (existingTerminals == null)
+            {
+                return new CustomerServiceEmployeeResponse("Terminal doesnt exist");
+            }
             try
             {
                 await _CustomerServiceEmployeeRepository.AddAsync(customerServiceEmployee);

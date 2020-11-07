@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using VirtualExpress.General.Domain.Repositories;
 using VirtualExpress.Initialization.Domain.Model;
+using VirtualExpress.Initialization.Domain.Repositories;
 using VirtualExpress.ShipDelivery.Domain.Repositories;
 using VirtualExpress.ShipDelivery.Domain.Services;
 using VirtualExpress.ShipDelivery.Domain.Services.Responses;
@@ -12,13 +13,15 @@ namespace VirtualExpress.ShipDelivery.Services
 {
     public class DeliveryService:IDeliveryService
     {
+        private readonly IDealerRepository _dealerRepository;
         private readonly IDeliveryRepository _DeliveryRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public DeliveryService(IDeliveryRepository DeliveryRepository, IUnitOfWork unitOfWork)
+        public DeliveryService(IDeliveryRepository DeliveryRepository, IUnitOfWork unitOfWork, IDealerRepository dealerRepository)
         {
             _DeliveryRepository = DeliveryRepository;
             _unitOfWork = unitOfWork;
+            _dealerRepository = dealerRepository;
         }
 
         public async Task<DeliveryResponse> DeleteAsync(int id)
@@ -54,6 +57,9 @@ namespace VirtualExpress.ShipDelivery.Services
 
         public async Task<DeliveryResponse> SaveAsync(Delivery Delivery)
         {
+            var existingdealer = await _dealerRepository.FindById(Delivery.Id);
+            if (existingdealer == null)
+                return new DeliveryResponse("Dealer doesnt exist");
             try
             {
                 await _DeliveryRepository.AddAsync(Delivery);
@@ -73,6 +79,7 @@ namespace VirtualExpress.ShipDelivery.Services
                 return new DeliveryResponse("Delivery not found");
             existingDelivery.Arrival = Delivery.Arrival;
             existingDelivery.Price = Delivery.Price;
+            existingDelivery.DealerId = Delivery.DealerId;
             try
             {
                 _DeliveryRepository.Update(existingDelivery);

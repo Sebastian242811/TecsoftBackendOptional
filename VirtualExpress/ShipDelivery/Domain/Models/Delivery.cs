@@ -11,6 +11,8 @@ namespace VirtualExpress.Initialization.Domain.Model
         public int Id { get; set; }
         public string Arrival { get; set; }
         public double Price { get; set; }
+        public int DealerId { get; set; }
+        public Dealer Dealer { get; set; }
         public IList<PackageDelivery> PackageDeliveries { get; set; } = new List<PackageDelivery>();
     }
 }

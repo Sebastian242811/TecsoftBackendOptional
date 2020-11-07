@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 using VirtualExpress.CompanyManagement.Domain.Models;
 using VirtualExpress.CompanyManagement.Resources;
 using VirtualExpress.Initialization.Domain.Model;
+using VirtualExpress.Initialization.Domain.Models;
 using VirtualExpress.Initialization.Resource;
+using VirtualExpress.Initialization.Resources;
 using VirtualExpress.MemberShip.Domain.Model;
 using VirtualExpress.MemberShip.Model.Model;
 using VirtualExpress.MemberShip.Resource;
@@ -31,6 +33,7 @@ namespace VirtualExpress.General.Mapping
             CreateMap<PackageDelivery, PackageDeliveryResource>();
             CreateMap<Terminal, TerminalResource>();
             CreateMap<City, CityResource>();
+            CreateMap<ShipTerminal, ShipTerminalResource>();
 
             //Initialization
             CreateMap<Customer, CustomerResource>();
@@ -43,6 +46,7 @@ namespace VirtualExpress.General.Mapping
             CreateMap<SubscriptionCompany, SubscriptionCompanyResource>();
             CreateMap<SubscriptionCustomer, SubscriptionCustomerResource>();
             CreateMap<TypeOfCurrent, TypeOfCurrentResource>();
+
         }
     }
 }

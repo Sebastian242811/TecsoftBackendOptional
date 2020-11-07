@@ -13,7 +13,7 @@ using VirtualExpress.General.Extensions;
 
 namespace VirtualExpress.CompanyManagement.Controller
 {
-    [Route("api/[controller]")]
+    [Route("api/cities")]
     [ApiController]
     public class CityController : ControllerBase
     {

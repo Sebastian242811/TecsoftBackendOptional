@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using VirtualExpress.ShipProvincial.Domain.Models;
-using VirtualExpress.ShipProvincial.Domain.Services.Responses;
+using VirtualExpress.Initialization.Domain.Models;
+using VirtualExpress.Initialization.Domain.Services.Responses;
 
-namespace VirtualExpress.ShipProvincial.Domain.Services
+namespace VirtualExpress.Initialization.Domain.Services
 {
     public interface IDispatcherService
     {

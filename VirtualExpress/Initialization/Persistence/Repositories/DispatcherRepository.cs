@@ -5,10 +5,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using VirtualExpress.General.Persistance.Context;
 using VirtualExpress.General.Repositories;
-using VirtualExpress.ShipProvincial.Domain.Models;
-using VirtualExpress.ShipProvincial.Domain.Repositories;
+using VirtualExpress.Initialization.Domain.Models;
+using VirtualExpress.Initialization.Domain.Repositories;
 
-namespace VirtualExpress.ShipProvincial.Persistance.Repositories
+namespace VirtualExpress.Initialization.Persistance.Repositories
 {
     public class DispatcherRepository:BaseRepository, IDispatcherRepository
     {

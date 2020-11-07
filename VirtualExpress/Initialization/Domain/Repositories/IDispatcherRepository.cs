@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using VirtualExpress.ShipProvincial.Domain.Models;
+using VirtualExpress.Initialization.Domain.Models;
 
-namespace VirtualExpress.ShipProvincial.Domain.Repositories
+namespace VirtualExpress.Initialization.Domain.Repositories
 {
     public interface IDispatcherRepository
     {

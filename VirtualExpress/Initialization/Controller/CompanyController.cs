@@ -13,7 +13,7 @@ using VirtualExpress.Initialization.Resource;
 
 namespace VirtualExpress.Initialization.Controller
 {
-    [Route("api/[controller]")]
+    [Route("api/companies")]
     [ApiController]
     public class CompanyController : ControllerBase
     {

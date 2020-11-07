@@ -14,7 +14,7 @@ using VirtualExpress.MemberShip.Resource;
 
 namespace VirtualExpress.MemberShip.Controller
 {
-    [Route("api/[controller]")]
+    [Route("api/plancompanies")]
     [ApiController]
     public class PlanCompanyController : ControllerBase
     {

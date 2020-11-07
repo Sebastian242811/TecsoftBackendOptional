@@ -15,7 +15,6 @@ namespace VirtualExpress.ShipProvincial.Resources
         public EState State { get; set; }
         public string Weight { get; set; }
         public double Discount { get; set; }
-        public double Price { get; set; }
         public int FerightId { get; set; }
         public int DispatcherId { get; set; }
     }

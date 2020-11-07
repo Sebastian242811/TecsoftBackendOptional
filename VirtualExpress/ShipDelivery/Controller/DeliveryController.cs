@@ -14,7 +14,7 @@ using VirtualExpress.ShipDelivery.Resources;
 namespace VirtualExpress.ShipDelivery.Controller
 {
     [Produces("application/json")]
-    [Route("api/[controller]")]
+    [Route("api/deliveries")]
     [ApiController]
     public class DeliveryController : ControllerBase
     {

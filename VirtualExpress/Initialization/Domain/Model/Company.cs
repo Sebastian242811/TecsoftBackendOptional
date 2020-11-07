@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using VirtualExpress.Communication.Domain.Models;
 using VirtualExpress.CompanyManagement.Domain.Models;
 using VirtualExpress.MemberShip.Domain.Model;
+using VirtualExpress.Social.Domain.Models;
 
 namespace VirtualExpress.Initialization.Domain.Model
 {
@@ -19,5 +21,6 @@ namespace VirtualExpress.Initialization.Domain.Model
         public IList<Terminal> Terminals { get; set; } = new List<Terminal>();
         //Subscription
         public IList<SubscriptionCompany> Subscriptions { get; set; } = new List<SubscriptionCompany>();
+        public IList<Commentary> Commentaries { get; set; } = new List<Commentary>();
     }
 }

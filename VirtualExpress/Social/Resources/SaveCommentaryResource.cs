@@ -14,5 +14,9 @@ namespace VirtualExpress.Social.Resources
 
         [Required]
         public int Valoration { get; set; }
+        [Required]
+        public int CustomerId { get; set; }
+        [Required]
+        public int CompanyId { get; set; }
     }
 }

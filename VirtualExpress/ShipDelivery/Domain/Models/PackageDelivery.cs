@@ -9,6 +9,7 @@ namespace VirtualExpress.ShipDelivery.Domain.Models
 {
     public class PackageDelivery
     {
+        public int Id { get; set; }
         public int DeliveryId { get; set; }
         public Delivery Delivery { get; set; }
         public int PackageId { get; set; }

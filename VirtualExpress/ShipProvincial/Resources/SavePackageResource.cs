@@ -26,8 +26,6 @@ namespace VirtualExpress.ShipProvincial.Resources
         [Required]
         public double Discount { get; set; }
         [Required]
-        public double Price { get; set; }
-        [Required]
         public int FerightId { get; set; }
         [Required]
         public int DispatcherId { get; set; }

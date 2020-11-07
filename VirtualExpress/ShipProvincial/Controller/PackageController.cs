@@ -13,7 +13,7 @@ using VirtualExpress.ShipProvincial.Resources;
 
 namespace VirtualExpress.ShipProvincial.Controller
 {
-    [Route("api/[controller]")]
+    [Route("api/packages")]
     [ApiController]
     public class PackageController : ControllerBase
     {

@@ -2,23 +2,26 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using VirtualExpress.CompanyManagement.Domain.Repositories;
 using VirtualExpress.General.Domain.Repositories;
-using VirtualExpress.ShipProvincial.Domain.Models;
-using VirtualExpress.ShipProvincial.Domain.Repositories;
-using VirtualExpress.ShipProvincial.Domain.Services;
-using VirtualExpress.ShipProvincial.Domain.Services.Responses;
+using VirtualExpress.Initialization.Domain.Models;
+using VirtualExpress.Initialization.Domain.Repositories;
+using VirtualExpress.Initialization.Domain.Services;
+using VirtualExpress.Initialization.Domain.Services.Responses;
 
-namespace VirtualExpress.ShipProvincial.Services
+namespace VirtualExpress.Initialization.Services
 {
     public class DispatcherService: IDispatcherService
     {
+        private readonly ITerminalRepository _terminalRepository;
         private readonly IDispatcherRepository _dispatcherRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public DispatcherService(IDispatcherRepository dispatcherRepository, IUnitOfWork unitOfWork)
+        public DispatcherService(IDispatcherRepository dispatcherRepository, IUnitOfWork unitOfWork, ITerminalRepository terminalRepository)
         {
             _dispatcherRepository = dispatcherRepository;
             _unitOfWork = unitOfWork;
+            _terminalRepository = terminalRepository;
         }
 
         public async Task<DispatcherResponse> DeleteAsync(int id)
@@ -54,6 +57,11 @@ namespace VirtualExpress.ShipProvincial.Services
 
         public async Task<DispatcherResponse> SaveAsync(Dispatcher dispatcher)
         {
+            var existingTerminal = await _terminalRepository.FindById(dispatcher.TerminalId);
+            if (existingTerminal == null)
+            {
+                return new DispatcherResponse("Terminal doesnt exist");
+            }
             try
             {
                 await _dispatcherRepository.AddAsync(dispatcher);

@@ -14,7 +14,7 @@ using VirtualExpress.General.Extensions;
 namespace VirtualExpress.CompanyManagement.Controller
 {
     [Produces("application/json")]
-    [Route("api/[controller]")]
+    [Route("api/terminals")]
     [ApiController]
     public class TerminalController : ControllerBase
     {

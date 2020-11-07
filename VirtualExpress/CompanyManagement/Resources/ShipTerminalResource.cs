@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace VirtualExpress.ShipDelivery.Resources
+namespace VirtualExpress.CompanyManagement.Resources
 {
-    public class DeliveryResource
+    public class ShipTerminalResource
     {
         public int Id { get; set; }
-        public string Arrival { get; set; }
+        public int TerminalOriginId { get; set; }
+        public int TerminalDestinyId { get; set; }
         public double Price { get; set; }
-        public int DealerId { get; set; }
     }
 }

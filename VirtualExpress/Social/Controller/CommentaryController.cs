@@ -14,7 +14,7 @@ using VirtualExpress.Social.Resources;
 namespace VirtualExpress.Social.Controller
 {
     [Produces("application/json")]
-    [Route("api/[controller]")]
+    [Route("api/commentaries")]
     [ApiController]
     public class CommentaryController : ControllerBase
     {

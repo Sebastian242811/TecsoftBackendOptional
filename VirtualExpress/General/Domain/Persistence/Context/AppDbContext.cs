@@ -9,6 +9,9 @@ using VirtualExpress.MemberShip.Model.Model;
 using VirtualExpress.MemberShip.Domain.Model;
 using Microsoft.EntityFrameworkCore.Internal;
 using VirtualExpress.Communication.Domain.Models;
+using VirtualExpress.Initialization.Domain.Models;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using System;
 
 namespace VirtualExpress.General.Persistance.Context
 {
@@ -26,6 +29,7 @@ namespace VirtualExpress.General.Persistance.Context
         public DbSet<Freight> Freights { get; set; }
         public DbSet<Package> Packages { get; set; }
         public DbSet<Commentary> Comentaries { get; set; }
+        public DbSet<ShipTerminal> ShipTerminals { get; set; }
 
         //Initialization
         public DbSet<Company> Companies { get; set; }
@@ -81,6 +85,9 @@ namespace VirtualExpress.General.Persistance.Context
                 .WithMany(p => p.Terminals).HasForeignKey(p => p.CityId);
             builder.Entity<Terminal>().HasOne(p => p.Company)
                 .WithMany(p => p.Terminals).HasForeignKey(p => p.CompanyId);
+            builder.Entity<Terminal>().HasData(
+                new Terminal { Id=1,Name="Rosalitos",Adress="Jr. Salaverry 151",CityId=1,CompanyId=1}
+                );
 
             builder.Entity<Delivery>().ToTable("Delivery");
             builder.Entity<Delivery>().HasKey(k => k.Id);
@@ -90,9 +97,16 @@ namespace VirtualExpress.General.Persistance.Context
                 .IsRequired().HasMaxLength(25);
             builder.Entity<Delivery>().Property(p => p.Price)
                 .IsRequired().HasMaxLength(25);
+            builder.Entity<Delivery>().HasOne(p => p.Dealer)
+                .WithMany(p => p.Deliveries).HasForeignKey(p=>p.DealerId);
+            builder.Entity<Delivery>().HasData(
+                new Delivery { Id = 1, Arrival = "Av. Los Angles 23", Price = 23.45, DealerId = 1 }
+                );
 
             builder.Entity<PackageDelivery>().ToTable("PackageDelivery");
-            builder.Entity<PackageDelivery>().HasKey(k => new { k.DeliveryId, k.PackageId});
+            builder.Entity<PackageDelivery>().HasKey(k => k.Id);
+            builder.Entity<PackageDelivery>().Property(k => k.Id)
+                .IsRequired().ValueGeneratedOnAdd();
             builder.Entity<PackageDelivery>().HasOne(p => p.Delivery)
                 .WithMany(p => p.PackageDeliveries).HasForeignKey(p => p.DeliveryId);
             builder.Entity<PackageDelivery>().HasOne(p => p.Package)
@@ -107,6 +121,9 @@ namespace VirtualExpress.General.Persistance.Context
             builder.Entity<Dispatcher>().Property(p => p.DNI).HasMaxLength(8);
             builder.Entity<Dispatcher>().HasOne(p => p.Terminal)
                 .WithMany(p => p.Dispatchers).HasForeignKey(p => p.TerminalId);
+            builder.Entity<Dispatcher>().HasData(
+                new Dispatcher { Id=1,Name="Juan Alberto",DNI="73190786",Username="juan21",Password="12234",TerminalId=1}
+                );
 
 
             builder.Entity<Freight>().ToTable("Freight");
@@ -132,12 +149,18 @@ namespace VirtualExpress.General.Persistance.Context
                 .WithMany(p => p.Packages).HasForeignKey(p => p.DispatcherId);
             builder.Entity<Package>().HasOne(p => p.Customer)
                 .WithMany(p => p.Packages).HasForeignKey(p => p.CustomerId);
+            builder.Entity<Package>().HasOne(p => p.ShipTerminal)
+                .WithMany(p => p.Packages).HasForeignKey(p => p.ShipTerminalId);
 
 
             builder.Entity<Commentary>().ToTable("Commentary");
             builder.Entity<Commentary>().HasKey(p => p.Id);
             builder.Entity<Commentary>().Property(p => p.Id)
                 .IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<Commentary>().HasOne(p => p.Company)
+                .WithMany(p => p.Commentaries).HasForeignKey(p => p.CompanyId);
+            builder.Entity<Commentary>().HasOne(p => p.Customer)
+                .WithMany(p => p.Commentaries).HasForeignKey(p => p.CustomerId);
 
                 //Initialization
 
@@ -161,6 +184,9 @@ namespace VirtualExpress.General.Persistance.Context
                 .HasMany(p => p.Subscriptions)
                 .WithOne(p => p.Company)
                 .HasForeignKey(p => p.CompanyId);
+            builder.Entity<Company>().HasData(
+                new Company { Id=1, Name="Antesanca",Username="Antesanca1",Number="017432371",Email="AntesancaComp@gmail.com",Password="12345",Ruc="12345678912"}
+                );
 
             builder.Entity<Customer>().ToTable("Customers");
             builder.Entity<Customer>().HasKey(p => p.Id);
@@ -199,6 +225,9 @@ namespace VirtualExpress.General.Persistance.Context
                 .IsRequired().HasMaxLength(50);
             builder.Entity<Dealer>().Property(p => p.Password)
                 .IsRequired().HasMaxLength(15);
+            builder.Entity<Dealer>().HasData(
+                new Dealer { Id = 1, Name = "Luis Gerardo", Username = "Luisqa", Number = "723162464", Brithday = Convert.ToDateTime("Friday, 29 May 1994"), Email = "luisqa@gmail.com", Password = "123456", CityId = 1 }
+                );
 
             //MemberShip
             builder.Entity<TypeOfCurrent>().ToTable("TypeOfCurrents");
@@ -296,6 +325,15 @@ namespace VirtualExpress.General.Persistance.Context
                .WithMany(p => p.Messages).HasForeignKey(p => p.CustomerId);
             builder.Entity<Message>().HasOne(p => p.CustomerServiceEmployee)
                .WithMany(p => p.Messages).HasForeignKey(p => p.CustomerServiceEmployeeId);
+
+            builder.Entity<ShipTerminal>().ToTable("ShipTerminals");
+            builder.Entity<ShipTerminal>().HasKey(p => p.Id);
+            builder.Entity<ShipTerminal>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<ShipTerminal>().Property(p => p.Price).IsRequired();
+            builder.Entity<ShipTerminal>().HasOne(p => p.TerminalOrigin)
+                .WithMany(p => p.ShipTerminalso).HasForeignKey(p=>p.TerminalOriginId);
+            builder.Entity<ShipTerminal>().HasOne(p => p.TerminalDestiny)
+                .WithMany(p => p.ShipTerminalsd).HasForeignKey(p => p.TerminalDestinyId);
             //builder.ApplySnakeCaseNamingConvention();
         }
     }

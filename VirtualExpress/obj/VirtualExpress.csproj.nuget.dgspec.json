@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Aplicaciones Web\\Clone\\Nueva carpeta\\TecsoftBackendOptional\\VirtualExpress\\VirtualExpress.csproj": {}
+    "C:\\Users\\Usuario\\Desktop\\UPC_trabajos y archivos\\ciclo8\\web\\Trabajo Final\\TecsoftBackendOptional\\VirtualExpress\\VirtualExpress.csproj": {}
   },
   "projects": {
-    "E:\\Aplicaciones Web\\Clone\\Nueva carpeta\\TecsoftBackendOptional\\VirtualExpress\\VirtualExpress.csproj": {
+    "C:\\Users\\Usuario\\Desktop\\UPC_trabajos y archivos\\ciclo8\\web\\Trabajo Final\\TecsoftBackendOptional\\VirtualExpress\\VirtualExpress.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Aplicaciones Web\\Clone\\Nueva carpeta\\TecsoftBackendOptional\\VirtualExpress\\VirtualExpress.csproj",
+        "projectUniqueName": "C:\\Users\\Usuario\\Desktop\\UPC_trabajos y archivos\\ciclo8\\web\\Trabajo Final\\TecsoftBackendOptional\\VirtualExpress\\VirtualExpress.csproj",
         "projectName": "VirtualExpress",
-        "projectPath": "E:\\Aplicaciones Web\\Clone\\Nueva carpeta\\TecsoftBackendOptional\\VirtualExpress\\VirtualExpress.csproj",
-        "packagesPath": "C:\\Users\\lucia\\.nuget\\packages\\",
-        "outputPath": "E:\\Aplicaciones Web\\Clone\\Nueva carpeta\\TecsoftBackendOptional\\VirtualExpress\\obj\\",
+        "projectPath": "C:\\Users\\Usuario\\Desktop\\UPC_trabajos y archivos\\ciclo8\\web\\Trabajo Final\\TecsoftBackendOptional\\VirtualExpress\\VirtualExpress.csproj",
+        "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Usuario\\Desktop\\UPC_trabajos y archivos\\ciclo8\\web\\Trabajo Final\\TecsoftBackendOptional\\VirtualExpress\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\lucia\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -89,7 +92,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
         }
       }
     }

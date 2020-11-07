@@ -11,7 +11,7 @@ using VirtualExpress.MemberShip.Resource;
 
 namespace VirtualExpress.MemberShip.Controller
 {
-    [Route("api/[controller]")]
+    [Route("api/typeofcurrents")]
     [ApiController]
     public class TypeOfCurrentController : ControllerBase
     {

@@ -17,5 +17,7 @@ namespace VirtualExpress.CompanyManagement.Resources
         public string Adress { get; set; }
         [Required]
         public int CityId { get; set; }
+        [Required]
+        public int CompanyId { get; set; }
     }
 }

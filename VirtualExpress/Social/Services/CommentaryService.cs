@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VirtualExpress.General.Domain.Repositories;
+using VirtualExpress.Initialization.Domain.Repositories;
 using VirtualExpress.Social.Domain.Models;
 using VirtualExpress.Social.Domain.Repositories;
 using VirtualExpress.Social.Domain.Services;
@@ -12,13 +13,17 @@ namespace VirtualExpress.Social.Services
 {
     public class CommentaryService:ICommentaryService
     {
+        private readonly ICustomerRepository _customerRepository;
+        private readonly ICompanyRepository _companyRepository;
         private readonly ICommentaryRepository _CommentaryRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public CommentaryService(ICommentaryRepository CommentaryRepository, IUnitOfWork unitOfWork)
+        public CommentaryService(ICommentaryRepository CommentaryRepository, IUnitOfWork unitOfWork, ICustomerRepository customerRepository, ICompanyRepository companyRepository)
         {
             _CommentaryRepository = CommentaryRepository;
             _unitOfWork = unitOfWork;
+            _customerRepository = customerRepository;
+            _companyRepository = companyRepository;
         }
 
         public async Task<CommentaryResponse> DeleteAsync(int id)
@@ -55,6 +60,12 @@ namespace VirtualExpress.Social.Services
 
         public async Task<CommentaryResponse> SaveAsync(Commentary Commentary)
         {
+            var existimgCustomer = await _customerRepository.FindById(Commentary.CustomerId);
+            var existingCompany = await _companyRepository.FindCompanyById(Commentary.CompanyId);
+            if (existimgCustomer == null)
+                return new CommentaryResponse("Customer doesnt exist");
+            if (existingCompany == null)
+                return new CommentaryResponse("Company doesnt exist");
             try
             {
                 await _CommentaryRepository.AddAsync(Commentary);
@@ -75,6 +86,8 @@ namespace VirtualExpress.Social.Services
                 return new CommentaryResponse("Commentary not found");
             existing.Opinion = Commentary.Opinion;
             existing.Valoration = Commentary.Valoration;
+            existing.CustomerId = Commentary.CustomerId;
+            existing.CompanyId = Commentary.CompanyId;
             try
             {
                 _CommentaryRepository.Update(existing);

@@ -7,13 +7,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using VirtualExpress.General.Extensions;
-using VirtualExpress.ShipProvincial.Domain.Models;
-using VirtualExpress.ShipProvincial.Domain.Services;
-using VirtualExpress.ShipProvincial.Resources;
+using VirtualExpress.Initialization.Domain.Models;
+using VirtualExpress.Initialization.Domain.Services;
+using VirtualExpress.Initialization.Resources;
 
 namespace VirtualExpress.ShipProvincial.Controller
 {
-    [Route("api/[controller]")]
+    [Route("api/dispatchers")]
     [ApiController]
     public class DispatcherController : ControllerBase
     {
@@ -60,7 +60,7 @@ namespace VirtualExpress.ShipProvincial.Controller
 
         [SwaggerResponse(200, "Update Dispatcher", typeof(IActionResult))]
         [ProducesResponseType(typeof(IActionResult), 200)]
-        [HttpPut("id")]
+        [HttpPut("{id}")]
         public async Task<IActionResult> PutAsync(int id, [FromBody] SaveDispatcherResource resource)
         {
             var dispatcher = _mapper.Map<SaveDispatcherResource, Dispatcher>(resource);

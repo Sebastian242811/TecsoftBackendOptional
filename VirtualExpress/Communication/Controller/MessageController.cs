@@ -13,7 +13,7 @@ using VirtualExpress.General.Extensions;
 
 namespace VirtualExpress.Communication.Controller
 {
-    [Route("api/[controller]")]
+    [Route("api/messages")]
     [ApiController]
     public class MessageController : ControllerBase
     {

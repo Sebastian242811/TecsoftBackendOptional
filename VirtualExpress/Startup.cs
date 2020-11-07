@@ -15,7 +15,9 @@ using VirtualExpress.General.Persistance.Context;
 using VirtualExpress.General.Repositories;
 using VirtualExpress.Initialization.Domain.Repositories;
 using VirtualExpress.Initialization.Domain.Services;
+using VirtualExpress.Initialization.Persistance.Repositories;
 using VirtualExpress.Initialization.Persistence.Repositories;
+using VirtualExpress.Initialization.Services;
 using VirtualExpress.MemberShip.Domain.Model;
 using VirtualExpress.MemberShip.Domain.Repositories;
 using VirtualExpress.MemberShip.Domain.Services;
@@ -66,6 +68,7 @@ namespace VirtualExpress
                 //CompanyManagement
             services.AddScoped<ICityRepository, CityRepository>();
             services.AddScoped<ITerminalRepository, TerminalRepository>();
+            services.AddScoped<IShipTerminalRepository,ShipTerminalRepository>();
                 //ShipDelivery
             services.AddScoped<IDeliveryRepository, DeliveryRepository>();
             services.AddScoped<IPackageDeliveryRepository, PackageDeliveryRepository>();
@@ -92,6 +95,7 @@ namespace VirtualExpress
                 //CompanyManagement
             services.AddScoped<ICityService, CityService>();
             services.AddScoped<ITerminalService, TerminalService>();
+            services.AddScoped<IShipTerminalService, ShipTerminalService>();
                 //shipDelivery
             services.AddScoped<IDeliveryService, DeliveryService>();
             services.AddScoped<IPackageDeliveryService, PackageDeliveryService>();

@@ -6,11 +6,15 @@ using VirtualExpress.Communication.Domain.Models;
 using VirtualExpress.Communication.Domain.Repositories;
 using VirtualExpress.Communication.Domain.Services;
 using VirtualExpress.Communication.Domain.Services.Responses;
+using VirtualExpress.Initialization.Domain.Repositories;
 
 namespace VirtualExpress.Communication.Services
 {
     public class MessageService : IMessageService
     {
+        public readonly IChatRepository _chatRepository;
+        public readonly ICustomerServiceEmployeeRepository _customerServiceEmployeeRepository;
+        public readonly ICustomerRepository _customerRepository;
         public readonly IMessageRepository _MessageRepository;
         public async Task<MessageResponse> DeleteAsync(int id)
         {
@@ -50,6 +54,21 @@ namespace VirtualExpress.Communication.Services
 
         public async Task<MessageResponse> SaveAsync(Message message)
         {
+            var existingchats = await _chatRepository.FindById(message.ChatId);
+            var existingCustomer = await _customerRepository.FindById(message.CustomerId);
+            var existingCustomerServEmployee = await _customerServiceEmployeeRepository.FindById(message.CustomerServiceEmployeeId);
+            if (existingchats == null)
+            {
+                return new MessageResponse("Chat doesnt exist");
+            }
+            if (existingCustomer == null)
+            {
+                return new MessageResponse("Customer doesnt exist");
+            }
+            if (existingCustomerServEmployee == null)
+            {
+                return new MessageResponse("Customer Service Employee doesnt exist");
+            }
             try
             {
                 await _MessageRepository.AddAsync(message);

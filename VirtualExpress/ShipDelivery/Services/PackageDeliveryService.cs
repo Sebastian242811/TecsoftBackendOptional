@@ -7,18 +7,23 @@ using VirtualExpress.ShipDelivery.Domain.Models;
 using VirtualExpress.ShipDelivery.Domain.Repositories;
 using VirtualExpress.ShipDelivery.Domain.Services;
 using VirtualExpress.ShipDelivery.Domain.Services.Responses;
+using VirtualExpress.ShipProvincial.Domain.Repositories;
 
 namespace VirtualExpress.ShipDelivery.Services
 {
     public class PackageDeliveryService:IPackageDeliveryService
     {
+        private readonly IPackageRepository _packageRepository;
+        private readonly IDeliveryRepository _deliveryRepository;
         private readonly IPackageDeliveryRepository _PackageDeliveryRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public PackageDeliveryService(IPackageDeliveryRepository PackageDeliveryRepository, IUnitOfWork unitOfWork)
+        public PackageDeliveryService(IPackageDeliveryRepository PackageDeliveryRepository, IUnitOfWork unitOfWork, IPackageRepository packageRepository, IDeliveryRepository deliveryRepository)
         {
             _PackageDeliveryRepository = PackageDeliveryRepository;
             _unitOfWork = unitOfWork;
+            _packageRepository = packageRepository;
+            _deliveryRepository = deliveryRepository;
         }
 
         public async Task<PackageDeliveryResponse> DeleteAsync(int id)
@@ -54,6 +59,12 @@ namespace VirtualExpress.ShipDelivery.Services
 
         public async Task<PackageDeliveryResponse> SaveAsync(PackageDelivery PackageDelivery)
         {
+            var existingPackages = await _packageRepository.FindById(PackageDelivery.PackageId);
+            var existingDeliveries = await _deliveryRepository.FindById(PackageDelivery.DeliveryId);
+            if (existingDeliveries == null)
+                return new PackageDeliveryResponse("Delivery doesnt exist");
+            if (existingPackages == null)
+                return new PackageDeliveryResponse("Package doesnt exist");
             try
             {
                 await _PackageDeliveryRepository.AddAsync(PackageDelivery);

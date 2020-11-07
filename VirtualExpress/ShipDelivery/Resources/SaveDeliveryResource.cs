@@ -12,5 +12,7 @@ namespace VirtualExpress.ShipDelivery.Resources
         public string Arrival { get; set; }
         [Required]
         public double Price { get; set; }
+        [Required]
+        public int DealerId { get; set; }
     }
 }

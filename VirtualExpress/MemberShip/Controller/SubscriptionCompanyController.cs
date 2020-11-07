@@ -13,7 +13,7 @@ using VirtualExpress.MemberShip.Resource;
 
 namespace VirtualExpress.MemberShip.Controller
 {
-    [Route("api/[controller]")]
+    [Route("api/subscriptionscompanies")]
     [ApiController]
     public class SubscriptionCompanyController : ControllerBase
     {

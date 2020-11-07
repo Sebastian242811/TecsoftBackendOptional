@@ -7,6 +7,7 @@ using VirtualExpress.CompanyManagement.Domain.Repositories;
 using VirtualExpress.CompanyManagement.Domain.Services;
 using VirtualExpress.CompanyManagement.Domain.Services.Responses;
 using VirtualExpress.General.Domain.Repositories;
+using VirtualExpress.Initialization.Domain.Repositories;
 
 namespace VirtualExpress.CompanyManagement.Services
 {
@@ -14,11 +15,15 @@ namespace VirtualExpress.CompanyManagement.Services
     {
         private readonly ITerminalRepository _terminalRepository;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly ICityRepository _cityRepository;
+        private readonly ICompanyRepository _companyRepository;
 
-        public TerminalService(ITerminalRepository terminalRepository, IUnitOfWork unitOfWork)
+        public TerminalService(ITerminalRepository terminalRepository, IUnitOfWork unitOfWork, ICityRepository cityRepository, ICompanyRepository companyRepository)
         {
             _terminalRepository = terminalRepository;
             _unitOfWork = unitOfWork;
+            _cityRepository = cityRepository;
+            _companyRepository = companyRepository;
         }
 
         public async Task<TerminalResponse> AssignTerminalCompanyAsync(int terminaId, int companyID)
@@ -79,6 +84,24 @@ namespace VirtualExpress.CompanyManagement.Services
 
         public async Task<TerminalResponse> SaveAssync(Terminal terminal)
         {
+            var existingterminals = await _terminalRepository.ListAsync();
+            var existingcities = await _cityRepository.FindById(terminal.CityId);
+            var existingcompany = await _companyRepository.FindCompanyById(terminal.CompanyId);
+            foreach(Terminal Terminal in existingterminals)
+            {
+                if(Terminal.Name.Equals(terminal.Name) && Terminal.Adress.Equals(Terminal.Adress) && Terminal.CityId==terminal.CityId && Terminal.CompanyId==terminal.CompanyId)
+                {
+                    return new TerminalResponse("This terminal is already registered");
+                }
+            }
+            if (existingcities == null)
+            {
+                return new TerminalResponse("City doesnt exist");
+            }
+            if (existingcompany == null)
+            {
+                return new TerminalResponse("Company doesnt exist");
+            }
             try
             {
                 await _terminalRepository.AddAsync(terminal);
@@ -99,6 +122,7 @@ namespace VirtualExpress.CompanyManagement.Services
             if (existingTerminal == null)
                 return new TerminalResponse("Terminal not found");
             existingTerminal.Name = terminal.Name;
+            existingTerminal.Adress = terminal.Adress;
             try
             {
                 _terminalRepository.Update(existingTerminal);
