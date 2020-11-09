@@ -13,6 +13,5 @@ namespace VirtualExpress.CompanyManagement.Domain.Models
         public Terminal TerminalDestiny { get; set; }
         public int TerminalDestinyId { get; set; }
         public double Price { get; set; }
-        public IList<Package> Packages { get; set; } = new List<Package>();
     }
 }

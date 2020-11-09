@@ -39,6 +39,13 @@ namespace VirtualExpress.ShipProvincial.Persistance.Repositories
                 .ToListAsync();
         }
 
+        public async Task<IEnumerable<Package>> ListByState(int state)
+        {
+            return await _context.Packages
+                .Where(p => (int)p.State == state)
+                .ToListAsync();
+        }
+
         public void Remove(Package package)
         {
             _context.Packages.Remove(package);

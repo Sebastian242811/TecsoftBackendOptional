@@ -18,6 +18,5 @@ namespace VirtualExpress.ShipProvincial.Resources
         public int FerightId { get; set; }
         public int DispatcherId { get; set; }
         public int CustomerId { get; set; }
-        public int ShipTerminalId { get; set; }
     }
 }

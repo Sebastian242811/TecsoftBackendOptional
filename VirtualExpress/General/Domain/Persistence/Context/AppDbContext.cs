@@ -54,7 +54,7 @@ namespace VirtualExpress.General.Persistance.Context
         {
             base.OnModelCreating(builder);
 
-            builder.Entity<City>().ToTable("City");
+            builder.Entity<City>().ToTable("Cities");
             builder.Entity<City>().HasKey(k => k.Id);
             builder.Entity<City>().Property(k => k.Id)
                 .IsRequired().ValueGeneratedOnAdd();
@@ -90,7 +90,7 @@ namespace VirtualExpress.General.Persistance.Context
                 new Terminal { Id=1,Name="Rosalitos",Adress="Jr. Salaverry 151",CityId=1,CompanyId=1}
                 );
 
-            builder.Entity<Delivery>().ToTable("Delivery");
+            builder.Entity<Delivery>().ToTable("Deliveries");
             builder.Entity<Delivery>().HasKey(k => k.Id);
             builder.Entity<Delivery>().Property(k => k.Id)
                 .IsRequired().ValueGeneratedOnAdd();
@@ -104,14 +104,14 @@ namespace VirtualExpress.General.Persistance.Context
                 new Delivery { Id = 1, Arrival = "Av. Los Angles 23", Price = 23.45, DealerId = 1 }
                 );
 
-            builder.Entity<PackageDelivery>().ToTable("PackageDelivery");
+            builder.Entity<PackageDelivery>().ToTable("PackageDeliveries");
             builder.Entity<PackageDelivery>().HasKey(k => k.Id);
             builder.Entity<PackageDelivery>().Property(k => k.Id)
                 .IsRequired().ValueGeneratedOnAdd();
             builder.Entity<PackageDelivery>().HasOne(p => p.Delivery)
                 .WithMany(p => p.PackageDeliveries).HasForeignKey(p => p.DeliveryId);
-            builder.Entity<PackageDelivery>().HasOne(p => p.Package)
-                .WithMany(p => p.PackageDeliveries).HasForeignKey(p => p.PackageId);
+            //builder.Entity<PackageDelivery>().HasOne(p => p.Package)
+            //    .WithMany(p => p.PackageDeliveries).HasForeignKey(p => p.PackageId);
 
             builder.Entity<Dispatcher>().ToTable("Dispatchers");
             builder.Entity<Dispatcher>().HasKey(Key => Key.Id);
@@ -127,7 +127,7 @@ namespace VirtualExpress.General.Persistance.Context
                 );
 
 
-            builder.Entity<Freight>().ToTable("Freight");
+            builder.Entity<Freight>().ToTable("Freights");
             builder.Entity<Freight>().HasKey(prop => prop.Id);
             builder.Entity<Freight>().Property(p => p.Id)
                 .IsRequired().ValueGeneratedOnAdd();
@@ -135,15 +135,24 @@ namespace VirtualExpress.General.Persistance.Context
                 .HasMaxLength(50);
 
 
-            builder.Entity<Package>().ToTable("Package");
+            builder.Entity<Package>().ToTable("Packages");
             builder.Entity<Package>().HasKey(p => p.Id);
             builder.Entity<Package>().Property(p => p.Id)
                 .IsRequired().ValueGeneratedOnAdd();
             builder.Entity<Package>().Property(p => p.Description)
-                .IsRequired().ValueGeneratedOnAdd();
-            builder.Entity<Package>().Property(p => p.Observations).HasMaxLength(50);
-            builder.Entity<Package>().Property(p => p.Priority).HasDefaultValue(EPriority.Baja).IsRequired();
-            builder.Entity<Package>().Property(p => p.State).HasDefaultValue(EState.En_espera).IsRequired();
+                .IsRequired().HasMaxLength(50);
+            builder.Entity<Package>().Property(p => p.Observations)
+                .IsRequired().HasMaxLength(50);
+            builder.Entity<Package>().Property(p => p.Discount)
+                .IsRequired();
+            builder.Entity<Package>().Property(p => p.DispatcherId)
+                .IsRequired();
+            builder.Entity<Package>().Property(p => p.FerightId)
+                .IsRequired();
+            builder.Entity<Package>().Property(p => p.Weight)
+                .IsRequired().HasMaxLength(5);
+            builder.Entity<Package>().Property(p => p.Priority).HasDefaultValue(EPriority.Baja);
+            builder.Entity<Package>().Property(p => p.State).HasDefaultValue(EState.En_espera);
             builder.Entity<Package>().HasOne(p => p.Freight)
                 .WithMany(p => p.Packages).HasForeignKey(p => p.FerightId);
             builder.Entity<Package>().HasOne(p => p.Dispatcher)
@@ -152,7 +161,7 @@ namespace VirtualExpress.General.Persistance.Context
                 .WithMany(p => p.Packages).HasForeignKey(p => p.CustomerId);
 
 
-            builder.Entity<Commentary>().ToTable("Commentary");
+            builder.Entity<Commentary>().ToTable("Commentaries");
             builder.Entity<Commentary>().HasKey(p => p.Id);
             builder.Entity<Commentary>().Property(p => p.Id)
                 .IsRequired().ValueGeneratedOnAdd();
@@ -336,8 +345,6 @@ namespace VirtualExpress.General.Persistance.Context
             builder.Entity<ChangeState>().HasKey(p => p.Id);
             builder.Entity<ChangeState>().Property(p => p.Id)
                 .IsRequired().ValueGeneratedOnAdd();
-            builder.Entity<ChangeState>().Property(p => p.PackageId).IsRequired();
-            builder.Entity<ChangeState>().HasOne(p => p.Package).WithMany(p => p.ChangesStates).HasForeignKey(p=>p.PackageId);
             //builder.ApplySnakeCaseNamingConvention();
         }
     }

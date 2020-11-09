@@ -17,18 +17,16 @@ namespace VirtualExpress.ShipProvincial.Services
         private readonly IFreightRepository _freightRepository;
         private readonly IDispatcherRepository _dispatcherRepository;
         private readonly ICustomerRepository _customerRepository;
-        private readonly IShipTerminalRepository _shipTerminalRepository;
         private readonly IPackageRepository _packageRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public PackageService(IPackageRepository packageRepository, IUnitOfWork unitOfWork, IFreightRepository freightRepository, IDispatcherRepository dispatcherRepository, ICustomerRepository customerRepository, IShipTerminalRepository shipTerminalRepository)
+        public PackageService(IFreightRepository freightRepository, IDispatcherRepository dispatcherRepository, ICustomerRepository customerRepository, IPackageRepository packageRepository, IUnitOfWork unitOfWork)
         {
-            _packageRepository = packageRepository;
-            _unitOfWork = unitOfWork;
             _freightRepository = freightRepository;
             _dispatcherRepository = dispatcherRepository;
             _customerRepository = customerRepository;
-            _shipTerminalRepository = shipTerminalRepository;
+            _packageRepository = packageRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<PackageResponse> DeleteAsync(int id)
@@ -62,7 +60,8 @@ namespace VirtualExpress.ShipProvincial.Services
             var existing = await _packageRepository.FindById(packageId);
             if (existing == null)
                 return new PackageResponse("Package not found");
-            return new PackageResponse("Dispacher: " + existing.Dispatcher.Name + " Dni: " + existing.Dispatcher.DNI);
+            return new PackageResponse("o");
+            //return new PackageResponse("Dispacher: " + existing.Dispatcher.Name + " Dni: " + existing.Dispatcher.DNI);
         }
 
         public async Task<IEnumerable<Package>> ListAsync()
@@ -75,14 +74,19 @@ namespace VirtualExpress.ShipProvincial.Services
             return await _packageRepository.ListByCostumerId(costumerId);
         }
 
+        public async Task<IEnumerable<Package>> ListByState(int state)
+        {
+            return await _packageRepository.ListByState(state);
+        }
+
         public async Task<PackageResponse> SaveAsync(Package package)
         {
-            var existingfreight = await _freightRepository.FindById(package.FerightId);
+            var existingFreight = await _freightRepository.FindById(package.FerightId);
             var existingDispatcher = await _dispatcherRepository.FindById(package.DispatcherId);
             var existingCustomer = await _customerRepository.FindById(package.CustomerId);
-            
 
-            if (existingfreight==null)
+
+            if (existingFreight == null)
             {
                 return new PackageResponse("Freight doesnt exist");
             }
@@ -94,12 +98,14 @@ namespace VirtualExpress.ShipProvincial.Services
             {
                 return new PackageResponse("Customer doesnt exist");
             }
-            
+
+            package.Freight = existingFreight;
+            package.Customer = existingCustomer;
+            package.Dispatcher = existingDispatcher;
             try
             {
                 await _packageRepository.AddAsync(package);
                 await _unitOfWork.CompleteAsync();
-
                 return new PackageResponse(package);
             }
             catch (Exception e)
@@ -115,12 +121,12 @@ namespace VirtualExpress.ShipProvincial.Services
                 return new PackageResponse("Package not found");
             existing.Description = package.Description;
             existing.Observations = package.Observations;
-            existing.Priority = package.Priority;
-            existing.State = package.State;
-            existing.Weight = package.Weight;
-            existing.Discount = package.Discount;
-            existing.FerightId = package.FerightId;
-            existing.DispatcherId = package.DispatcherId;
+            //existing.Priority = package.Priority;
+            //existing.State = package.State;
+            //existing.Weight = package.Weight;
+            //existing.Discount = package.Discount;
+            //existing.FerightId = package.FerightId;
+            //existing.DispatcherId = package.DispatcherId;
             try
             {
                 _packageRepository.Update(existing);
@@ -139,7 +145,7 @@ namespace VirtualExpress.ShipProvincial.Services
             var existing = await _packageRepository.FindById(id);
             if (existing == null)
                 return new PackageResponse("Package not found");
-            existing.State = package.State;
+            //existing.State = package.State;
             try
             {
                 _packageRepository.Update(existing);

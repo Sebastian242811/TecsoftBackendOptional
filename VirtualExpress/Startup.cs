@@ -63,6 +63,7 @@ namespace VirtualExpress
             services.AddDbContext<AppDbContext>(options =>
             {
                 options.UseMySQL(Configuration.GetConnectionString("MySQLConnection"));
+                //options.UseInMemoryDatabase("transport-api-in-memory");
             });
 
             //Repositorie

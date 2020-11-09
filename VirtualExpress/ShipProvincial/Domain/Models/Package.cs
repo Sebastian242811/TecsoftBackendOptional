@@ -24,8 +24,6 @@ namespace VirtualExpress.ShipProvincial.Domain.Models
         public Dispatcher Dispatcher { get; set; }
         public int CustomerId { get; set; }
         public Customer Customer { get; set; }
-        public int ShipTerminalId { get; set; }
-        public ShipTerminal ShipTerminal { get; set; }
         public IList<PackageDelivery> PackageDeliveries { get; set; } = new List<PackageDelivery>();
         public IList<ChangeState> ChangesStates { get; set; } = new List<ChangeState>();
     }
