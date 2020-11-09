@@ -58,7 +58,7 @@ namespace VirtualExpress
             services.AddControllers();
 
             services.AddCors(options => options.AddDefaultPolicy(
-                builder => builder.AllowAnyOrigin()));
+                  builder => builder.AllowAnyOrigin().WithMethods("POST", "GET", "PUT")));
 
             services.AddDbContext<AppDbContext>(options =>
             {
