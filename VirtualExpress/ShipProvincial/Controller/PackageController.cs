@@ -37,7 +37,18 @@ namespace VirtualExpress.ShipProvincial.Controller
             return resource;
         }
 
-        [SwaggerResponse(200, "Save package.    ATTENTION: there are 4 options of state values: 'En_camino' 'En_espera' 'Retrasado' 'En_termina_destino' and 3 options of priority values: 'Alta' 'Media' 'Baja'", typeof(IActionResult))]
+        [SwaggerResponse(200, "List of non shipped package by customer Id", typeof(IEnumerable<PackageResource>))]
+        [ProducesResponseType(typeof(IEnumerable<PackageResource>), 200)]
+        [HttpGet("packagestate/customer/{id}")]
+        public async Task<IEnumerable<PackageResource>> GetAllAsyncbystate(int id)
+        {
+            var packages = await _PackageService.ListByState(id);
+            var resource = _mapper.Map<IEnumerable<Package>, IEnumerable<PackageResource>>(packages);
+
+            return resource;
+        }
+
+        [SwaggerResponse(200, "Save package", typeof(IActionResult))]
         [ProducesResponseType(typeof(IActionResult), 200)]
         [HttpPost]
         public async Task<IActionResult> PostAsync([FromBody] SavePackageResource resource)

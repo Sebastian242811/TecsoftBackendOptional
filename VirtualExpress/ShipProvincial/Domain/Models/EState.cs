@@ -7,9 +7,10 @@ namespace VirtualExpress.ShipProvincial.Domain.Models
 {
     public enum EState:byte
     {
-        En_espera = 1,
-        En_camino = 2,
-        Retrasado = 3,
-        En_terminal_destino = 4
+        Waiting = 1,
+        In_route = 2,
+        At_destination_terminal = 3,
+        Shipped = 4,
+        Delayed = 5
     }
 }

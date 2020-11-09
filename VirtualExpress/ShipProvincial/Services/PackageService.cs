@@ -74,9 +74,18 @@ namespace VirtualExpress.ShipProvincial.Services
             return await _packageRepository.ListByCostumerId(costumerId);
         }
 
-        public async Task<IEnumerable<Package>> ListByState(int state)
+        public async Task<IEnumerable<Package>> ListByState(int customerId)
         {
-            return await _packageRepository.ListByState(state);
+            var existingcustomerpackage = await _packageRepository.ListByCostumerId(customerId);
+            List<Package> packages = new List<Package>();
+            foreach(Package package in existingcustomerpackage)
+            {
+                if (!package.State.Equals(EState.Shipped))
+                {
+                    packages.Add(package);
+                }
+            }
+            return packages;
         }
 
         public async Task<PackageResponse> SaveAsync(Package package)

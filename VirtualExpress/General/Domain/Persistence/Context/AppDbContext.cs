@@ -151,8 +151,8 @@ namespace VirtualExpress.General.Persistance.Context
                 .IsRequired();
             builder.Entity<Package>().Property(p => p.Weight)
                 .IsRequired().HasMaxLength(5);
-            builder.Entity<Package>().Property(p => p.Priority).HasDefaultValue(EPriority.Baja);
-            builder.Entity<Package>().Property(p => p.State).HasDefaultValue(EState.En_espera);
+            builder.Entity<Package>().Property(p => p.Priority).HasDefaultValue(EPriority.Low);
+            builder.Entity<Package>().Property(p => p.State).HasDefaultValue(EState.Waiting);
             builder.Entity<Package>().HasOne(p => p.Freight)
                 .WithMany(p => p.Packages).HasForeignKey(p => p.FerightId);
             builder.Entity<Package>().HasOne(p => p.Dispatcher)

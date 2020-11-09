@@ -7,8 +7,8 @@ namespace VirtualExpress.ShipProvincial.Domain.Models
 {
     public enum EPriority:byte
     {
-        Baja = 1,
-        Media = 2,
-        Alta = 3
+        Low = 1,
+        Medium = 2,
+        Hight = 3
     }
 }
