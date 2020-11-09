@@ -113,13 +113,14 @@ namespace VirtualExpress.ShipProvincial.Controller
         }
 
 
-        [SwaggerResponse(200, "List of package by state", typeof(IEnumerable<PackageResource>))]
+        [SwaggerResponse(200, "package by Id", typeof(IEnumerable<PackageResource>))]
         [ProducesResponseType(typeof(IEnumerable<PackageResource>), 200)]
-        [HttpGet("state/")]
-        public async Task<IEnumerable<PackageResource>> GetPackagesByState(int state)
+        [HttpGet("{id}")]
+        public async Task<PackageResource> GetPackagesById(int id)
         {
-            var packages = await _PackageService.ListByState(state);
-            var resource = _mapper.Map<IEnumerable<Package>, IEnumerable<PackageResource>>(packages);
+            var package =  await _PackageService.GetById(id);
+            var packageresu = package.Resource;
+            var resource = _mapper.Map<Package, PackageResource>(packageresu);
 
             return resource;
         }
