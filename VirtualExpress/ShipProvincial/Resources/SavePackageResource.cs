@@ -30,5 +30,9 @@ namespace VirtualExpress.ShipProvincial.Resources
         public int DispatcherId { get; set; }
         [Required]
         public int CustomerId { get; set; }
+        [Required]
+        public int TerminalOriginId { get; set; }
+        [Required]
+        public int TerminalDestinyId { get; set; }
     }
 }

@@ -153,13 +153,17 @@ namespace VirtualExpress.General.Persistance.Context
                 .IsRequired().HasMaxLength(5);
             builder.Entity<Package>().Property(p => p.Priority).HasDefaultValue(EPriority.Low);
             builder.Entity<Package>().Property(p => p.State).HasDefaultValue(EState.Waiting);
+            builder.Entity<Package>().Property(p => p.TerminalOriginId)
+                .IsRequired();
+            builder.Entity<Package>().Property(p => p.TerminalDestinyId)
+                .IsRequired();
             builder.Entity<Package>().HasOne(p => p.Freight)
                 .WithMany(p => p.Packages).HasForeignKey(p => p.FerightId);
             builder.Entity<Package>().HasOne(p => p.Dispatcher)
                 .WithMany(p => p.Packages).HasForeignKey(p => p.DispatcherId);
             builder.Entity<Package>().HasOne(p => p.Customer)
                 .WithMany(p => p.Packages).HasForeignKey(p => p.CustomerId);
-
+            
 
             builder.Entity<Commentary>().ToTable("Commentaries");
             builder.Entity<Commentary>().HasKey(p => p.Id);

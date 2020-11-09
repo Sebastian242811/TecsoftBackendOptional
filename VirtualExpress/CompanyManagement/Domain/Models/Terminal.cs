@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using VirtualExpress.Communication.Domain.Models;
 using VirtualExpress.Initialization.Domain.Model;
 using VirtualExpress.Initialization.Domain.Models;
+using VirtualExpress.ShipProvincial.Domain.Models;
 
 namespace VirtualExpress.CompanyManagement.Domain.Models
 {
@@ -23,5 +24,6 @@ namespace VirtualExpress.CompanyManagement.Domain.Models
         public IList<CustomerServiceEmployee> CustomerServiceEmployees { get; set; } = new List<CustomerServiceEmployee>();
         public IList<ShipTerminal> ShipTerminalso { get; set; } = new List<ShipTerminal>();
         public IList<ShipTerminal> ShipTerminalsd { get; set; } = new List<ShipTerminal>();
+        public IList<Package> Packages { get; set; } = new List<Package>();
     }
 }

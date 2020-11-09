@@ -18,15 +18,17 @@ namespace VirtualExpress.ShipProvincial.Services
         private readonly IDispatcherRepository _dispatcherRepository;
         private readonly ICustomerRepository _customerRepository;
         private readonly IPackageRepository _packageRepository;
+        private readonly IShipTerminalRepository _shipTerminalRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public PackageService(IFreightRepository freightRepository, IDispatcherRepository dispatcherRepository, ICustomerRepository customerRepository, IPackageRepository packageRepository, IUnitOfWork unitOfWork)
+        public PackageService(IFreightRepository freightRepository, IDispatcherRepository dispatcherRepository, ICustomerRepository customerRepository, IPackageRepository packageRepository, IUnitOfWork unitOfWork, IShipTerminalRepository shipTerminalRepository)
         {
             _freightRepository = freightRepository;
             _dispatcherRepository = dispatcherRepository;
             _customerRepository = customerRepository;
             _packageRepository = packageRepository;
             _unitOfWork = unitOfWork;
+            _shipTerminalRepository = shipTerminalRepository;
         }
 
         public async Task<PackageResponse> DeleteAsync(int id)
@@ -60,8 +62,8 @@ namespace VirtualExpress.ShipProvincial.Services
             var existing = await _packageRepository.FindById(packageId);
             if (existing == null)
                 return new PackageResponse("Package not found");
-            return new PackageResponse("o");
-            //return new PackageResponse("Dispacher: " + existing.Dispatcher.Name + " Dni: " + existing.Dispatcher.DNI);
+            
+            return new PackageResponse("Dispacher: " + existing.Dispatcher.Name + " Dni: " + existing.Dispatcher.DNI);
         }
 
         public async Task<IEnumerable<Package>> ListAsync()
@@ -93,7 +95,7 @@ namespace VirtualExpress.ShipProvincial.Services
             var existingFreight = await _freightRepository.FindById(package.FerightId);
             var existingDispatcher = await _dispatcherRepository.FindById(package.DispatcherId);
             var existingCustomer = await _customerRepository.FindById(package.CustomerId);
-
+            var existingShipTerminal = await _shipTerminalRepository.FindByOriginIdAndDestinyId(package.TerminalOriginId, package.TerminalDestinyId);
 
             if (existingFreight == null)
             {
@@ -107,10 +109,15 @@ namespace VirtualExpress.ShipProvincial.Services
             {
                 return new PackageResponse("Customer doesnt exist");
             }
+            if(existingShipTerminal == null)
+            {
+                return new PackageResponse("Shipterminal doesnt exist");
+            }
 
             package.Freight = existingFreight;
             package.Customer = existingCustomer;
             package.Dispatcher = existingDispatcher;
+            package.ShipTerminal = existingShipTerminal;
             try
             {
                 await _packageRepository.AddAsync(package);
