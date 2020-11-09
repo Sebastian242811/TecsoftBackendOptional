@@ -9,6 +9,7 @@ namespace VirtualExpress.ShipProvincial.Domain.Repositories
     public interface IChangeStateRepository
     {
         Task<IEnumerable<ChangeState>> ListAsync();
+        Task<IEnumerable<ChangeState>> ListAsyncbypackageid(int id);
         Task AddAsync(ChangeState ChangeState);
         Task<ChangeState> FindById(int id);
         void Update(ChangeState ChangeState);

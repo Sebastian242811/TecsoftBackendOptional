@@ -37,6 +37,18 @@ namespace VirtualExpress.CompanyManagement.Controller
             return resource;
         }
 
+        [SwaggerResponse(200, "get City by id", typeof(IEnumerable<CityResource>))]
+        [ProducesResponseType(typeof(IEnumerable<CityResource>), 200)]
+        [HttpGet("{id}")]
+        public async Task<CityResource> Getcitybyid(int id)
+        {
+            var cities = await _cityService.FindCityById(id);
+            var cityre = cities.Resource;
+            var resource = _mapper.Map<City, CityResource>(cityre);
+
+            return resource;
+        }
+
         [SwaggerResponse(200, "Save cities by entering the name", typeof(IActionResult))]
         [ProducesResponseType(typeof(IActionResult), 200)]
         [HttpPost]

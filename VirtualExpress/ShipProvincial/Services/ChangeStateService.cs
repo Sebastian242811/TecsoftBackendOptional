@@ -12,11 +12,11 @@ namespace VirtualExpress.ShipProvincial.Services
 {
     public class ChangeStateService : IChangeStateService
     {
-        private readonly IPackageRepository _packageRepository;
+        private readonly IPackageService _packageRepository;
         private readonly IChangeStateRepository _changeStateRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public ChangeStateService(IUnitOfWork unitOfWork, IChangeStateRepository changeStateRepository, IPackageRepository packageRepository)
+        public ChangeStateService(IUnitOfWork unitOfWork, IChangeStateRepository changeStateRepository, IPackageService packageRepository)
         {
             this._unitOfWork = unitOfWork;
             _changeStateRepository = changeStateRepository;
@@ -36,6 +36,11 @@ namespace VirtualExpress.ShipProvincial.Services
             return await _changeStateRepository.ListAsync();
         }
 
+        public async Task<IEnumerable<ChangeState>> ListAsyncbypackageid(int id)
+        {
+            return await _changeStateRepository.ListAsyncbypackageid(id);
+        }
+
         public async Task<ChangeStateResponse> SaveAsync(ChangeState ChangeState)
         {
 
@@ -43,6 +48,7 @@ namespace VirtualExpress.ShipProvincial.Services
             {
                 await _changeStateRepository.AddAsync(ChangeState);
                 await _unitOfWork.CompleteAsync();
+                await _packageRepository.UpdateStateAsync(ChangeState.PackageId,(int)ChangeState.FinalState);
                 return new ChangeStateResponse(ChangeState);
             }
             catch (Exception e)

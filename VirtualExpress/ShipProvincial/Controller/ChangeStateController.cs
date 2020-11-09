@@ -26,12 +26,23 @@ namespace VirtualExpress.ShipProvincial.Controller
             _mapper = mapper;
         }
 
-        [SwaggerResponse(200, "List of Changes in te pakcage state", typeof(IEnumerable<ChangeStateResource>))]
+        [SwaggerResponse(200, "List of Changes in te package state", typeof(IEnumerable<ChangeStateResource>))]
         [ProducesResponseType(typeof(IEnumerable<ChangeStateResource>), 200)]
         [HttpGet]
         public async Task<IEnumerable<ChangeStateResource>> GetAllAsync()
         {
             var cities = await _ChangeStateService.ListAsync();
+            var resource = _mapper.Map<IEnumerable<ChangeState>, IEnumerable<ChangeStateResource>>(cities);
+
+            return resource;
+        }
+
+        [SwaggerResponse(200, "List of Changes in te package state", typeof(IEnumerable<ChangeStateResource>))]
+        [ProducesResponseType(typeof(IEnumerable<ChangeStateResource>), 200)]
+        [HttpGet("package/{id}")]
+        public async Task<IEnumerable<ChangeStateResource>> GetAllAsyncbypackageid(int id)
+        {
+            var cities = await _ChangeStateService.ListAsyncbypackageid(id);
             var resource = _mapper.Map<IEnumerable<ChangeState>, IEnumerable<ChangeStateResource>>(cities);
 
             return resource;
@@ -48,6 +59,7 @@ namespace VirtualExpress.ShipProvincial.Controller
             var ChangeState = _mapper.Map<SaveChangeStateResource, ChangeState>(resource);
             // TODO: Implement Response Logic
             var result = await _ChangeStateService.SaveAsync(ChangeState);
+
 
             if (!result.Sucess)
                 return BadRequest(result.Message);
