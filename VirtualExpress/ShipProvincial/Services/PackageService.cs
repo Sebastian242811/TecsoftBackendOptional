@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using VirtualExpress.CompanyManagement.Domain.Repositories;
 using VirtualExpress.General.Domain.Repositories;
@@ -62,7 +63,7 @@ namespace VirtualExpress.ShipProvincial.Services
             var existing = await _packageRepository.FindById(packageId);
             if (existing == null)
                 return new PackageResponse("Package not found");
-            
+
             return new PackageResponse("Dispacher: " + existing.Dispatcher.Name + " Dni: " + existing.Dispatcher.DNI);
         }
 
@@ -76,18 +77,14 @@ namespace VirtualExpress.ShipProvincial.Services
             return await _packageRepository.ListByCostumerId(costumerId);
         }
 
-        public async Task<IEnumerable<Package>> ListByState(int customerId)
+        public async Task<IEnumerable<Package>> ListByCustomerAndStateIsNotShipped(int customerId)
         {
-            var existingcustomerpackage = await _packageRepository.ListByCostumerId(customerId);
-            List<Package> packages = new List<Package>();
-            foreach(Package package in existingcustomerpackage)
-            {
-                if (!package.State.Equals(EState.Shipped))
-                {
-                    packages.Add(package);
-                }
-            }
-            return packages;
+            return await _packageRepository.ListByCustomerShipped(customerId);
+        }
+
+        public async Task<IEnumerable<Package>> ListByState(int state)
+        {
+            return await _packageRepository.ListByState(state);
         }
 
         public async Task<PackageResponse> SaveAsync(Package package)
@@ -109,7 +106,7 @@ namespace VirtualExpress.ShipProvincial.Services
             {
                 return new PackageResponse("Customer doesnt exist");
             }
-            if(existingShipTerminal == null)
+            if (existingShipTerminal == null)
             {
                 return new PackageResponse("Shipterminal doesnt exist");
             }
@@ -156,22 +153,31 @@ namespace VirtualExpress.ShipProvincial.Services
             }
         }
 
-        public async Task<PackageResponse> UpdateStateAsync(int id, Package package)
+        public async Task<PackageResponse> UpdateStateAsync(int id, int value)
         {
-            var existing = await _packageRepository.FindById(id);
-            if (existing == null)
+            if (value <= 0 || value >= 6)
+            {
+                return new PackageResponse("The state not found");
+            }
+
+            var existingPackage = await _packageRepository.FindById(id);
+
+            if(existingPackage == null)
+            {
                 return new PackageResponse("Package not found");
-            //existing.State = package.State;
+            }
+
+            existingPackage.State = (EState)value;
+
             try
             {
-                _packageRepository.Update(existing);
+                _packageRepository.Update(existingPackage);
                 await _unitOfWork.CompleteAsync();
-
-                return new PackageResponse(existing);
+                return new PackageResponse(existingPackage);
             }
             catch (Exception e)
             {
-                return new PackageResponse($"An error ocurred while updating Package: {e.Message}");
+                return new PackageResponse($"An error ocurred while update the state: {e.Message}");
             }
         }
     }

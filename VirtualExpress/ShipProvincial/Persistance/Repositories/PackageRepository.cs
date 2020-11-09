@@ -39,6 +39,14 @@ namespace VirtualExpress.ShipProvincial.Persistance.Repositories
                 .ToListAsync();
         }
 
+        public async Task<IEnumerable<Package>> ListByCustomerShipped(int customer)
+        {
+            return await _context.Packages
+                .Where(p => p.CustomerId == customer)
+                .Where(p => (int)p.State != 4)
+                .ToListAsync();
+        }
+
         public async Task<IEnumerable<Package>> ListByState(int state)
         {
             return await _context.Packages

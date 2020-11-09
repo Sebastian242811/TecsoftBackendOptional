@@ -37,12 +37,23 @@ namespace VirtualExpress.ShipProvincial.Controller
             return resource;
         }
 
-        [SwaggerResponse(200, "List of non shipped package by customer Id", typeof(IEnumerable<PackageResource>))]
+        [SwaggerResponse(200, "List of packages by state", typeof(IEnumerable<PackageResource>))]
         [ProducesResponseType(typeof(IEnumerable<PackageResource>), 200)]
-        [HttpGet("packagestate/customer/{id}")]
+        [HttpGet("state/{id}")]
         public async Task<IEnumerable<PackageResource>> GetAllAsyncbystate(int id)
         {
             var packages = await _PackageService.ListByState(id);
+            var resource = _mapper.Map<IEnumerable<Package>, IEnumerable<PackageResource>>(packages);
+
+            return resource;
+        }
+
+        [SwaggerResponse(200, "List of non shipped package by customer Id", typeof(IEnumerable<PackageResource>))]
+        [ProducesResponseType(typeof(IEnumerable<PackageResource>), 200)]
+        [HttpGet("packagestate/customer/{id}")]
+        public async Task<IEnumerable<PackageResource>> GetAllByCustomerIsNotEqualShipped(int customerId)
+        {
+            var packages = await _PackageService.ListByCostumerId(customerId);
             var resource = _mapper.Map<IEnumerable<Package>, IEnumerable<PackageResource>>(packages);
 
             return resource;
@@ -99,10 +110,9 @@ namespace VirtualExpress.ShipProvincial.Controller
         [SwaggerResponse(200, "Update package State", typeof(IActionResult))]
         [ProducesResponseType(typeof(IActionResult), 200)]
         [HttpPut("updatestate/{id}")]
-        public async Task<IActionResult> PutStateAsyng(int id, [FromBody] UpdateStateResource resource)
+        public async Task<IActionResult> PutStateAsyng(int id, int value)
         {
-            var package = _mapper.Map<UpdateStateResource, Package>(resource);
-            var result = await _PackageService.UpdateStateAsync(id, package);
+            var result = await _PackageService.UpdateStateAsync(id, value);
 
             if (result == null)
                 return BadRequest(result.Message);

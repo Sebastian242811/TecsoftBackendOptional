@@ -11,12 +11,13 @@ namespace VirtualExpress.ShipProvincial.Domain.Services
     {
         Task<IEnumerable<Package>> ListAsync();
         Task<IEnumerable<Package>> ListByCostumerId(int costumerId);
-        Task<IEnumerable<Package>> ListByState(int customerId);
+        Task<IEnumerable<Package>> ListByState(int state);
+        Task<IEnumerable<Package>> ListByCustomerAndStateIsNotShipped(int customerId);
         Task<PackageResponse> GetInfoToDispatcherByPackageId(int packageId);
         Task<PackageResponse> GetById(int id);
         Task<PackageResponse> SaveAsync(Package package);
         Task<PackageResponse> UpdateAsync(int id, Package package);
-        Task<PackageResponse> UpdateStateAsync(int id, Package package);
+        Task<PackageResponse> UpdateStateAsync(int id, int value);
         Task<PackageResponse> DeleteAsync(int id);
     }
 }

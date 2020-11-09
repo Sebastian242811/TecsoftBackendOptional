@@ -10,6 +10,7 @@ namespace VirtualExpress.ShipProvincial.Domain.Repositories
     {
         Task<IEnumerable<Package>> ListAsync();
         Task<IEnumerable<Package>> ListByState(int state);
+        Task<IEnumerable<Package>> ListByCustomerShipped(int cusomter);
         Task<IEnumerable<Package>> ListByCostumerId(int costumerId);
         Task AddAsync(Package Package);
         Task<Package> FindById(int id);
