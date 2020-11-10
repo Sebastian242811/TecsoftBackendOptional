@@ -65,30 +65,6 @@ namespace VirtualExpress.Api.Test.ShipDelivery.Test
             response.Message.Should().Be("Delivery not found");
         }
 
-        [Test]
-        public async Task GetSuccesTruWhenDeliverySaveSuccesful()
-        {
-            //Arrange
-            var mockDeliveryRepository = GetDefaultIDeliveryRepositoryInstance();
-            mockDeliveryRepository.Setup(r => r.ListAsync())
-                .ReturnsAsync(new List<Delivery>());
-            var mockUnitOfWork = GetDefaultIUnitOfWorkInstance();
-            var mockdealer = GetDefaultIDealerRepository();
-            var service = new DeliveryService(
-                mockDeliveryRepository.Object,
-                mockUnitOfWork.Object,
-                mockdealer.Object
-                );
-
-            //Act
-            Delivery delivery = new Delivery();
-            delivery.Id = 1;
-            var response = await service.SaveAsync(delivery);
-
-            //Assert
-            response.Sucess.Should().BeTrue();
-        }
-
         private Mock<IDeliveryRepository> GetDefaultIDeliveryRepositoryInstance()
         {
             return new Mock<IDeliveryRepository>();

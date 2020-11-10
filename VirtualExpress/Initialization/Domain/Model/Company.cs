@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using VirtualExpress.Communication.Domain.Models;
 using VirtualExpress.CompanyManagement.Domain.Models;
+using VirtualExpress.Initialization.Domain.Models;
 using VirtualExpress.MemberShip.Domain.Model;
+using VirtualExpress.ShipProvincial.Controller;
 using VirtualExpress.Social.Domain.Models;
 
 namespace VirtualExpress.Initialization.Domain.Model
@@ -22,5 +21,6 @@ namespace VirtualExpress.Initialization.Domain.Model
         //Subscription
         public IList<SubscriptionCompany> Subscriptions { get; set; } = new List<SubscriptionCompany>();
         public IList<Commentary> Commentaries { get; set; } = new List<Commentary>();
+        public IList<Dispatcher> Dispatchers { get; set; } = new List<Dispatcher>();
     }
 }

@@ -13,15 +13,15 @@ namespace VirtualExpress.Initialization.Services
 {
     public class DispatcherService: IDispatcherService
     {
-        private readonly ITerminalRepository _terminalRepository;
+        private readonly ICompanyRepository _companyRepository;
         private readonly IDispatcherRepository _dispatcherRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public DispatcherService(IDispatcherRepository dispatcherRepository, IUnitOfWork unitOfWork, ITerminalRepository terminalRepository)
+        public DispatcherService(ICompanyRepository companyRepository, IDispatcherRepository dispatcherRepository, IUnitOfWork unitOfWork)
         {
+            _companyRepository = companyRepository;
             _dispatcherRepository = dispatcherRepository;
             _unitOfWork = unitOfWork;
-            _terminalRepository = terminalRepository;
         }
 
         public async Task<DispatcherResponse> DeleteAsync(int id)
@@ -57,11 +57,12 @@ namespace VirtualExpress.Initialization.Services
 
         public async Task<DispatcherResponse> SaveAsync(Dispatcher dispatcher)
         {
-            var existingTerminal = await _terminalRepository.FindById(dispatcher.TerminalId);
-            if (existingTerminal == null)
+            var existinCompany = await _companyRepository.FindCompanyById(dispatcher.CompanyId);
+            if (existinCompany == null)
             {
                 return new DispatcherResponse("Terminal doesnt exist");
             }
+            dispatcher.Company = existinCompany;
             try
             {
                 await _dispatcherRepository.AddAsync(dispatcher);
@@ -82,7 +83,7 @@ namespace VirtualExpress.Initialization.Services
                 return new DispatcherResponse("Dispatcher not found");
             existing.Name = dispatcher.Name;
             existing.DNI = dispatcher.DNI;
-            existing.TerminalId = dispatcher.TerminalId;
+            existing.CompanyId = dispatcher.CompanyId;
             try
             {
                 _dispatcherRepository.Update(existing);

@@ -20,7 +20,6 @@ namespace VirtualExpress.CompanyManagement.Domain.Models
         public City City { get; set; }
         public int CompanyId { get; set; }
         public Company Company { get; set; }
-        public IList<Dispatcher> Dispatchers { get; set; } = new List<Dispatcher>();
         public IList<CustomerServiceEmployee> CustomerServiceEmployees { get; set; } = new List<CustomerServiceEmployee>();
         public IList<ShipTerminal> ShipTerminalso { get; set; } = new List<ShipTerminal>();
         public IList<ShipTerminal> ShipTerminalsd { get; set; } = new List<ShipTerminal>();

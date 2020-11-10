@@ -120,11 +120,8 @@ namespace VirtualExpress.General.Persistance.Context
             builder.Entity<Dispatcher>().Property(p => p.Name)
                 .IsRequired().HasMaxLength(30);
             builder.Entity<Dispatcher>().Property(p => p.DNI).HasMaxLength(8);
-            builder.Entity<Dispatcher>().HasOne(p => p.Terminal)
-                .WithMany(p => p.Dispatchers).HasForeignKey(p => p.TerminalId);
-            builder.Entity<Dispatcher>().HasData(
-                new Dispatcher { Id=1,Name="Juan Alberto",DNI="73190786",Username="juan21",Password="12234",TerminalId=1}
-                );
+            builder.Entity<Dispatcher>().HasOne(p => p.Company)
+                .WithMany(p => p.Dispatchers).HasForeignKey(p => p.CompanyId);
 
 
             builder.Entity<Freight>().ToTable("Freights");

@@ -61,7 +61,7 @@ namespace VirtualExpress.ShipProvincial.Controller
 
         [SwaggerResponse(200, "List of package by customer Id", typeof(IEnumerable<PackageResource>))]
         [ProducesResponseType(typeof(IEnumerable<PackageResource>), 200)]
-        [HttpGet("packagestate/customer")]
+        [HttpGet("package/customer/{id}")]
         public async Task<IEnumerable<PackageResource>> ListGetAllByCustomer(int id)
         {
             var packages = await _PackageService.ListByCostumerId(id);

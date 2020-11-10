@@ -70,34 +70,6 @@ namespace VirtualExpress.Api.Test.CompanyManagement.Test
             response.Message.Should().Be("Terminal not found");
         }
 
-        [Test]
-        public async Task GetMessageWhenATerminalIsCreatedSuccesfulleReturnTrue()
-        {
-            //Arrange
-            var mockTerminalRepository = GetDefaultITerminalRepositoryInstance();
-            mockTerminalRepository.Setup(r => r.ListAsync())
-                .ReturnsAsync(new List<Terminal>());
-            var mockUnitOfWork = GetDefaultIUnitOfWorkInstance();
-            var mockcity = GetDefaultICityRepositoryInstance();
-            var mockCompany = GetDefaultICompanyRepositoryInstance();
-            var service = new TerminalService(
-                mockTerminalRepository.Object,
-                mockUnitOfWork.Object,
-                mockcity.Object,
-                mockCompany.Object
-                );
-
-            //Act
-            Terminal terminal = new Terminal();
-            terminal.Id = 1;
-            terminal.Name = "Panamericana";
-            var response = await service.SaveAssync(terminal);
-
-            //Assert
-            response.Sucess.Should().BeTrue();
-        }
-
-
         private Mock<ITerminalRepository> GetDefaultITerminalRepositoryInstance()
         {
             return new Mock<ITerminalRepository>();

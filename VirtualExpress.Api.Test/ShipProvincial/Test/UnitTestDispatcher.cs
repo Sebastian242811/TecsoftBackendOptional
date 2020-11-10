@@ -30,11 +30,11 @@ namespace VirtualExpress.Api.Test.ShipProvincial.Test
             var mockDispatcherRepository = GetDefaultIDispatcherRepositoryInstance();
             mockDispatcherRepository.Setup(r => r.ListAsync()).ReturnsAsync(new List<Dispatcher>());
             var mockUnitOfWork = GetDefaultIUnitOfWorkInstance();
-            var mockTerminalRepository = GetDefaultITerminalRepository();
+            var mockCompanyRepository = GetDefaultICompanyRepository();
             var service = new DispatcherService(
+                mockCompanyRepository.Object,
                 mockDispatcherRepository.Object,
-                mockUnitOfWork.Object,
-                mockTerminalRepository.Object
+                mockUnitOfWork.Object
                 );
 
             //Act
@@ -52,11 +52,11 @@ namespace VirtualExpress.Api.Test.ShipProvincial.Test
             var mockDispatcherRepository = GetDefaultIDispatcherRepositoryInstance();
             mockDispatcherRepository.Setup(r => r.ListAsync()).ReturnsAsync(new List<Dispatcher>());
             var mockUnitOfWork = GetDefaultIUnitOfWorkInstance();
-            var mockTerminalRepository = GetDefaultITerminalRepository();
+            var mockCompanyRepository = GetDefaultICompanyRepository();
             var service = new DispatcherService(
+                mockCompanyRepository.Object,
                 mockDispatcherRepository.Object,
-                mockUnitOfWork.Object,
-                mockTerminalRepository.Object
+                mockUnitOfWork.Object
                 );
 
             //Act
@@ -65,30 +65,6 @@ namespace VirtualExpress.Api.Test.ShipProvincial.Test
             //Assert
             response.Message.Should().Be("Dispatcher not found");
         }
-
-        [Test]
-        public async Task GetSuccesTruWhenDispatcherSaveSuccesful()
-        {
-            //Arrange
-            var mockDispatcherRepository = GetDefaultIDispatcherRepositoryInstance();
-            mockDispatcherRepository.Setup(r => r.ListAsync()).ReturnsAsync(new List<Dispatcher>());
-            var mockUnitOfWork = GetDefaultIUnitOfWorkInstance();
-            var mockTerminalRepository = GetDefaultITerminalRepository();
-            var service = new DispatcherService(
-                mockDispatcherRepository.Object,
-                mockUnitOfWork.Object,
-                mockTerminalRepository.Object
-                );
-
-            //Act
-            Dispatcher dispatcher = new Dispatcher();
-            dispatcher.Id = 1;
-            var response = await service.SaveAsync(dispatcher);
-
-            //Assert
-            response.Sucess.Should().BeTrue();
-        }
-
 
         private Mock<IDispatcherRepository> GetDefaultIDispatcherRepositoryInstance()
         {
@@ -100,9 +76,10 @@ namespace VirtualExpress.Api.Test.ShipProvincial.Test
             return new Mock<IUnitOfWork>();
         }
 
-        private Mock<ITerminalRepository> GetDefaultITerminalRepository()
+        private Mock<ICompanyRepository> GetDefaultICompanyRepository()
         {
-            return new Mock<ITerminalRepository>();
+            return new Mock<ICompanyRepository>();
         }
+
     }
 }

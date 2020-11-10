@@ -38,6 +38,21 @@ namespace VirtualExpress.ShipProvincial.Controller
             return resource;
         }
 
+        [SwaggerResponse(200, "Get Dispatcher", typeof(IActionResult))]
+        [ProducesResponseType(typeof(IActionResult), 200)]
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var result = await _dispatcherService.GetById(id);
+
+            if (!result.Sucess)
+                return BadRequest(result.Message);
+
+            var resourceDispatcher = _mapper.Map<Dispatcher,DispatcherResource>(result.Resource);
+
+            return Ok(resourceDispatcher);
+        }
+
         [SwaggerResponse(200, "Save Dispatcher", typeof(IActionResult))]
         [ProducesResponseType(typeof(IActionResult), 200)]
         [HttpPost]
