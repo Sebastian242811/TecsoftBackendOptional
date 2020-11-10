@@ -51,9 +51,9 @@ namespace VirtualExpress.ShipProvincial.Controller
         [SwaggerResponse(200, "List of non shipped package by customer Id", typeof(IEnumerable<PackageResource>))]
         [ProducesResponseType(typeof(IEnumerable<PackageResource>), 200)]
         [HttpGet("packagestate/customer/{id}")]
-        public async Task<IEnumerable<PackageResource>> GetAllByCustomerIsNotEqualShipped(int customerId)
+        public async Task<IEnumerable<PackageResource>> GetAllByCustomerIsNotEqualShipped(int id)
         {
-            var packages = await _PackageService.ListByCostumerId(customerId);
+            var packages = await _PackageService.ListByCustomerAndStateIsNotShipped(id);
             var resource = _mapper.Map<IEnumerable<Package>, IEnumerable<PackageResource>>(packages);
 
             return resource;
