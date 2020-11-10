@@ -59,6 +59,17 @@ namespace VirtualExpress.ShipProvincial.Controller
             return resource;
         }
 
+        [SwaggerResponse(200, "List of package by customer Id", typeof(IEnumerable<PackageResource>))]
+        [ProducesResponseType(typeof(IEnumerable<PackageResource>), 200)]
+        [HttpGet("packagestate/customer")]
+        public async Task<IEnumerable<PackageResource>> ListGetAllByCustomer(int id)
+        {
+            var packages = await _PackageService.ListByCostumerId(id);
+            var resource = _mapper.Map<IEnumerable<Package>, IEnumerable<PackageResource>>(packages);
+
+            return resource;
+        }
+
         [SwaggerResponse(200, "Save package", typeof(IActionResult))]
         [ProducesResponseType(typeof(IActionResult), 200)]
         [HttpPost]
