@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using VirtualExpress.CompanyManagement.Domain.Models;
-using VirtualExpress.Initialization.Domain.Models;
+using VirtualExpress.Initialization.Domain.Model;
 using VirtualExpress.MemberShip.Domain.Model;
 using VirtualExpress.ShipProvincial.Controller;
 using VirtualExpress.Social.Domain.Models;

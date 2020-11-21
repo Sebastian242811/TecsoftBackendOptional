@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using VirtualExpress.CompanyManagement.Domain.Repositories;
 using VirtualExpress.General.Domain.Repositories;
-using VirtualExpress.Initialization.Domain.Models;
+using VirtualExpress.Initialization.Domain.Model;
 using VirtualExpress.Initialization.Domain.Repositories;
 using VirtualExpress.Initialization.Domain.Services;
 using VirtualExpress.Initialization.Domain.Services.Responses;
@@ -22,6 +22,32 @@ namespace VirtualExpress.Initialization.Services
             _companyRepository = companyRepository;
             _dispatcherRepository = dispatcherRepository;
             _unitOfWork = unitOfWork;
+        }
+
+
+        public async Task<DispatcherResponse> AddDispatcher(int companyId, int dispatcherId)
+        {
+            var existingDispatcher = await _dispatcherRepository.FindById(dispatcherId);
+            if (existingDispatcher == null)
+                return new DispatcherResponse("Dispatcher not found");
+
+            var existingCompany = await _companyRepository.FindCompanyById(companyId);
+            if (existingCompany == null)
+                return new DispatcherResponse("Company not found");
+
+            existingDispatcher.CompanyId = companyId;
+            existingDispatcher.Company = existingCompany;
+
+            try
+            {
+                _dispatcherRepository.Update(existingDispatcher);
+                await _unitOfWork.CompleteAsync();
+                return new DispatcherResponse(existingDispatcher);
+            }
+            catch (Exception e)
+            {
+                return new DispatcherResponse($"An error ocurred while adding a dispatcher: {e.Message}");
+            }
         }
 
         public async Task<DispatcherResponse> DeleteAsync(int id)
@@ -50,6 +76,14 @@ namespace VirtualExpress.Initialization.Services
             return new DispatcherResponse(existing);
         }
 
+        public async Task<DispatcherResponse> GetByUsernameAndPassword(string Username, string Password)
+        {
+            var existingDispatcher = await _dispatcherRepository.GetDispatcherByUsernameAndPassword(Username, Password);
+            if (existingDispatcher == null)
+                return new DispatcherResponse("Dispatcher not found");
+            return new DispatcherResponse(existingDispatcher);
+        }
+
         public async Task<IEnumerable<Dispatcher>> ListAsync()
         {
             return await _dispatcherRepository.ListAsync();
@@ -57,12 +91,7 @@ namespace VirtualExpress.Initialization.Services
 
         public async Task<DispatcherResponse> SaveAsync(Dispatcher dispatcher)
         {
-            var existinCompany = await _companyRepository.FindCompanyById(dispatcher.CompanyId);
-            if (existinCompany == null)
-            {
-                return new DispatcherResponse("Terminal doesnt exist");
-            }
-            dispatcher.Company = existinCompany;
+            dispatcher.Company = null;
             try
             {
                 await _dispatcherRepository.AddAsync(dispatcher);

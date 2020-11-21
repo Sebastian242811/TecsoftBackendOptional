@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "eL/UYab8uMqYt94DWBbsFSQT67wEM8ya83pjvzKLq0uWi5F+iG4L9tJoJYZI4NL2wtlHQWs0ggIe1gjLXFZodw==",
+  "dgSpecHash": "DaMVwqXkUVI3lwCrqrJn/bv3do4ekApjvPgD3uzWHZMC+raJfrKCXSSdIE48fd+Oo334i/IRzJzrQ6jKhk1yGQ==",
   "success": true,
-  "projectFilePath": "E:\\Aplicaciones Web\\Clone\\Visual\\TecsoftBackendOptional\\VirtualExpress\\VirtualExpress.csproj",
+  "projectFilePath": "E:\\Aplicaciones Web\\Trabajo\\Backend\\TecsoftBackendOptional\\VirtualExpress\\VirtualExpress.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\lucia\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\lucia\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.0\\automapper.extensions.microsoft.dependencyinjection.8.1.0.nupkg.sha512",

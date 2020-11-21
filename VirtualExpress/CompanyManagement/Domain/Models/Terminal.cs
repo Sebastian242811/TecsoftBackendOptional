@@ -6,7 +6,6 @@ using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using VirtualExpress.Communication.Domain.Models;
 using VirtualExpress.Initialization.Domain.Model;
-using VirtualExpress.Initialization.Domain.Models;
 using VirtualExpress.ShipProvincial.Domain.Models;
 
 namespace VirtualExpress.CompanyManagement.Domain.Models

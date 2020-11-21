@@ -6450,11 +6450,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Aplicaciones Web\\Clone\\Visual\\TecsoftBackendOptional\\VirtualExpress\\VirtualExpress.csproj",
+      "projectUniqueName": "E:\\Aplicaciones Web\\Trabajo\\Backend\\TecsoftBackendOptional\\VirtualExpress\\VirtualExpress.csproj",
       "projectName": "VirtualExpress",
-      "projectPath": "E:\\Aplicaciones Web\\Clone\\Visual\\TecsoftBackendOptional\\VirtualExpress\\VirtualExpress.csproj",
+      "projectPath": "E:\\Aplicaciones Web\\Trabajo\\Backend\\TecsoftBackendOptional\\VirtualExpress\\VirtualExpress.csproj",
       "packagesPath": "C:\\Users\\lucia\\.nuget\\packages\\",
-      "outputPath": "E:\\Aplicaciones Web\\Clone\\Visual\\TecsoftBackendOptional\\VirtualExpress\\obj\\",
+      "outputPath": "E:\\Aplicaciones Web\\Trabajo\\Backend\\TecsoftBackendOptional\\VirtualExpress\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\lucia\\AppData\\Roaming\\NuGet\\NuGet.Config",

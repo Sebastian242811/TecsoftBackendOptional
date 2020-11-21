@@ -8695,11 +8695,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Aplicaciones Web\\Clone\\Visual\\TecsoftBackendOptional\\VirtualExpress.Api.Test\\VirtualExpress.Api.Test.csproj",
+      "projectUniqueName": "E:\\Aplicaciones Web\\Trabajo\\Backend\\TecsoftBackendOptional\\VirtualExpress.Api.Test\\VirtualExpress.Api.Test.csproj",
       "projectName": "VirtualExpress.Api.Test",
-      "projectPath": "E:\\Aplicaciones Web\\Clone\\Visual\\TecsoftBackendOptional\\VirtualExpress.Api.Test\\VirtualExpress.Api.Test.csproj",
+      "projectPath": "E:\\Aplicaciones Web\\Trabajo\\Backend\\TecsoftBackendOptional\\VirtualExpress.Api.Test\\VirtualExpress.Api.Test.csproj",
       "packagesPath": "C:\\Users\\lucia\\.nuget\\packages\\",
-      "outputPath": "E:\\Aplicaciones Web\\Clone\\Visual\\TecsoftBackendOptional\\VirtualExpress.Api.Test\\obj\\",
+      "outputPath": "E:\\Aplicaciones Web\\Trabajo\\Backend\\TecsoftBackendOptional\\VirtualExpress.Api.Test\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\lucia\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -8715,8 +8715,8 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "E:\\Aplicaciones Web\\Clone\\Visual\\TecsoftBackendOptional\\VirtualExpress\\VirtualExpress.csproj": {
-              "projectPath": "E:\\Aplicaciones Web\\Clone\\Visual\\TecsoftBackendOptional\\VirtualExpress\\VirtualExpress.csproj"
+            "E:\\Aplicaciones Web\\Trabajo\\Backend\\TecsoftBackendOptional\\VirtualExpress\\VirtualExpress.csproj": {
+              "projectPath": "E:\\Aplicaciones Web\\Trabajo\\Backend\\TecsoftBackendOptional\\VirtualExpress\\VirtualExpress.csproj"
             }
           }
         }

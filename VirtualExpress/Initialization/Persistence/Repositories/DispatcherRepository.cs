@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using VirtualExpress.General.Persistance.Context;
 using VirtualExpress.General.Repositories;
-using VirtualExpress.Initialization.Domain.Models;
+using VirtualExpress.Initialization.Domain.Model;
 using VirtualExpress.Initialization.Domain.Repositories;
 
 namespace VirtualExpress.Initialization.Persistance.Repositories
@@ -29,6 +29,14 @@ namespace VirtualExpress.Initialization.Persistance.Repositories
         public async Task<IEnumerable<Dispatcher>> ListAsync()
         {
             return await _context.Dispatchers.ToListAsync();
+        }
+
+        public async Task<Dispatcher> GetDispatcherByUsernameAndPassword(string Username, string Password)
+        {
+            return await _context.Dispatchers
+                .Where(p => p.Username == Username)
+                .Where(p => p.Password == Password)
+                .FirstOrDefaultAsync();
         }
 
         public void Remove(Dispatcher dispatcher)

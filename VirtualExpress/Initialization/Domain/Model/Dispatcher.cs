@@ -6,7 +6,7 @@ using VirtualExpress.CompanyManagement.Domain.Models;
 using VirtualExpress.Initialization.Domain.Model;
 using VirtualExpress.ShipProvincial.Domain.Models;
 
-namespace VirtualExpress.Initialization.Domain.Models
+namespace VirtualExpress.Initialization.Domain.Model
 {
     public class Dispatcher
     {
@@ -15,8 +15,8 @@ namespace VirtualExpress.Initialization.Domain.Models
         public string DNI { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
-        public int CompanyId { get; set; }
-        public Company Company { get; set; }
+        public int? CompanyId { get; set; }
+        public virtual Company Company { get; set; }
         public IList<Package> Packages { get; set; }
     }
 }

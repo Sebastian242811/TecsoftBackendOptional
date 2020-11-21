@@ -13,6 +13,7 @@ namespace VirtualExpress.Register.Services
     public class CompanyService : ICompanyService
     {
         private readonly ICompanyRepository _companyRepository;
+        private readonly IDispatcherRepository _dispatcherRepository;
         private readonly IUnitOfWork _unitOfWork;
 
         public CompanyService(ICompanyRepository companyRepository, IUnitOfWork unitOfWork)

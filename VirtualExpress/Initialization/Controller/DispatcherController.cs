@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using VirtualExpress.General.Extensions;
-using VirtualExpress.Initialization.Domain.Models;
+using VirtualExpress.Initialization.Domain.Model;
 using VirtualExpress.Initialization.Domain.Services;
 using VirtualExpress.Initialization.Resources;
 
@@ -62,7 +62,6 @@ namespace VirtualExpress.ShipProvincial.Controller
                 return BadRequest(ModelState.GetErrorMessages());
 
             var dispatcher = _mapper.Map<SaveDispatcherResource, Dispatcher>(resource);
-            // TODO: Implement Response Logic
             var result = await _dispatcherService.SaveAsync(dispatcher);
 
             if (!result.Sucess)
@@ -99,6 +98,28 @@ namespace VirtualExpress.ShipProvincial.Controller
                 return BadRequest(result.Message);
 
             return Ok("Delete");
+        }
+
+        [HttpGet("{username}/{password}")]
+        public async Task<IActionResult> GetByUsernameAndPassword(string username, string password)
+        {
+            var result = await _dispatcherService.GetByUsernameAndPassword(username, password);
+            if (!result.Sucess)
+                return BadRequest(result.Message);
+
+            var dispatcherResource = _mapper.Map<Dispatcher, DispatcherResource>(result.Resource);
+            return Ok(dispatcherResource);
+        }
+
+        [HttpPut("{companyId}/{dispatcherId}")]
+        public async Task<IActionResult> CompanyAddDispatcher(int companyId, int dispatcherId)
+        {
+            var result = await _dispatcherService.AddDispatcher(companyId, dispatcherId);
+            if (!result.Sucess)
+                return BadRequest(result.Message);
+
+            var dispatcherResource = _mapper.Map<Dispatcher, DispatcherResource>(result.Resource);
+            return Ok(dispatcherResource);
         }
     }
 }

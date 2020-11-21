@@ -37,12 +37,23 @@ namespace VirtualExpress.ShipProvincial.Controller
             return resource;
         }
 
+        [SwaggerResponse(200, "List of package by dispatcher is null", typeof(IEnumerable<PackageResource>))]
+        [ProducesResponseType(typeof(IEnumerable<PackageResource>), 200)]
+        [HttpGet("dispatcher/null")]
+        public async Task<IEnumerable<PackageResource>> GetAllPackageByDispatcherEqualNull()
+        {
+            var packages = await _PackageService.ListByDispatcherNull();
+            var resource = _mapper.Map<IEnumerable<Package>, IEnumerable<PackageResource>>(packages);
+
+            return resource;
+        }
+
         [SwaggerResponse(200, "List of packages by state", typeof(IEnumerable<PackageResource>))]
         [ProducesResponseType(typeof(IEnumerable<PackageResource>), 200)]
-        [HttpGet("state/{id}")]
-        public async Task<IEnumerable<PackageResource>> GetAllAsyncbystate(int id)
+        [HttpGet("state/{id}/dispatcher/{dispatcherId}")]
+        public async Task<IEnumerable<PackageResource>> GetAllAsyncbystate(int id, int dispatcherId)
         {
-            var packages = await _PackageService.ListByState(id);
+            var packages = await _PackageService.ListByState(id,dispatcherId);
             var resource = _mapper.Map<IEnumerable<Package>, IEnumerable<PackageResource>>(packages);
 
             return resource;
@@ -144,6 +155,16 @@ namespace VirtualExpress.ShipProvincial.Controller
             var resource = _mapper.Map<Package, PackageResource>(packageresu);
 
             return resource;
+        }
+
+        [HttpPut("{packageId}/{dispatcherId}")]
+        public async Task<IActionResult> AddDispatcherToPackage(int packageId, int dispatcherId)
+        {
+            var result = await _PackageService.AddDispatcher(packageId, dispatcherId);
+            if (!result.Sucess)
+                return BadRequest(result.Message);
+            var packageResource = _mapper.Map<Package, PackageResource>(result.Resource);
+            return Ok(packageResource);
         }
     }
 }

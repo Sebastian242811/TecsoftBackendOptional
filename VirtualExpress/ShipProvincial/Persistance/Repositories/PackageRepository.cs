@@ -47,10 +47,18 @@ namespace VirtualExpress.ShipProvincial.Persistance.Repositories
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<Package>> ListByState(int state)
+        public async Task<IEnumerable<Package>> ListByDispatcherNull()
+        {
+            return await _context.Packages
+                .Where(p => p.DispatcherId == null)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Package>> ListByState(int state, int dispatcherId)
         {
             return await _context.Packages
                 .Where(p => (int)p.State == state)
+                .Where(p => p.DispatcherId == dispatcherId)
                 .ToListAsync();
         }
 

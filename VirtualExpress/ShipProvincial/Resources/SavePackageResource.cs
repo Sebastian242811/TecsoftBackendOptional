@@ -18,16 +18,10 @@ namespace VirtualExpress.ShipProvincial.Resources
         [Required]
         public EPriority Priority { get; set; }
         [Required]
-        public EState State { get; set; }
-        [Required]
         [MaxLength(5)]
         public string Weight { get; set; }
         [Required]
         public double Discount { get; set; }
-        [Required]
-        public int FerightId { get; set; }
-        [Required]
-        public int DispatcherId { get; set; }
         [Required]
         public int CustomerId { get; set; }
         [Required]
