@@ -68,5 +68,17 @@ namespace VirtualExpress.ShipProvincial.Controller
 
             return Ok(ChangeStateResource);
         }
+
+        [HttpGet("package/{id}/state/{initState}/state/{endState}")]
+        public async Task<IActionResult> GetPackageByIdAndInitStateAndEndState(int id, int initState, int endState)
+        {
+            var result = await _ChangeStateService.GetByPackageIdAndInitStateAndEndState(id, initState, endState);
+
+            if (!result.Sucess)
+                return BadRequest(result.Message);
+
+            var changeResource = _mapper.Map<ChangeState, ChangeStateResource>(result.Resource);
+            return Ok(changeResource);
+        }
     }
 }

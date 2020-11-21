@@ -13,5 +13,6 @@ namespace VirtualExpress.ShipProvincial.Domain.Services
         Task<IEnumerable<ChangeState>> ListAsyncbypackageid(int id);
         Task<ChangeStateResponse> FindChangeStateById(int id);
         Task<ChangeStateResponse> SaveAsync(ChangeState ChangeState);
+        Task<ChangeStateResponse> GetByPackageIdAndInitStateAndEndState(int packageID, int initState, int endState);
     }
 }

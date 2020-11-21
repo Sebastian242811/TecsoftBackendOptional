@@ -11,6 +11,7 @@ namespace VirtualExpress.ShipProvincial.Domain.Models
     public class Package
     {
         public int Id { get; set; }
+        public string Name { get; set; }
         public string Description { get; set; }
         public string Observations { get; set; }
         public EPriority Priority { get; set; }

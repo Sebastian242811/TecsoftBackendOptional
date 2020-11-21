@@ -31,6 +31,14 @@ namespace VirtualExpress.ShipProvincial.Services
             return new ChangeStateResponse(existingChangeState);
         }
 
+        public async Task<ChangeStateResponse> GetByPackageIdAndInitStateAndEndState(int packageID, int initState, int endState)
+        {
+            var existingChange = await _changeStateRepository.GetByPackageIdAndInitStateAndEndState(packageID, initState, endState);
+            if (existingChange == null)
+                return new ChangeStateResponse("Change not found");
+            return new ChangeStateResponse(existingChange);
+        }
+
         public async Task<IEnumerable<ChangeState>> ListAsync()
         {
             return await _changeStateRepository.ListAsync();

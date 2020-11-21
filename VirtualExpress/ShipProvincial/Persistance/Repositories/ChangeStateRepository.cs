@@ -26,6 +26,15 @@ namespace VirtualExpress.ShipProvincial.Persistance.Repositories
             return await _context.ChangesStates.FindAsync(id);
         }
 
+        public async Task<ChangeState> GetByPackageIdAndInitStateAndEndState(int packageId, int initState, int endState)
+        {
+            return await _context.ChangesStates
+                .Where(p => p.PackageId == packageId)
+                .Where(p => p.InitialState == (EState)initState)
+                .Where(p => p.FinalState == (EState)endState)
+                .FirstOrDefaultAsync();
+        }
+
         public async Task<IEnumerable<ChangeState>> ListAsync()
         {
             return await _context.ChangesStates.ToListAsync();

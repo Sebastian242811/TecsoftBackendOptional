@@ -125,6 +125,8 @@ namespace VirtualExpress.General.Persistance.Context
             builder.Entity<Package>().HasKey(p => p.Id);
             builder.Entity<Package>().Property(p => p.Id)
                 .IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<Package>().Property(p => p.Name)
+                .IsRequired().HasMaxLength(20);
             builder.Entity<Package>().Property(p => p.Description)
                 .IsRequired().HasMaxLength(50);
             builder.Entity<Package>().Property(p => p.Observations)

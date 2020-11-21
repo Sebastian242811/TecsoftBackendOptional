@@ -10,6 +10,9 @@ namespace VirtualExpress.ShipProvincial.Resources
     public class SavePackageResource
     {
         [Required]
+        [MaxLength(20)]
+        public string Name { get; set; }
+        [Required]
         [MaxLength(150)]
         public string Description { get; set; }
         [Required]
