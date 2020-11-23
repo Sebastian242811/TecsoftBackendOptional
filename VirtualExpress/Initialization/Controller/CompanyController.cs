@@ -26,10 +26,10 @@ namespace VirtualExpress.Initialization.Controller
             _mapper = mapper;
         }
 
-        [SwaggerResponse(200, "List of Companies", typeof(IEnumerable<CompanyResource>))]
-        [ProducesResponseType(typeof(IEnumerable<CompanyResource>), 200)]
+        [SwaggerResponse(200, "List of Companies", typeof(IEnumerable<Resource.CompanyResource>))]
+        [ProducesResponseType(typeof(IEnumerable<Resource.CompanyResource>), 200)]
         [HttpGet]
-        public async Task<IEnumerable<CompanyResource>> getAllCompanies()
+        public async Task<IEnumerable<Resource.CompanyResource>> getAllCompanies()
         {
             var companies = await _companyService.ListAsync();
             var resources = _mapper.Map<IEnumerable<Company>, IEnumerable<CompanyResource>>(companies);

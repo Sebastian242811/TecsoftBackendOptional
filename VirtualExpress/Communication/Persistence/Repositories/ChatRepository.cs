@@ -28,7 +28,28 @@ namespace VirtualExpress.Communication.Persistence.Repositories
 
         public async Task<IEnumerable<Chat>> ListAsync()
         {
-            return await _context.Chats.Include(p=>p.Messages).ToListAsync();
+            return await _context.Chats.Include(p=>p.Messages)
+                .Include(p => p.Company)
+                .Include(p => p.Customer)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Chat>> ListAsyncByCompanyId(int companyId)
+        {
+            return await _context.Chats
+                .Where(p => p.CompanyId == companyId)
+                .Include(p => p.Company)
+                .Include(p => p.Customer)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Chat>> ListAsyncByCustomerId(int customerId)
+        {
+            return await _context.Chats
+                .Where(p => p.CustomerId == customerId)
+                .Include(p => p.Company)
+                .Include(p => p.Customer)
+                .ToListAsync();
         }
 
         public void Remove(Chat chat)

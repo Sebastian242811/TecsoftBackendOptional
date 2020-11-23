@@ -6,22 +6,35 @@ using VirtualExpress.Communication.Domain.Models;
 using VirtualExpress.Communication.Domain.Repositories;
 using VirtualExpress.Communication.Domain.Services;
 using VirtualExpress.Communication.Domain.Services.Responses;
+using VirtualExpress.General.Domain.Repositories;
+using VirtualExpress.Initialization.Domain.Repositories;
 
 namespace VirtualExpress.Communication.Services
 {
     public class ChatService : IChatService
     {
-        public readonly IChatRepository _ChatRepository;
+        private readonly IChatRepository _chatRepository;
+        private readonly ICustomerRepository _customerRepository;
+        private readonly ICompanyRepository _companyRepository;
+        private readonly IUnitOfWork _unitOfWork;
+
+        public ChatService(IChatRepository chatRepository, IUnitOfWork unitOfWork, ICustomerRepository customerRepository, ICompanyRepository companyRepository)
+        {
+            _chatRepository = chatRepository;
+            _unitOfWork = unitOfWork;
+            _customerRepository = customerRepository;
+            _companyRepository = companyRepository;
+        }
+
         public async Task<ChatResponse> DeleteAsync(int id)
         {
-            var existingChat = await _ChatRepository.FindById(id);
+            var existingChat = await _chatRepository.FindById(id);
             if (existingChat == null)
                 return new ChatResponse("Chat not found");
             try
             {
-                _ChatRepository.Remove(existingChat);
-
-
+                _chatRepository.Remove(existingChat);
+                await _unitOfWork.CompleteAsync();
                 return new ChatResponse(existingChat);
             }
             catch (Exception e)
@@ -32,7 +45,7 @@ namespace VirtualExpress.Communication.Services
 
         public async Task<ChatResponse> GetByIdAsync(int id)
         {
-            var existingChat = await _ChatRepository.FindById(id);
+            var existingChat = await _chatRepository.FindById(id);
             if (existingChat == null)
                 return new ChatResponse("Chat not found");
             return new ChatResponse(existingChat);
@@ -40,14 +53,35 @@ namespace VirtualExpress.Communication.Services
 
         public async Task<IEnumerable<Chat>> ListAsync()
         {
-            return await _ChatRepository.ListAsync();
+            return await _chatRepository.ListAsync();
+        }
+
+        public async Task<IEnumerable<Chat>> ListAsyncByCompanyId(int companyId)
+        {
+            return await _chatRepository.ListAsyncByCompanyId(companyId);
+        }
+
+        public async Task<IEnumerable<Chat>> ListAsyncByCustomerId(int customerId)
+        {
+            return await _chatRepository.ListAsyncByCustomerId(customerId);
         }
 
         public async Task<ChatResponse> SaveAsync(Chat chat)
         {
+            var existingCustomer = await _customerRepository.FindById(chat.CustomerId);
+            if (existingCustomer == null)
+                return new ChatResponse("Customer not found");
+
+            var existingCompany = await _companyRepository.FindCompanyById(chat.CompanyId);
+            if (existingCompany == null)
+                return new ChatResponse("Company not found");
+
+            chat.Customer = existingCustomer;
+            chat.Company = existingCompany;
             try
             {
-                await _ChatRepository.AddAsync(chat);
+                await _chatRepository.AddAsync(chat);
+                await _unitOfWork.CompleteAsync();
                 return new ChatResponse(chat);
             }
             catch (Exception e)
@@ -58,13 +92,13 @@ namespace VirtualExpress.Communication.Services
 
         public async Task<ChatResponse> UpdateAsync(int id, Chat chat)
         {
-            var existingChat = await _ChatRepository.FindById(id);
+            var existingChat = await _chatRepository.FindById(id);
             if (existingChat == null)
                 return new ChatResponse("Chat not found");
             try
             {
-                _ChatRepository.Update(existingChat);
-
+                _chatRepository.Update(existingChat);
+                await _unitOfWork.CompleteAsync();
                 return new ChatResponse(chat);
             }
             catch (Exception e)

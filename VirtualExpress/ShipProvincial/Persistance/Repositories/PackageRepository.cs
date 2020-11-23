@@ -51,6 +51,9 @@ namespace VirtualExpress.ShipProvincial.Persistance.Repositories
         {
             return await _context.Packages
                 .Where(p => p.DispatcherId == null)
+                .Include(p => p.ShipTerminal)
+                .Include(p => p.ShipTerminal.TerminalDestiny)
+                .Include(p => p.ShipTerminal.TerminalOrigin)
                 .ToListAsync();
         }
 

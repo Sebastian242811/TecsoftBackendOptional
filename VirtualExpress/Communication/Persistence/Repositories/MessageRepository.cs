@@ -7,6 +7,7 @@ using VirtualExpress.Communication.Domain.Models;
 using VirtualExpress.Communication.Domain.Repositories;
 using VirtualExpress.General.Persistance.Context;
 using VirtualExpress.General.Repositories;
+using VirtualExpress.Register.Persistence.Repositories;
 
 namespace VirtualExpress.Communication.Persistence.Repositories
 {
@@ -30,7 +31,7 @@ namespace VirtualExpress.Communication.Persistence.Repositories
             return await _context.Messages
                 .Include(p=>p.Chat)
                 .Include(p => p.Customer)
-                .Include(p => p.CustomerServiceEmployee)
+                .Include(p => p.Company)
                 .ToListAsync();
         }
 

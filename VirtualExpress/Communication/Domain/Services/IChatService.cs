@@ -10,6 +10,8 @@ namespace VirtualExpress.Communication.Domain.Services
     public interface IChatService
     {
         Task<IEnumerable<Chat>> ListAsync();
+        Task<IEnumerable<Chat>> ListAsyncByCustomerId(int customerId);
+        Task<IEnumerable<Chat>> ListAsyncByCompanyId(int companyId);
         Task<ChatResponse> SaveAsync(Chat chat);
         Task<ChatResponse> UpdateAsync(int id, Chat chat);
         Task<ChatResponse> DeleteAsync(int id);

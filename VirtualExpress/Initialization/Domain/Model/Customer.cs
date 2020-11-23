@@ -24,6 +24,7 @@ namespace VirtualExpress.Initialization.Domain.Model
         public IList<Package> Packages { get; set; } = new List<Package>();
         public IList<SubscriptionCustomer> Subscriptions { get; set; } = new List<SubscriptionCustomer>();
         //Subscription
+        public IList<Chat> Chats { get; set; } = new List<Chat>();
         public IList<Message> Messages { get; set; } = new List<Message>();
         public IList<Commentary> Commentaries { get; set; } = new List<Commentary>();
     }

@@ -16,13 +16,9 @@ namespace VirtualExpress.Communication.Resources
 
         public ChatResource Chat { get; set; }
 
-        public int CustomerServiceEmployeeId { get; set; }
-
-        public CustomerServiceEmployeeResource CustomerServiceEmployee { get; set; }
+        public int CompanyId { get; set; }
 
         public int CustomerId { get; set; }
-
-        public CustomerResource Customer { get; set; }
 
     }
 }

@@ -44,7 +44,6 @@ namespace VirtualExpress.General.Persistance.Context
         public DbSet<SubscriptionCompany> SubscriptionCompanies { get; set; }
 
         //Communication
-        public DbSet<CustomerServiceEmployee> CustomerServiceEmployees { get; set; }
         public DbSet<Chat> Chats { get; set; }
         public DbSet<Message> Messages { get; set; }
 
@@ -285,14 +284,6 @@ namespace VirtualExpress.General.Persistance.Context
                 .IsRequired();
 
             //Communication
-            builder.Entity<CustomerServiceEmployee>().ToTable("CustomersServicesEmployees");
-            builder.Entity<CustomerServiceEmployee>().HasKey(p => p.Id);
-            builder.Entity<CustomerServiceEmployee>().Property(p => p.Id)
-                .IsRequired().ValueGeneratedOnAdd();
-            builder.Entity<CustomerServiceEmployee>().Property(p => p.Name)
-                .IsRequired();
-            builder.Entity<CustomerServiceEmployee>().HasOne(p => p.Terminal)
-                .WithMany(p => p.CustomerServiceEmployees).HasForeignKey(p => p.TerminalId);
 
             builder.Entity<Chat>().ToTable("Chats");
             builder.Entity<Chat>().HasKey(p => p.Id);
@@ -302,6 +293,10 @@ namespace VirtualExpress.General.Persistance.Context
                 .IsRequired();
             builder.Entity<Chat>().HasMany(p => p.Messages)
                 .WithOne(p => p.Chat).HasForeignKey(p => p.ChatId);
+            builder.Entity<Chat>().HasOne(p => p.Company)
+                .WithMany(p => p.Chats).HasForeignKey(p => p.CompanyId);
+            builder.Entity<Chat>().HasOne(p => p.Customer)
+                .WithMany(p => p.Chats).HasForeignKey(p => p.CustomerId);
 
             builder.Entity<Message>().ToTable("Messages");
             builder.Entity<Message>().HasKey(p => p.Id);
@@ -313,8 +308,8 @@ namespace VirtualExpress.General.Persistance.Context
                 .WithMany(p => p.Messages).HasForeignKey(p => p.ChatId);
             builder.Entity<Message>().HasOne(p => p.Customer)
                .WithMany(p => p.Messages).HasForeignKey(p => p.CustomerId);
-            builder.Entity<Message>().HasOne(p => p.CustomerServiceEmployee)
-               .WithMany(p => p.Messages).HasForeignKey(p => p.CustomerServiceEmployeeId);
+            builder.Entity<Message>().HasOne(p => p.Company)
+               .WithMany(p => p.Messages).HasForeignKey(p => p.CompanyId);
 
             builder.Entity<ShipTerminal>().ToTable("ShipTerminal");
             builder.Entity<ShipTerminal>().HasKey(k => new { k.TerminalOriginId, k.TerminalDestinyId });

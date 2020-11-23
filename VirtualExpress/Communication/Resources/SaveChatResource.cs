@@ -9,8 +9,12 @@ namespace VirtualExpress.Communication.Resources
     public class SaveChatResource
     {
         [Required]
-        public int Id { get; set; }
-        [Required]
         public DateTime PostDate { get; set; }
+
+        [Required]
+        public int CustomerId { get; set; }
+
+        [Required]
+        public int CompanyId { get; set; }
     }
 }

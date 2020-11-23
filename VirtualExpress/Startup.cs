@@ -5,6 +5,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using VirtualExpress.Communication.Domain.Repositories;
+using VirtualExpress.Communication.Domain.Services;
+using VirtualExpress.Communication.Persistence.Repositories;
+using VirtualExpress.Communication.Services;
 using VirtualExpress.CompanyManagement.Domain.Repositories;
 using VirtualExpress.CompanyManagement.Domain.Services;
 using VirtualExpress.CompanyManagement.Persistence.Repositories;
@@ -58,12 +62,13 @@ namespace VirtualExpress
             services.AddControllers();
 
             services.AddCors(options => options.AddDefaultPolicy(
-                  builder => builder.AllowAnyOrigin().WithMethods("POST", "GET", "PUT")));
+                  builder => builder.AllowAnyOrigin().WithMethods("POST", "GET", "PUT").AllowAnyHeader()));
+
 
             services.AddDbContext<AppDbContext>(options =>
             {
-                //options.UseMySQL(Configuration.GetConnectionString("MySQLConnection"));
-                options.UseInMemoryDatabase("transport-api-in-memory");
+                options.UseMySQL(Configuration.GetConnectionString("MySQLConnection"));
+                //options.UseInMemoryDatabase("transport-api-in-memory");
             });
 
             //Repositorie
@@ -91,6 +96,9 @@ namespace VirtualExpress
             services.AddScoped<ISubscriptionCompanyRepository, SubscriptionCompanyRepository>();
             services.AddScoped<ISubscriptionCustomerRepository, SubscriptionCustomerRepository>();
             services.AddScoped<ITypeOfCurrentRepository, TypeOfCurrentRepository>();
+            //Communication
+            services.AddScoped<IChatRepository, ChatRepository>();
+            services.AddScoped<IMessageRepository, MessageRepository>();
                 //UnitOfWork
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
@@ -119,7 +127,9 @@ namespace VirtualExpress
             services.AddScoped<ISubscriptionCompanyService, SubscriptionCompanyService>();
             services.AddScoped<ISubscriptionCustomerService, SubscriptionCustomerService>();
             services.AddScoped<ITypeOfCurrentService, TypeOfCurrentService>();
-
+            //Communication
+            services.AddScoped<IChatService, ChatService>();
+            services.AddScoped<IMessageService, MessageService>();
             services.AddAutoMapper(typeof(Startup));
 
             services.AddCustomSwagger();

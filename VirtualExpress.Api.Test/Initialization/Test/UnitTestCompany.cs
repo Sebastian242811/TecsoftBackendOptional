@@ -26,7 +26,7 @@ namespace VirtualExpress.Api.Test.Initialization.Test
             //Arrange
             var mockCompanyRepository = GetDefaultICompanyRepositoryInstance();
             mockCompanyRepository.Setup(r => r.ListAsync())
-                .ReturnsAsync(new List<Company>());
+                .ReturnsAsync(new List<CompanyResource>());
             var mockUnitOfWork = GetDefaultIUnitOfWorkInstance();
             var service = new CompanyService(
                 mockCompanyRepository.Object,
@@ -34,7 +34,7 @@ namespace VirtualExpress.Api.Test.Initialization.Test
                 );
         
             //Act
-            List<Company> companies = (List<Company>)await service.ListAsync();
+            List<CompanyResource> companies = (List<CompanyResource>)await service.ListAsync();
             var companyCount = companies.Count;
         
             //Assert
@@ -47,7 +47,7 @@ namespace VirtualExpress.Api.Test.Initialization.Test
             //Arrange
             var mockCompanyRepository = GetDefaultICompanyRepositoryInstance();
             mockCompanyRepository.Setup(r => r.ListAsync())
-                .ReturnsAsync(new List<Company>());
+                .ReturnsAsync(new List<CompanyResource>());
             var mockUnitOfWork = GetDefaultIUnitOfWorkInstance();
             var service = new CompanyService(
                 mockCompanyRepository.Object,
@@ -65,7 +65,7 @@ namespace VirtualExpress.Api.Test.Initialization.Test
         public async Task GetIfTheUsernameIsUsedReturnsThisUsernameIsBeginUsedByAnotherUser()
         {
             //Arrange
-            Company company = new Company();
+            CompanyResource company = new CompanyResource();
             company.Username = "Web";
         
             var mockCompanyRepository = GetDefaultICompanyRepositoryInstance();
@@ -78,7 +78,7 @@ namespace VirtualExpress.Api.Test.Initialization.Test
                 );
 
             //Act
-            Company company2 = new Company();
+            CompanyResource company2 = new CompanyResource();
             company2.Username = "Web";
         
             var response = await service.SaveAsync(company2);
@@ -90,7 +90,7 @@ namespace VirtualExpress.Api.Test.Initialization.Test
         public async Task GetIfTheCustomerIsUsedAnEmailSaveReturnsThisUsernameIsBeginUsedByAnotherUser()
         {
             //Arrange
-            Company company = new Company();
+            CompanyResource company = new CompanyResource();
             company.Email = "web@hotmail.com";
 
             var mockCompanyRepository = GetDefaultICompanyRepositoryInstance();
@@ -102,7 +102,7 @@ namespace VirtualExpress.Api.Test.Initialization.Test
                 mockUnitOfWork.Object
                 );
             //Act
-            Company company2 = new Company();
+            CompanyResource company2 = new CompanyResource();
             company2.Email = "web@hotmail.com";
         
             var response = await service.SaveAsync(company2);

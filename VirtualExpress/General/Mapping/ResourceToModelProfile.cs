@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using VirtualExpress.Communication.Domain.Models;
+using VirtualExpress.Communication.Resources;
 using VirtualExpress.CompanyManagement.Domain.Models;
 using VirtualExpress.CompanyManagement.Resources;
 using VirtualExpress.Initialization.Domain.Model;
@@ -47,6 +49,9 @@ namespace VirtualExpress.General.Mapping
             CreateMap<SaveSubscriptionCompanyResource, SubscriptionCompany>();
             CreateMap<SaveSubscriptionCustomerResource, SubscriptionCustomer>();
             CreateMap<SaveTypeOfCurrentResource, TypeOfCurrent>();
+
+            CreateMap<SaveChatResource, Chat>();
+            CreateMap<SaveMessageResource, Message>();
         }
     }
 }

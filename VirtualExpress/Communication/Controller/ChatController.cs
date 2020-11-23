@@ -33,9 +33,30 @@ namespace VirtualExpress.Communication.Controller
         {
             var chats = await _chatService.ListAsync();
             var resource = _mapper.Map<IEnumerable<Chat>, IEnumerable<ChatResource>>(chats);
-
             return resource;
         }
+
+        [SwaggerResponse(200, "List of Company Chat", typeof(IEnumerable<ChatResource>))]
+        [ProducesResponseType(typeof(IEnumerable<ChatResource>), 200)]
+        [HttpGet("company/{companyId}")]
+        public async Task<IEnumerable<ChatResource>> GetAllAsyncByCompanyId(int companyId)
+        {
+            var chats = await _chatService.ListAsyncByCompanyId(companyId);
+            var resource = _mapper.Map<IEnumerable<Chat>, IEnumerable<ChatResource>>(chats);
+            return resource;
+        }
+
+
+        [SwaggerResponse(200, "List of Customer Chat", typeof(IEnumerable<ChatResource>))]
+        [ProducesResponseType(typeof(IEnumerable<ChatResource>), 200)]
+        [HttpGet("customer/{customerId}")]
+        public async Task<IEnumerable<ChatResource>> GetAllAsyncByCustomerId(int customerId)
+        {
+            var chats = await _chatService.ListAsyncByCustomerId(customerId);
+            var resource = _mapper.Map<IEnumerable<Chat>, IEnumerable<ChatResource>>(chats);
+            return resource;
+        }
+
 
         [SwaggerResponse(200, "Save chats by entering the name", typeof(IActionResult))]
         [ProducesResponseType(typeof(IActionResult), 200)]

@@ -9,7 +9,6 @@ namespace VirtualExpress.Communication.Domain.Repositories
     public interface IMessageRepository
     {
         Task<IEnumerable<Message>> ListAsync();
-
         Task<IEnumerable<Message>> ListByChatByIdAsync(int chatId);
         Task AddAsync(Message message);
         Task<Message> FindById(int id);

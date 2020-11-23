@@ -106,7 +106,7 @@ namespace VirtualExpress.Api.Test.MemberShip.Test
         public async Task GetMessageWhenSaveSubscriptionCompanyWitoutPlanReturnCompanyNotFound()
         {
             //Arrange
-            Company company = new Company();
+            CompanyResource company = new CompanyResource();
             company.Id = 1;
             company.Name = "Nivel 1";
             var mockPSubscriptionCompanyRepository = GetDefaultISubscriptionCompanyRepositoryInstance();
@@ -138,7 +138,7 @@ namespace VirtualExpress.Api.Test.MemberShip.Test
         public async Task GetSuccesTruWhenSaveSubscriptionCompanySuccesfulReturnCompanyNotFound()
         {
             //Arrange
-            Company company = new Company();
+            CompanyResource company = new CompanyResource();
             company.Id = 1;
             company.Name = "Nivel 1";
             PlanCompany planCompany = new PlanCompany();
