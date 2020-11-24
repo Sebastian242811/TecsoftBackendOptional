@@ -134,7 +134,7 @@ namespace VirtualExpress.ShipProvincial.Services
 
             package.Freight = null  ;
             package.Customer = existingCustomer;
-            package.State = EState.Waiting;
+            package.State = EState.Espera;
             package.Dispatcher = null;
             package.ShipTerminal = existingShipTerminal;
             try

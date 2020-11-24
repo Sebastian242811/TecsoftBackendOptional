@@ -4807,12 +4807,11 @@
       ]
     },
     "System.Collections.NonGeneric/4.3.0": {
-      "sha512": "prtjIEMhGUnQq6RnPEYLpFt8AtLbp9yq2zxOSrY7KJJZrw25Fi97IzBqY7iqssbM61Ek5b8f3MG/sG1N2sN5KA==",
+      "sha512": "LE/oChpRvkSi3U25u0KnJcI44JeDZ1QJCyN4qFDx2uusEypdqR24w7lKYw21eYe5esuCBuc862wRmpF63Yy1KQ==",
       "type": "package",
       "path": "system.collections.nongeneric/4.3.0",
       "files": [
         ".nupkg.metadata",
-        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -5142,12 +5141,11 @@
       ]
     },
     "System.ComponentModel.TypeConverter/4.3.0": {
-      "sha512": "16pQ6P+EdhcXzPiEK4kbA953Fu0MNG2ovxTZU81/qsCd1zPRsKc3uif5NgvllCY598k6bI0KUyKW8fanlfaDQg==",
+      "sha512": "HZiP0DwTHJ+C+rdFqP47nBYUh5283kcwXIGY2zOVVhsJmVI/2tYiX2zNRdjRQRHsTox58Ydkec6h0pWSh8wAsw==",
       "type": "package",
       "path": "system.componentmodel.typeconverter/4.3.0",
       "files": [
         ".nupkg.metadata",
-        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -8234,12 +8232,11 @@
       ]
     },
     "System.Threading.ThreadPool/4.3.0": {
-      "sha512": "k/+g4b7vjdd4aix83sTgC9VG6oXYKAktSfNIJUNGxPEj7ryEOfzHHhfnmsZvjxawwcD9HyWXKCXmPjX8U4zeSw==",
+      "sha512": "SrCOmTvvOOCmJT4BBxdZcwhz6XEMsjBGZvGSVorOxdCznaUNeVotEjDfXGIZ8gcGo00qgPbTV6puHDgcFYl6Iw==",
       "type": "package",
       "path": "system.threading.threadpool/4.3.0",
       "files": [
         ".nupkg.metadata",
-        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -8690,19 +8687,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\lucia\\.nuget\\packages\\": {}
+    "C:\\Users\\Usuario\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Aplicaciones Web\\Trabajo\\Backend\\TecsoftBackendOptional\\VirtualExpress.Api.Test\\VirtualExpress.Api.Test.csproj",
+      "projectUniqueName": "C:\\Users\\Usuario\\Desktop\\UPC_trabajos y archivos\\ciclo8\\web\\Trabajo Final\\BackOficial\\TecsoftBackendOptional\\VirtualExpress.Api.Test\\VirtualExpress.Api.Test.csproj",
       "projectName": "VirtualExpress.Api.Test",
-      "projectPath": "E:\\Aplicaciones Web\\Trabajo\\Backend\\TecsoftBackendOptional\\VirtualExpress.Api.Test\\VirtualExpress.Api.Test.csproj",
-      "packagesPath": "C:\\Users\\lucia\\.nuget\\packages\\",
-      "outputPath": "E:\\Aplicaciones Web\\Trabajo\\Backend\\TecsoftBackendOptional\\VirtualExpress.Api.Test\\obj\\",
+      "projectPath": "C:\\Users\\Usuario\\Desktop\\UPC_trabajos y archivos\\ciclo8\\web\\Trabajo Final\\BackOficial\\TecsoftBackendOptional\\VirtualExpress.Api.Test\\VirtualExpress.Api.Test.csproj",
+      "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Usuario\\Desktop\\UPC_trabajos y archivos\\ciclo8\\web\\Trabajo Final\\BackOficial\\TecsoftBackendOptional\\VirtualExpress.Api.Test\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "C:\\Users\\lucia\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -8715,8 +8716,8 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "E:\\Aplicaciones Web\\Trabajo\\Backend\\TecsoftBackendOptional\\VirtualExpress\\VirtualExpress.csproj": {
-              "projectPath": "E:\\Aplicaciones Web\\Trabajo\\Backend\\TecsoftBackendOptional\\VirtualExpress\\VirtualExpress.csproj"
+            "C:\\Users\\Usuario\\Desktop\\UPC_trabajos y archivos\\ciclo8\\web\\Trabajo Final\\BackOficial\\TecsoftBackendOptional\\VirtualExpress\\VirtualExpress.csproj": {
+              "projectPath": "C:\\Users\\Usuario\\Desktop\\UPC_trabajos y archivos\\ciclo8\\web\\Trabajo Final\\BackOficial\\TecsoftBackendOptional\\VirtualExpress\\VirtualExpress.csproj"
             }
           }
         }
@@ -8785,7 +8786,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
       }
     }
   }
