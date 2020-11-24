@@ -64,7 +64,6 @@ namespace VirtualExpress
             services.AddCors(options => options.AddDefaultPolicy(
                   builder => builder.AllowAnyOrigin().WithMethods("POST", "GET", "PUT").AllowAnyHeader()));
 
-
             services.AddDbContext<AppDbContext>(options =>
             {
                 options.UseMySQL(Configuration.GetConnectionString("MySQLConnection"));
