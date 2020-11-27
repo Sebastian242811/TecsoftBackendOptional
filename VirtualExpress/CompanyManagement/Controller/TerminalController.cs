@@ -38,6 +38,16 @@ namespace VirtualExpress.CompanyManagement.Controller
             return resource;
         }
 
+        [SwaggerResponse(200, "List of terminals by a given company", typeof(IEnumerable<TerminalResource>))]
+        [ProducesResponseType(typeof(IEnumerable<TerminalResource>), 200)]
+        [HttpGet("company/{companyid}")]
+        public async Task<IEnumerable<TerminalResource>> GetAllbyCompanyAsync(int companyid)
+        {
+            var terminals = await _terminalService.ListByCompanyByIdAsync(companyid);
+            var resource = _mapper.Map<IEnumerable<Terminal>, IEnumerable<TerminalResource>>(terminals);
+            return resource;
+        }
+
         [SwaggerResponse(200, "Get terminal by id", typeof(IEnumerable<TerminalResource>))]
         [ProducesResponseType(typeof(IEnumerable<TerminalResource>), 200)]
         [HttpGet("{id}")]
